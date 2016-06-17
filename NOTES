@@ -21,7 +21,6 @@
 	- projet
 	- type
 	- type_evenement
-	- Cal_support_List_moins_EnLigne
 
 - campos removidos:
 	- cote_calcul (= cote_prefix + cote_auteur + cote_annee + cote_numero)

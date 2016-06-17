@@ -6,11 +6,11 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class Auteur(models.Model):
-    cote_auteur = models.CharField(max_length=20)
-    nom_auteur = models.CharField(max_length=200)
+    cote = models.CharField(max_length=20)
+    nom = models.CharField(max_length=200)
 
     def __str__(self):
-       return self.nom_auteur
+       return self.nom
 
     class Meta:
         verbose_name = "Auteur"

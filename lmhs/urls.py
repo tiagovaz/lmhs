@@ -19,7 +19,6 @@ from django.contrib import admin
 from lmhsweb.views import *
 from django.conf.urls.static import static
 from django.conf import settings
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -39,5 +38,26 @@ urlpatterns = [
                       name='login'
                   ),
                   url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name="logout"),
+                  url(r'^search/', SearchForm.as_view()),
+                  url(r'^type-autocomplete/$', TypeAutocomplete.as_view(), name='type-autocomplete', ),
+                  url(r'^type_evenement-autocomplete/$', TypeEvenementAutocomplete.as_view(), name='type_evenement-autocomplete', ),
+                  url(r'^auteur-autocomplete/$', AuteurAutocomplete.as_view(), name='auteur-autocomplete', ),
+                  url(r'^directeur_collection-autocomplete/$', DirecteurCollectionAutocomplete.as_view(), name='directeur_collection-autocomplete', ),
+                  url(r'^directeur_publication-autocomplete/$', DirecteurPublicationAutocomplete.as_view(), name='directeur_publication-autocomplete', ),
+                  url(r'^editeur-autocomplete/$', EditeurAutocomplete.as_view(), name='editeur-autocomplete', ),
+                  url(r'^mot_cle-autocomplete/$', MotCleAutocomplete.as_view(), name='mot_cle-autocomplete', ),
+                  url(r'^support-autocomplete/$', SupportAutocomplete.as_view(), name='support-autocomplete', ),
+                  url(r'^traducteur-autocomplete/$', TraducteurAutocomplete.as_view(), name='traducteur-autocomplete', ),
+                  url(r'^collection-autocomplete/$', CollectionAutocomplete.as_view(), name='collection-autocomplete', ),
+                  url(r'^fonds-autocomplete/$', FondsAutocomplete.as_view(), name='fonds-autocomplete', ),
+                  url(r'^genre-autocomplete/$', GenreAutocomplete.as_view(), name='genre-autocomplete', ),
+                  url(r'^langue_origine-autocomplete/$', LangueOrigineAutocomplete.as_view(), name='langue_origine-autocomplete', ),
+                  url(r'^lieu-autocomplete/$', LieuAutocomplete.as_view(), name='lieu-autocomplete', ),
+                  url(r'^localisation-autocomplete/$', LocalisationAutocomplete.as_view(), name='localisation-autocomplete', ),
+                  url(r'^maison_edition-autocomplete/$', MaisonEditionAutocomplete.as_view(), name='maison_edition-autocomplete', ),
+                  url(r'^medium-autocomplete/$', MediumAutocomplete.as_view(), name='medium-autocomplete', ),
+                  url(r'^methode_reproduction-autocomplete/$', MethodeReproductionAutocomplete.as_view(), name='methode_reproduction-autocomplete', ),
+                  url(r'^nom_org-autocomplete/$', NomOrgAutocomplete.as_view(), name='nom_org-autocomplete', ),
+                  url(r'^projet-autocomplete/$', ProjetAutocomplete.as_view(), name='projet-autocomplete', ),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

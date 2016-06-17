@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load i18n %}
+{% load bootstrap3 %}
+{% load bootstrap_pagination %}
 
 {% block content %}
-
-        <!-- Page Header -->
-        <div class="row">
-            <div class="col-sm-12">
-                <center>
-                <h1 class="page-header">Recherche | Banque de données du LMHS
-                </h1>
-                </center>
-		{% load crispy_forms_tags %}
-		{% crispy form %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><center>Recherche - Base de données du LMHS</center></h3>
+                </div>
+                <div class="panel-body">
+                    {% csrf_token %}
+                    {% load crispy_forms_tags %}
+                    {% crispy form %}
+                </div>
             </div>
         </div>
-        <!-- /.row -->
-
+    </div>
 {% endblock %}

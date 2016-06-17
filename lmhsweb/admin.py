@@ -1,7 +1,13 @@
 from django.contrib import admin
+
+from lmhsweb.forms import MainAdminForm
 from models import *
 
-admin.site.register(Main)
+
+class MainAdmin(admin.ModelAdmin):
+    form = MainAdminForm
+admin.site.register(Main, MainAdmin)
+
 admin.site.register(Auteur)
 admin.site.register(Collection)
 admin.site.register(Place)
@@ -16,3 +22,12 @@ admin.site.register(NomOrg)
 admin.site.register(Projet)
 admin.site.register(Type)
 admin.site.register(TypeEvenement)
+admin.site.register(DirecteurCollection)
+admin.site.register(DirecteurPublication)
+admin.site.register(Editeur)
+admin.site.register(Support)
+admin.site.register(Traducteur)
+admin.site.register(City)
+admin.site.register(State)
+admin.site.register(Country)
+admin.site.register(MotCle)
