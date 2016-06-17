@@ -28,3 +28,5 @@ class MainList(generic.ListView):
 
 class Login(generic.TemplateView):
     template_name = 'registration/login.html'
+
+
