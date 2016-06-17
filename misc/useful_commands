@@ -1,0 +1,6 @@
+# graphical model
+./manage.py graph_models lmhsweb -g -o lmhs.png
+
+# migrations
+python manage.py makemigrations lmhsweb; python manage.py migrate; python manage.py runserver
+

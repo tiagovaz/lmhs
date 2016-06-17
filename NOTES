@@ -1,0 +1,45 @@
+- convertidos pra manytomany (separados por ';' dentro do CSV):
+	- auteur (cote_auteur, nom_auteur)
+	- directeur_collection
+	- directeur_publication
+	- editeur
+	- mot_cle
+	- support (separados por 'enter')
+	- traducteur
+
+- convertidos pra foreignkey:
+	- collection
+	- fonds
+	- genre
+	- langue_origine
+	- lieu (mais tarde separar em local/cidade/estado...)
+	- localisation
+	- maison_edition
+	- medium
+	- methode_reproduction
+	- nom_org
+	- projet
+	- type
+	- type_evenement
+	- Cal_support_List_moins_EnLigne
+
+- campos removidos:
+	- cote_calcul (= cote_prefix + cote_auteur + cote_annee + cote_numero)
+	- notice_ID (= cote_calcul sem os espacos)
+	- Cal_support_EnLigne (pode ser substituido por 'support' que contem 'en ligne')
+	- Cal_support_List_moins_EnLigne (= support)
+	- cote_calcul_url (= cote_calcul com espacos transformados em -)
+	- cote_per_calcul (sem registros)
+	- hash (inutil)
+	- id_org (sem registro)
+	- organisme (sem registro)
+	- source_per (inutil)
+	- source_per_calcul (= cote_prefix + cote_numero)
+	- tousindex_calcul (varios campos juntos pra pesquisa)
+
+- campos sem nenhum registro (confirmar antes de remover):
+	- annee_1re_publication
+	- annee_enregistrement
+	- annee_production
+	- nb_volume
+	- no_volume

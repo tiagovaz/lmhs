@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Résultats
+                <a class="btn btn-xs btn-primary" href="JavaScript:newPopup('/admin/lmhsweb/main/add/?_popup=1');"><i class="fa fa-plus"></i> Nouveau</a>
+            </h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+           <div class="panel panel-default">
+                <div class="panel-heading">
+                    Filtres
+                </div>
+                <div class="panel-body">
+                    <form class="form" action="" method="get">
+                        <form method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            {% buttons %}
+                                <button type="submit" class="btn btn-primary pull-right">Filtrer</button>
+                                <a class="btn btn-danger" href="/">Réinitialiser</a>
+                            {% endbuttons %}
+                        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Auteur(s)</th>
+                                    <th>Type de document</th>
+                                    <th>Date</th>
+                                    <th>Support</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {% for m in main_registers %}
+                                <tr class="odd gradeX">
+                                    <td>
+                                        <a href="JavaScript:newPopup('/admin/lmhsweb/main/{{ m.id }}/change/?_popup=1');">
+                                            {{ m.titre }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% for a in m.auteur.all %}
+                                            - {{ a }}<br>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {{ m.type }}
+
+                                    <td>
+                                        {{ m.date }}
+                                    </td>
+                                   </td>
+                                    <td>
+                                        {{ m.support}}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

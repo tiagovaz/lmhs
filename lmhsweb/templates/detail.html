@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {% trans "Détails de l'événement" %} "<em>{{ event.title }}"</em>
+                <a class="btn btn-xs btn-warning" href="JavaScript:newPopup('/admin/lmhsweb/event/{{ event.id }}/change/?_popup=1');">
+                    <i class="fa fa-pencil"></i> {% trans "Modifier" %}
+                </a>
+            </h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-2">
+            {% if event.poster %}
+                        <a href="/media/{{ event.poster }}"> <img src="/media/{{ event.poster }}" height='130'"></a>
+            {% endif %}
+        </div>
+
+        <div class="col-sm-6">
+            <strong>{% trans "Nature de l'évenement" %} :</strong> {{ event.type|default:"" }}<br>
+            <strong>{% trans "Lieu" %} :</strong> {{ event.place|default:"" }}<br>
+            <strong>{% trans "Date début" %} :</strong> {{event.start_date|default:""}}<br>
+            <strong>{% trans "Date fin" %} :</strong> {{event.end_date|default:""}}<br>
+
+            <strong>{% trans "Difusions radio associés" %} :</strong>
+            <ul>
+                {% for r in event.relates_to_radio.all %}
+                    <li><a href="/{{ r.id }}">{{ r }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-6">
+          <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-music fa-fw"></i><b> Pièces</b>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                    {% for piece in event.piece.all %}
+                        <li>{{ piece.name }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-female fa-fw"></i><b> Interprètes</b>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                    {% for p in event.performer.all %}
+                        <li>{{ p.name }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+         </div>
+     </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-book fa-fw"></i><b> Références</b>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                    {% for r in event.reference.all %}
+                        {% if r.article_file %}
+                            <li><a href="/media/{{ r.article_file }}">{{ r }}</a></li>
+                        {% else %}
+                            <li>{{ r }}</li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+         </div>
+               <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-group fa-fw"></i><b> Conférences</b>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                    {% for s in event.speech.all %}
+                        <li>{{ s }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+         </div>
+     </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="pull-right">
+                        <a data-toggle="modal" data-target="#CommentModal" class="btn btn-xs btn-success">
+                            {% trans "Ajouter commentaire" %}
+                        </a>
+                    </span>
+                    <i class="fa fa-comments-o fa-fw"></i><b> Commentaires</b>
+                </div>
+
+                <table class="table table-hover table-condensed">
+                    {% for comment in event.comment.all %}
+                    <tr>
+                        <td>
+                            "{{comment.content}}", par {{comment.user}} en {{comment.created_date}}<br>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-----------
+    --- MODAL ---
+    ------------>
+
+    <!-- Comment modal -->
+    <div class="modal fade" id="CommentModal" tabindex="-1" role="dialog" aria-labelledby="commentLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-xs btn-danger pull-right" data-dismiss="modal">x</button>
+                    <h4 class="modal-title" id="commentLabel">{% trans "Nouveau commentaire" %}</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'comment_create' event.id %}">
+                        {% csrf_token %}
+                        {% bootstrap_form form_comment %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
