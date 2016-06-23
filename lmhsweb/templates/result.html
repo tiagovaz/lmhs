@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap_pagination %}
+{% load bootstrap3 %}
+
+{% block content %}
+                <center>
+                <h1 class="page-header">Résultats | Banque de données du LMHS</h1>
+                <p><a href="/search">Nouvelle recherche</a></p>
+                </center>
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-sm-3">
+               <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Filtres
+                    </div>
+                    <div class="panel-body">
+                        <form class="form" action="" method="get">
+                            <form method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form form %}
+                                {% buttons %}
+                                    <button type="submit" class="btn btn-primary pull-right">Filtrer</button>
+                                    <a class="btn btn-danger" href="/">Réinitialiser</a>
+                                {% endbuttons %}
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+                {% for i in items %}
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><b>{{ forloop.counter }}. {{ i.titre }}</b></div>
+                                <div class="panel-body">
+                                    <center>
+                                    {% if i.type == "Article de périodique" or i.type == "Livre" %}
+                                        {{ i.auteur }}</br>
+                                        {% if i.date %}
+                                            {{ i.date }}</br>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% if i.type == "Iconographie" %}
+                                        {{ i.sujet }}</br>
+                                        {{ i.genre }}</br>
+                                        {{ i.auteur }}</br>
+                                        {% if i.date %}
+                                            {{ i.date }}</br>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    </center>
+                                    <p class="text-right">Support(s) disponible(s) : <a href="/details?notice_id={{ i.notice_id }}">Consulter la liste</a></p>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+            </div>
+                <center>
+                    {% bootstrap_paginate items range=10 show_prev_next="false" show_first_last="true" %}
+                </center>
+        </div>
+        <!-- /.row -->
+
+{% endblock %}
