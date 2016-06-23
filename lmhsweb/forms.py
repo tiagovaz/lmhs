@@ -54,7 +54,6 @@ class MainAdminForm(forms.ModelForm):
         model = Main
         fields = ('__all__')
         widgets = {
-            'type': autocomplete.ModelSelect2('type-autocomplete'),
             'type_evenement': autocomplete.ModelSelect2('type_evenement-autocomplete'),
             'projet': autocomplete.ModelSelect2('projet-autocomplete'),
             'nom_org': autocomplete.ModelSelect2('nom_org-autocomplete'),

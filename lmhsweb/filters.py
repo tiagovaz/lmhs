@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import django_filters
-from lmhsweb.models import Main
+from lmhsweb.models import Main, TYPE_CHOICES
 
 
 class MainFilter(django_filters.FilterSet):
+
+    TYPE_CHOICES_FILTER = [ ('', 'Tous')]
+    TYPE_CHOICES_FILTER.extend(list(TYPE_CHOICES))
+
     titre = django_filters.CharFilter(label="Titre", lookup_expr='icontains')
+    type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='icontains')
 
     class Meta:
         model = Main

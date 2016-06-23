@@ -7,7 +7,7 @@ from django.views import generic
 
 from lmhsweb.filters import MainFilter
 from lmhsweb.forms import Search
-from lmhsweb.models import Main, Type, TypeEvenement, Auteur, DirecteurCollection, DirecteurPublication, Editeur, MotCle, \
+from lmhsweb.models import Main, TypeEvenement, Auteur, DirecteurCollection, DirecteurPublication, Editeur, MotCle, \
     Support, Traducteur, Collection, Fonds, LangueOrigine, Place, Localisation, MaisonEdition, Medium, \
     MethodeReproduction, NomOrg, Projet, Genre
 
@@ -22,8 +22,10 @@ class MainList(generic.View):
         mot_cle = request.GET.get('mot_cle', '')
         #tousindex_calcul = request.GET['tousIndex_calcul']
 
-        data = Main.objects.filter(titre__icontains=titre).filter(auteur__nom__icontains=auteur).filter(projet__nom__icontains=projet, type__nom__icontains=type).filter(date__icontains=date).filter(mot_cle__nom__icontains=mot_cle)
+        data = Main.objects.filter(titre__icontains=titre, auteur__nom__icontains=auteur, projet__nom__icontains=projet, type__icontains=type, date__icontains=date, mot_cle__nom__icontains=mot_cle).distinct()
         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all())
+
+        print data
 
         paginator = Paginator(data, 25)
         page = request.GET.get('page')
@@ -34,7 +36,7 @@ class MainList(generic.View):
             items = paginator.page(1)
         except EmptyPage:
             items = paginator.page(paginator.num_pages)
-        return render(request, 'result.html', {'items': items, 'form' : all_main_registers.form})
+        return render(request, 'result.html', {'items': items, 'data': data, 'form' : all_main_registers.form})
 
 
 # class MainList(generic.ListView):
@@ -72,19 +74,6 @@ class SearchForm(generic.CreateView):
 
 class Login(generic.TemplateView):
     template_name = 'registration/login.html'
-
-
-class TypeAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        if not self.request.user.is_authenticated():
-            return Type.objects.none()
-
-        qs = Type.objects.all()
-
-        if self.q:
-            qs = qs.filter(nom__icontains=self.q)
-
-        return qs
 
 class TypeEvenementAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):

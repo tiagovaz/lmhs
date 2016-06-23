@@ -4,6 +4,69 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
+TYPE_CHOICES = (
+    (
+        "Affiche",
+        "Affiche",
+    ),
+    (
+        "Annonce de concours",
+        "Annonce de concours",
+    ),
+    (
+        "Article de périodique",
+        "Article de périodique",
+    ),
+    (
+        "Catalogue",
+        "Catalogue",
+    ),
+    (
+        "Conférence",
+        "Conférence",
+    ),
+    (
+        "Document non publié",
+        "Document non publié",
+    ),
+    (
+        "Extrait de livre",
+        "Extrait de livre",
+    ),
+    (
+        "Iconographie",
+        "Iconographie",
+    ),
+    (
+        "Livre",
+        "Livre",
+    ),
+    (
+        "Matériel audiovisuel",
+        "Matériel audiovisuel",
+    ),
+    (
+        "Partition",
+        "Partition",
+    ),
+    (
+        "Périodique",
+        "Périodique",
+    ),
+    (
+        "Photographie",
+        "Photographie",
+    ),
+    (
+        "Programme",
+        "Programme",
+    ),
+    (
+        "Référence",
+        "Référence",
+    ),
+)
+
 @python_2_unicode_compatible
 class Auteur(models.Model):
     cote = models.CharField(max_length=20)
@@ -112,17 +175,6 @@ class Localisation(models.Model):
 
     class Meta:
         verbose_name = "Localisation"
-
-@python_2_unicode_compatible
-class Type(models.Model):
-    nom = models.CharField(max_length=200)
-
-    def __str__(self):
-       return self.nom
-
-    class Meta:
-        verbose_name = "Type"
-
 
 @python_2_unicode_compatible
 class TypeEvenement(models.Model):
@@ -288,7 +340,14 @@ class Main(models.Model):
     support = models.ManyToManyField('Support')
     titre = models.CharField(blank=True, max_length=50)
     traducteur = models.ManyToManyField('Traducteur')
-    type = models.ForeignKey("Type", null=True)
+
+    type = models.CharField(
+        choices=TYPE_CHOICES,
+        max_length=100,
+        null=False,
+        verbose_name="Type"
+    )
+
     type_evenement = models.ForeignKey("TypeEvenement", null=True)
 
     class Meta:
