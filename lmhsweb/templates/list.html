@@ -60,7 +60,7 @@
                                     </td>
                                     <td>
                                         {% for a in m.auteur.all %}
-                                            - {{ a }}<br>
+                                            {{ a }}<br>
                                         {% endfor %}
                                     </td>
                                     <td>
@@ -69,9 +69,10 @@
                                     <td>
                                         {{ m.date }}
                                     </td>
-                                   </td>
                                     <td>
-                                        {{ m.support}}
+                                        {% for s in m.support.all %}
+                                            {{ s }}
+                                        {% endfor %}
                                     </td>
                                 </tr>
                                 {% endfor %}

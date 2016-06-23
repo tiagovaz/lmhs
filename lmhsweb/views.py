@@ -1,5 +1,7 @@
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import generic
 
@@ -10,27 +12,51 @@ from lmhsweb.models import Main, Type, TypeEvenement, Auteur, DirecteurCollectio
     MethodeReproduction, NomOrg, Projet, Genre
 
 
-class MainList(generic.ListView):
-    template_name = 'list.html'
-    context_object_name = 'main_registers'
-    model = Main
+class MainList(generic.View):
+    def get(self, request):
+        titre = request.GET.get('titre', '')
+        auteur = request.GET.get('auteur', '')
+        projet = request.GET.get('projet', '')
+        type = request.GET.get('type', '')
+        date = request.GET.get('date', '')
+        mot_cle = request.GET.get('mot_cle', '')
+        #tousindex_calcul = request.GET['tousIndex_calcul']
 
-    def get_queryset(self):
-        return MainFilter(self.request.GET, queryset=Main.objects.all())
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(MainList, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(MainList, self).get_context_data(**kwargs)
-
+        data = Main.objects.filter(titre__icontains=titre).filter(auteur__nom__icontains=auteur).filter(projet__nom__icontains=projet, type__nom__icontains=type).filter(date__icontains=date).filter(mot_cle__nom__icontains=mot_cle)
         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all())
-        context['view'] = "main_registers"
-        context['form'] = all_main_registers.form
 
-        return context
+        paginator = Paginator(data, 25)
+        page = request.GET.get('page')
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+        return render(request, 'result.html', {'items': items, 'form' : all_main_registers.form})
 
+
+# class MainList(generic.ListView):
+#     template_name = 'list.html'
+#     context_object_name = 'main_registers'
+#     model = Main
+#
+#     def get_queryset(self):
+#         return MainFilter(self.request.GET, queryset=Main.objects.all())
+#
+#     @method_decorator(login_required)
+#     def dispatch(self, *args, **kwargs):
+#         return super(MainList, self).dispatch(*args, **kwargs)
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(MainList, self).get_context_data(**kwargs)
+#
+#         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all())
+#         context['view'] = "main_registers"
+#         context['form'] = all_main_registers.form
+#
+#         return context
 
 class SearchForm(generic.CreateView):
     model = Main
