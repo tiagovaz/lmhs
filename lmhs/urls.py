@@ -51,7 +51,6 @@ urlpatterns = [
                   url(r'^fonds-autocomplete/$', FondsAutocomplete.as_view(), name='fonds-autocomplete', ),
                   url(r'^genre-autocomplete/$', GenreAutocomplete.as_view(), name='genre-autocomplete', ),
                   url(r'^langue_origine-autocomplete/$', LangueOrigineAutocomplete.as_view(), name='langue_origine-autocomplete', ),
-                  url(r'^lieu-autocomplete/$', LieuAutocomplete.as_view(), name='lieu-autocomplete', ),
                   url(r'^localisation-autocomplete/$', LocalisationAutocomplete.as_view(), name='localisation-autocomplete', ),
                   url(r'^maison_edition-autocomplete/$', MaisonEditionAutocomplete.as_view(), name='maison_edition-autocomplete', ),
                   url(r'^medium-autocomplete/$', MediumAutocomplete.as_view(), name='medium-autocomplete', ),

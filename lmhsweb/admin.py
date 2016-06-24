@@ -9,8 +9,8 @@ class MainAdmin(admin.ModelAdmin):
 admin.site.register(Main, MainAdmin)
 
 admin.site.register(Auteur)
+admin.site.register(CoteAuteur)
 admin.site.register(Collection)
-admin.site.register(Place)
 admin.site.register(Fonds)
 admin.site.register(Genre)
 admin.site.register(LangueOrigine)

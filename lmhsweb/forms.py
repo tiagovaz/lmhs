@@ -61,7 +61,6 @@ class MainAdminForm(forms.ModelForm):
             'medium': autocomplete.ModelSelect2('medium-autocomplete'),
             'maison_edition': autocomplete.ModelSelect2('maison_edition-autocomplete'),
             'localisation': autocomplete.ModelSelect2('localisation-autocomplete'),
-            'lieu': autocomplete.ModelSelect2('lieu-autocomplete'),
             'langue_origine': autocomplete.ModelSelect2('langue_origine-autocomplete'),
             'genre': autocomplete.ModelSelect2('genre-autocomplete'),
             'fonds': autocomplete.ModelSelect2('fonds-autocomplete'),

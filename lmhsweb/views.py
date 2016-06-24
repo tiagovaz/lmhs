@@ -8,7 +8,7 @@ from django.views import generic
 from lmhsweb.filters import MainFilter
 from lmhsweb.forms import Search
 from lmhsweb.models import Main, TypeEvenement, Auteur, DirecteurCollection, DirecteurPublication, Editeur, MotCle, \
-    Support, Traducteur, Collection, Fonds, LangueOrigine, Place, Localisation, MaisonEdition, Medium, \
+    Support, Traducteur, Collection, Fonds, LangueOrigine, Localisation, MaisonEdition, Medium, \
     MethodeReproduction, NomOrg, Projet, Genre
 
 
@@ -36,29 +36,7 @@ class MainList(generic.View):
             items = paginator.page(1)
         except EmptyPage:
             items = paginator.page(paginator.num_pages)
-        return render(request, 'result.html', {'items': items, 'data': data, 'form' : all_main_registers.form})
-
-
-# class MainList(generic.ListView):
-#     template_name = 'list.html'
-#     context_object_name = 'main_registers'
-#     model = Main
-#
-#     def get_queryset(self):
-#         return MainFilter(self.request.GET, queryset=Main.objects.all())
-#
-#     @method_decorator(login_required)
-#     def dispatch(self, *args, **kwargs):
-#         return super(MainList, self).dispatch(*args, **kwargs)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(MainList, self).get_context_data(**kwargs)
-#
-#         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all())
-#         context['view'] = "main_registers"
-#         context['form'] = all_main_registers.form
-#
-#         return context
+        return render(request, 'result.html', {'items': items, 'all': all_main_registers, 'form' : all_main_registers.form})
 
 class SearchForm(generic.CreateView):
     model = Main
@@ -205,18 +183,6 @@ class LangueOrigineAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(nom__icontains=self.q)
-
-        return qs
-
-class LieuAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        if not self.request.user.is_authenticated():
-            return Place.objects.none()
-
-        qs = Place.objects.all()
-
-        if self.q:
-            qs = qs.filter(venue__icontains=self.q)
 
         return qs
 

@@ -69,8 +69,7 @@ TYPE_CHOICES = (
 
 @python_2_unicode_compatible
 class Auteur(models.Model):
-    cote = models.CharField(max_length=20)
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -79,8 +78,18 @@ class Auteur(models.Model):
         verbose_name = "Auteur"
 
 @python_2_unicode_compatible
+class CoteAuteur(models.Model):
+    cote = models.CharField(max_length=200, unique=True)
+
+    def __str__(self):
+       return self.cote
+
+    class Meta:
+        verbose_name = "Cote auteur"
+
+@python_2_unicode_compatible
 class Collection(models.Model):
-    nom = models.CharField(max_length=20)
+    nom = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
        return self.nom
@@ -90,7 +99,7 @@ class Collection(models.Model):
 
 @python_2_unicode_compatible
 class Fonds(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -100,7 +109,7 @@ class Fonds(models.Model):
 
 @python_2_unicode_compatible
 class Genre(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -110,7 +119,7 @@ class Genre(models.Model):
 
 @python_2_unicode_compatible
 class LangueOrigine(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -120,7 +129,7 @@ class LangueOrigine(models.Model):
 
 @python_2_unicode_compatible
 class City(models.Model):
-    name = models.CharField("Nom de la ville", max_length=150)
+    name = models.CharField("Nom de la ville", max_length=150, unique=True)
 
     def __str__(self):
         return self.name
@@ -131,7 +140,7 @@ class City(models.Model):
 
 @python_2_unicode_compatible
 class State(models.Model):
-    name = models.CharField("Nom de la province", max_length=150)
+    name = models.CharField("Nom de la province", max_length=150, unique=True)
 
     def __str__(self):
         return self.name
@@ -142,7 +151,7 @@ class State(models.Model):
 
 @python_2_unicode_compatible
 class Country(models.Model):
-    name = models.CharField("Nom du pays", max_length=150)
+    name = models.CharField("Nom du pays", max_length=150, unique=True)
 
     def __str__(self):
         return self.name
@@ -152,23 +161,8 @@ class Country(models.Model):
         verbose_name_plural = "Pays"
 
 @python_2_unicode_compatible
-class Place(models.Model):
-    venue = models.CharField("Lieu", max_length=200)
-    city = models.ForeignKey('City', null=True)
-    state = models.ForeignKey('State', null=True)
-    country = models.ForeignKey('Country', null=True)
-
-    def __str__(self):
-        #return "%s, %s, %s, %s" % (self.venue, self.city, self.province, self.country)
-        return self.venue
-
-    class Meta:
-        verbose_name = "Lieu"
-        verbose_name_plural = "Lieu"
-
-@python_2_unicode_compatible
 class Localisation(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -178,7 +172,7 @@ class Localisation(models.Model):
 
 @python_2_unicode_compatible
 class TypeEvenement(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -188,7 +182,7 @@ class TypeEvenement(models.Model):
 
 @python_2_unicode_compatible
 class Projet(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -199,7 +193,7 @@ class Projet(models.Model):
 
 @python_2_unicode_compatible
 class NomOrg(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -209,7 +203,7 @@ class NomOrg(models.Model):
 
 @python_2_unicode_compatible
 class MethodeReproduction(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -219,7 +213,7 @@ class MethodeReproduction(models.Model):
 
 @python_2_unicode_compatible
 class MaisonEdition(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -229,7 +223,7 @@ class MaisonEdition(models.Model):
 
 @python_2_unicode_compatible
 class Medium(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -239,7 +233,7 @@ class Medium(models.Model):
 
 @python_2_unicode_compatible
 class DirecteurCollection(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -249,7 +243,7 @@ class DirecteurCollection(models.Model):
 
 @python_2_unicode_compatible
 class DirecteurPublication(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -259,7 +253,7 @@ class DirecteurPublication(models.Model):
 
 @python_2_unicode_compatible
 class Editeur(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -269,7 +263,7 @@ class Editeur(models.Model):
 
 @python_2_unicode_compatible
 class MotCle(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -279,7 +273,7 @@ class MotCle(models.Model):
 
 @python_2_unicode_compatible
 class Support(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -289,7 +283,7 @@ class Support(models.Model):
 
 @python_2_unicode_compatible
 class Traducteur(models.Model):
-    nom = models.CharField(max_length=200)
+    nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
        return self.nom
@@ -306,6 +300,7 @@ class Main(models.Model):
     collection = models.ForeignKey("Collection", null=True)
     commentaire = models.TextField(null=True)
     cote_annee = models.IntegerField()
+    cote_auteur = models.ForeignKey("CoteAuteur")
     cote_numero = models.IntegerField(blank=True, null=True)
     cote_prefixe = models.CharField(max_length=20)
     protection_droit_auteur = models.BooleanField(db_column='Protection_droit_auteur', blank=True, default=False)  # Field name made lowercase.
@@ -321,8 +316,8 @@ class Main(models.Model):
     instrumentation = models.TextField(null=True)
     interprete = models.CharField(null=True, max_length=200)
     langue_origine = models.ForeignKey("LangueOrigine", null=True)
-    lieu = models.ForeignKey("Place", null=True)
-    lieu_conservation = models.CharField(blank=True, max_length=200)
+    lieu = models.CharField("Lieu", max_length=200)
+    lieu_conservation = models.CharField("Lieu de conservation", blank=True, max_length=200)
     localisation = models.ForeignKey("Localisation", null=True)
     maison_edition = models.ForeignKey("MaisonEdition", null=True)
     medium = models.ForeignKey("Medium", null=True)
@@ -340,6 +335,10 @@ class Main(models.Model):
     support = models.ManyToManyField('Support')
     titre = models.CharField(blank=True, max_length=50)
     traducteur = models.ManyToManyField('Traducteur')
+
+    city = models.ForeignKey('City', null=True, blank=True)
+    state = models.ForeignKey('State', null=True, blank=True)
+    country = models.ForeignKey('Country', null=True, blank=True)
 
     type = models.CharField(
         choices=TYPE_CHOICES,
