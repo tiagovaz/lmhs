@@ -304,8 +304,8 @@ class Main(models.Model):
     cote_numero = models.IntegerField(blank=True, null=True)
     cote_prefixe = models.CharField(max_length=20)
     protection_droit_auteur = models.BooleanField(db_column='Protection_droit_auteur', blank=True, default=False)  # Field name made lowercase.
-    date = models.DateField(blank=True, null=True)
-    date_fin = models.DateField(blank=True, null=True)
+    date = models.CharField(blank=True, null=True, max_length=100)
+    date_fin = models.CharField(blank=True, null=True, max_length=100)
     depouillement = models.TextField(null=True)
     directeur_collection = models.ManyToManyField('DirecteurCollection')
     directeur_publication = models.ManyToManyField('DirecteurPublication')
