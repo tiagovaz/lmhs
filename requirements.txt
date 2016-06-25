@@ -4,3 +4,4 @@ django-bootstrap3-datepicker
 django-bootstrap3
 django-crispy-forms
 django-filter
+django-bootstrap-pagination
