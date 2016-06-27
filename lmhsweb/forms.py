@@ -10,8 +10,8 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, D
 class Search(forms.ModelForm):
     recherche_pdf = forms.CharField(label="Recherche plein text")
     tousIndex_calcul = forms.CharField(label="Tous")
-    auteur = forms.CharField(label="Auteur")
-    mot_cle = forms.CharField(label="Mot-clé")
+    auteur__nom = forms.CharField(label="Auteur")
+    mot_cle__nom = forms.CharField(label="Mot-clé")
 
     class Meta:
         model = Main
@@ -26,7 +26,7 @@ class Search(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'Chercher'))
         self.helper.layout = Layout (
                     Div(
-                            Div( 'auteur', css_class='col-sm-6'),
+                            Div( 'auteur__nom', css_class='col-sm-6'),
                             Div( 'recherche_pdf', css_class='col-sm-6'),
                             css_class='row'
                     ),
@@ -42,7 +42,7 @@ class Search(forms.ModelForm):
                             css_class='row'
                     ),
                     Div(
-                            Div( 'mot_cle', css_class='col-sm-6'),
+                            Div( 'mot_cle__nom', css_class='col-sm-6'),
                             Div( 'type', css_class='col-sm-6'),
                             css_class='row'
                     ),

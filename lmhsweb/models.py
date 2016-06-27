@@ -79,7 +79,7 @@ class Auteur(models.Model):
 
 @python_2_unicode_compatible
 class CoteAuteur(models.Model):
-    cote = models.CharField(max_length=200, unique=True)
+    cote = models.CharField(max_length=200, unique=True, null=True, default=None, blank=True)
 
     def __str__(self):
        return self.cote
@@ -300,23 +300,25 @@ class Main(models.Model):
     collection = models.ForeignKey("Collection", null=True)
     commentaire = models.TextField(null=True)
     cote_annee = models.IntegerField(blank=True, null=True)
-    cote_auteur = models.ForeignKey("CoteAuteur")
+    cote_auteur = models.ForeignKey("CoteAuteur", null=True, default=None, blank=True)
+    cote_calcul = models.CharField(max_length=100, null=True, blank=True)
     cote_numero = models.IntegerField(blank=True, null=True)
-    cote_prefixe = models.CharField(max_length=20)
+    cote_prefixe = models.CharField(max_length=20, blank=True, null=True)
+    cote_calcul_url = models.CharField(max_length=20, null=True, blank=True)
     protection_droit_auteur = models.NullBooleanField(db_column='Protection_droit_auteur', blank=True, null=True, default=None)  # Field name made lowercase.
     date = models.CharField(blank=True, null=True, max_length=100)
     date_fin = models.CharField(blank=True, null=True, max_length=100)
-    depouillement = models.TextField(null=True)
+    depouillement = models.TextField(null=True, blank=True)
     directeur_collection = models.ManyToManyField('DirecteurCollection')
     directeur_publication = models.ManyToManyField('DirecteurPublication')
     editeur = models.ManyToManyField('Editeur')
     en_collection = models.CharField(blank=True, max_length=200)
     fonds = models.ForeignKey("Fonds", null=True)
     genre = models.ForeignKey("Genre", null=True)
-    instrumentation = models.TextField(null=True)
-    interprete = models.CharField(null=True, max_length=200)
+    instrumentation = models.TextField(null=True, blank=True)
+    interprete = models.CharField(null=True, blank=True, max_length=200)
     langue_origine = models.ForeignKey("LangueOrigine", null=True)
-    lieu = models.CharField("Lieu", max_length=200)
+    lieu = models.CharField("Lieu", max_length=200, null=True, blank=True)
     lieu_conservation = models.CharField("Lieu de conservation", blank=True, max_length=200)
     localisation = models.ForeignKey("Localisation", null=True)
     maison_edition = models.ForeignKey("MaisonEdition", null=True)
@@ -328,12 +330,13 @@ class Main(models.Model):
     nb_volume = models.CharField(blank=True, max_length=20)
     no_page = models.CharField(blank=True, max_length=20)
     no_volume = models.CharField(blank=True, max_length=20)
+    notice_id = models.CharField(max_length=100, null=True, blank=True)
     nom_org = models.ForeignKey("NomOrg", null=True)
     projet = models.ForeignKey("Projet", null=True)
     source = models.CharField(blank=True, max_length=200)
     sujet = models.TextField(null=True)
     support = models.ManyToManyField('Support')
-    titre = models.CharField(blank=True, max_length=50)
+    titre = models.CharField(max_length=100)
     traducteur = models.ManyToManyField('Traducteur')
 
     city = models.ForeignKey('City', null=True, blank=True)
@@ -348,6 +351,27 @@ class Main(models.Model):
     )
 
     type_evenement = models.ForeignKey("TypeEvenement", null=True)
+
+    def save(self):
+        notice_id = self.cote_prefixe + str(self.cote_auteur.cote)
+        cote_calcul = self.cote_prefixe + " " + str(self.cote_auteur.cote)
+        cote_calcul_url = self.cote_prefixe + "-"+ str(self.cote_auteur.cote)
+        if self.cote_annee:
+            notice_id = notice_id + str(self.cote_annee)
+            cote_calcul = cote_calcul + " " + str(self.cote_annee)
+            cote_calcul_url = cote_calcul_url + "-" + str(self.cote_annee)
+        if self.cote_numero:
+            notice_id = notice_id + str(self.cote_numero).zfill(2)
+            cote_calcul = cote_calcul + " " + str(self.cote_numero).zfill(2)
+            cote_calcul_url = cote_calcul_url + "-" + str(self.cote_numero).zfill(2)
+
+        self.notice_id = notice_id
+        self.cote_calcul = cote_calcul
+        self.cote_calcul_url = cote_calcul_url
+
+        print self.notice_id
+
+        super(Main, self).save()
 
     class Meta:
         verbose_name = "Principale"

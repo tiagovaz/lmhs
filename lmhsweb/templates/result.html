@@ -24,7 +24,7 @@
             <div class="col-sm-3">
                <div class="panel panel-default">
                     <div class="panel-heading">
-                        Filtres
+                        <strong>Filtres</strong>
                     </div>
                     <div class="panel-body">
                         <form class="form" action="" method="get">
@@ -72,13 +72,13 @@
                                                     <h4 class="modal-title" id="requestLabel">
                                                         <strong>
                                                         <center>
-                                                        Cote : {{ i.cote_prefixe }} {{ i.cote_auteur }} {{ i.cote_annee }} {{ i.cote_numero|stringformat:"02d" }}
+                                                        Cote : {{ i.cote_calcul }}
                                                         </center>
                                                         </strong>
                                                     </h4>
                                                 </div>
                                                 {% for s in all %}
-                                                    {% if s.cote_prefixe == i.cote_prefixe and s.cote_auteur == i.cote_auteur and s.cote_annee == i.cote_annee and s.cote_numero == i.cote_numero %}
+                                                    {% if s.notice_id == i.notice_id %}
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-sm-12">
@@ -154,7 +154,7 @@
                                                                                     {% if sl.nom == "En ligne" %}
                                                                                         <tr>
                                                                                             <td><strong>Support(s) en ligne(s) :</strong></td>
-                                                                                            <td><a href='http://oicrm.org/wp-content/rechercheBDlmhs/PDF/public/{{ s.cote_prefixe }}-{{ s.cote_auteur }}-{{ s.cote_annee }}-{{ s.cote_numero|stringformat:"02d" }}.pdf'>PDF</a></td>
+                                                                                            <td><a href='http://oicrm.org/wp-content/rechercheBDlmhs/PDF/public/{{ s.cote_calcul_url }}.pdf'>PDF</a></td>
                                                                                         </tr>
                                                                                     {% endif %}
                                                                                 {% endfor %}

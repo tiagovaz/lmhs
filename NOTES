@@ -23,11 +23,11 @@
 	- type_evenement
 
 - campos removidos:
-	- cote_calcul (= cote_prefix + cote_auteur + cote_annee + cote_numero)
-	- notice_ID (= cote_calcul sem os espacos)
+#	- cote_calcul (= cote_prefix + cote_auteur + cote_annee + cote_numero)
+#	- notice_ID (= cote_calcul sem os espacos)
 	- Cal_support_EnLigne (pode ser substituido por 'support' que contem 'en ligne')
 	- Cal_support_List_moins_EnLigne (= support)
-	- cote_calcul_url (= cote_calcul com espacos transformados em -)
+#	- cote_calcul_url (= cote_calcul com espacos transformados em -)
 	- cote_per_calcul (sem registros)
 	- hash (inutil)
 	- id_org (sem registro)

@@ -7,6 +7,7 @@ import json
 PYTHONIOENCODING='utf-8'
 
 cote_auteur_list = []
+type_evenement_list = []
 author_list = ['Anonyme']
 collection_list = []
 fonds_list = []
@@ -61,9 +62,18 @@ with open('principal.csv', 'rb') as csvfile:
 
             if row['cote_numero']:
                 fields['cote_numero'] = row['cote_numero']
+
+            if row['cote_calcul']:
+                fields['cote_calcul'] = row['cote_calcul']
+
+            if row['cote_calcul_url']:
+                fields['cote_calcul_url'] = row['cote_calcul_url']
                
             if row['cote_prefixe']:
                 fields['cote_prefixe'] = row['cote_prefixe']
+
+            if row['notice_ID']:
+                fields['notice_id'] = row['notice_ID']
 
             if row['date']:
                 fields['date'] = row['date']
@@ -107,9 +117,6 @@ with open('principal.csv', 'rb') as csvfile:
             if row['type']:
                 fields['type'] = row['type']
                 
-            if row['type_evenement']:
-                fields['type_evenement'] = row['type_evenement']                
-
 #######################
 # Many-to-many fields #
 #######################
@@ -190,9 +197,10 @@ with open('principal.csv', 'rb') as csvfile:
 # Foreign-key fields #
 #######################
 
-            cote_auteur = row['cote_auteur']
-            if cote_auteur:
+            cote_auteur = row['cote_auteur'].strip()
+            if cote_auteur.strip():
                 if cote_auteur not in cote_auteur_list:
+                    print cote_auteur
                     cote_auteur_list.append(cote_auteur)
                     cote_auteur_id = cote_auteur_list.index(cote_auteur)+1
                     cote_auteur_fixture = """
@@ -208,8 +216,26 @@ with open('principal.csv', 'rb') as csvfile:
                     fixtures_file.write(cote_auteur_fixture)
                 fields['cote_auteur'] = cote_auteur_id
 
+            type_evenement = row['type_evenement']
+            if type_evenement.strip():
+                if type_evenement not in type_evenement_list:
+                    type_evenement_list.append(type_evenement)
+                    type_evenement_id = type_evenement_list.index(type_evenement)+1
+                    type_evenement_fixture = """
+{
+  "model": "lmhsweb.typeevenement",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (type_evenement_id,type_evenement.strip())
+
+                    fixtures_file.write(type_evenement_fixture)
+                fields['type_evenement'] = type_evenement_id
+
             collection = row['collection']
-            if collection:
+            if collection.strip():
                 if collection not in collection_list:
                     collection_list.append(collection)
                     collection_id = collection_list.index(collection)+1
@@ -227,7 +253,7 @@ with open('principal.csv', 'rb') as csvfile:
                 fields['collection'] = collection_id
 
             fonds = row['fonds']
-            if fonds:
+            if fonds.strip():
                 if fonds not in fonds_list:
                     fonds_list.append(fonds)
                     fonds_id = fonds_list.index(fonds)+1
@@ -245,7 +271,7 @@ with open('principal.csv', 'rb') as csvfile:
                 fields['fonds'] = fonds_id
 
             genre = row['genre']
-            if genre:
+            if genre.strip():
                 if genre not in genre_list:
                     genre_list.append(genre)
                     genre_id = genre_list.index(genre)+1
@@ -263,7 +289,7 @@ with open('principal.csv', 'rb') as csvfile:
                 fields['genre'] = genre_id
 
             langue_origine = row['langue_origine']
-            if langue_origine:
+            if langue_origine.strip():
                 if langue_origine not in langue_origine_list:
                     langue_origine_list.append(langue_origine)
                     langue_origine_id = langue_origine_list.index(langue_origine)+1
@@ -281,7 +307,7 @@ with open('principal.csv', 'rb') as csvfile:
                 fields['langue_origine'] = langue_origine_id
                      
             localisation = row['localisation']
-            if localisation:
+            if localisation.strip():
                 if localisation not in localisation_list:
                     localisation_list.append(localisation)
                     localisation_id = localisation_list.index(localisation)+1
@@ -299,7 +325,7 @@ with open('principal.csv', 'rb') as csvfile:
                 fields['localisation'] = localisation_id
                      
             projet = row['projet']
-            if projet:
+            if projet.strip():
                 if projet not in projet_list:
                     projet_list.append(projet)
                     projet_id = projet_list.index(projet)+1
@@ -317,7 +343,7 @@ with open('principal.csv', 'rb') as csvfile:
                 fields['projet'] = projet_id
                      
             nom_org = row['nom_org']
-            if nom_org:
+            if nom_org.strip():
                 if nom_org not in nom_org_list:
                     nom_org_list.append(nom_org)
                     nom_org_id = nom_org_list.index(nom_org)+1
@@ -334,9 +360,10 @@ with open('principal.csv', 'rb') as csvfile:
                     fixtures_file.write(nom_org_fixture)
                 fields['nom_org'] = nom_org_id 
                      
-            methode_reproduction = row['methode_reproduction']
-            if methode_reproduction:
+            methode_reproduction = row['methode_reproduction'].strip()
+            if methode_reproduction.strip():
                 if methode_reproduction not in methode_reproduction_list:
+                    print methode_reproduction.strip()
                     methode_reproduction_list.append(methode_reproduction)
                     methode_reproduction_id = methode_reproduction_list.index(methode_reproduction)+1
                     methode_reproduction_fixture = """
@@ -353,7 +380,7 @@ with open('principal.csv', 'rb') as csvfile:
                 fields['methode_reproduction'] = methode_reproduction_id
                      
             maison_edition = row['maison_edition']
-            if maison_edition:
+            if maison_edition.strip():
                 if maison_edition not in maison_edition_list:
                     maison_edition_list.append(maison_edition)
                     maison_edition_id = maison_edition_list.index(maison_edition)+1
@@ -371,7 +398,7 @@ with open('principal.csv', 'rb') as csvfile:
                 fields['maison_edition'] = maison_edition_id
 
             medium = row['medium']
-            if medium:
+            if medium.strip():
                 if medium not in medium_list:
                     medium_list.append(medium)
                     medium_id = medium_list.index(medium)+1
