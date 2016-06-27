@@ -17,4 +17,5 @@ class MainFilter(django_filters.FilterSet):
         fields = [
             'titre',
             'type',
+            'projet'
         ]

@@ -11,6 +11,7 @@ from lmhsweb.models import Main, TypeEvenement, Auteur, DirecteurCollection, Dir
     Support, Traducteur, Collection, Fonds, LangueOrigine, Localisation, MaisonEdition, Medium, \
     MethodeReproduction, NomOrg, Projet, Genre
 
+from django.db.models import Q
 
 class MainList(generic.View):
     def get(self, request):
@@ -22,7 +23,8 @@ class MainList(generic.View):
         mot_cle = request.GET.get('mot_cle', '')
         #tousindex_calcul = request.GET['tousIndex_calcul']
 
-        data = Main.objects.filter(titre__icontains=titre, auteur__nom__icontains=auteur, projet__nom__icontains=projet, type__icontains=type, date__icontains=date, mot_cle__nom__icontains=mot_cle).distinct()
+        data = MainFilter(self.request.GET, queryset=Main.objects.all())
+        data_total = data.count()
         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all())
 
         print data
@@ -36,7 +38,7 @@ class MainList(generic.View):
             items = paginator.page(1)
         except EmptyPage:
             items = paginator.page(paginator.num_pages)
-        return render(request, 'result.html', {'items': items, 'all': all_main_registers, 'form' : all_main_registers.form})
+        return render(request, 'result.html', {'items': items, 'all': all_main_registers, 'form' : all_main_registers.form, 'data_total' : data_total})
 
 class SearchForm(generic.CreateView):
     model = Main

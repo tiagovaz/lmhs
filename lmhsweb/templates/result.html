@@ -5,7 +5,16 @@
 
 {% block content %}
                 <center>
-                <h1 class="page-header">Résultats | Banque de données du LMHS</h1>
+                <h2 class="page-header">Résultats | Banque de données du LMHS<br>
+                    <small>
+                        {% if data_total == 0 %}
+                            Aucune notice trouvée
+                        {% elif data_tota == 1 %}
+                            1 notice trouvée
+                        {% else %}
+                            {{ data_total }} notices trouvées
+                        {% endif %}
+                    </small></h2>
                 </center>
                 <p class="text-left"><a href="/search">Nouvelle recherche</a></p>
 
@@ -36,28 +45,27 @@
                 {% for i in items %}
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><b>{{ forloop.counter }}. {{ i.titre }}</b></div>
+                                <div class="panel-heading"><b>{{ i.titre }}</b></div>
                                 <div class="panel-body">
-                                    <center>
-                                    {% if i.type == "Article de périodique" or i.type == "Livre" %}
-                                        {{ i.auteur }}</br>
-                                        {% if i.date %}
-                                            {{ i.date }}</br>
-                                        {% endif %}
-                                    {% endif %}
-
                                     {% if i.type == "Iconographie" %}
-                                        {{ i.sujet }}</br>
-                                        {{ i.genre }}</br>
-                                        {{ i.auteur }}</br>
+                                        {{ i.sujet }}<br>
+                                        {{ i.genre }}<br>
+                                        {{ i.auteur }}<br>
                                         {% if i.date %}
-                                            {{ i.date }}</br>
+                                            {{ i.date }}<br>
+                                        {% endif %}
+                                    {% else %}
+                                        {% for a in i.auteur.all %}
+                                            {{ a }}<br>
+                                        {% endfor %}
+                                        <p></p>
+                                        {% if i.date %}
+                                            {{ i.date }}<br>
                                         {% endif %}
                                     {% endif %}
-
-                                    </center>
+                                        <p></p>
                                     <div class="modal fade" id="ManageRequestModal-{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="requestLabel">
-                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="btn btn-xs btn-danger pull-right" data-dismiss="modal">X</button>
@@ -88,7 +96,7 @@
                                                                                 </tr>
                                                                                 {% endif %}
 
-                                                                                {% if s.auteur %}
+                                                                                {% if s.auteur.all %}
                                                                                         <tr>
                                                                                             <td><strong>Auteur(s) :</strong></td>
                                                                                             <td>
@@ -99,7 +107,7 @@
                                                                                         </tr>
                                                                                 {% endif %}
 
-                                                                                {% if s.directeur_publication %}
+                                                                                {% if s.directeur_publication.all %}
                                                                                         <tr>
                                                                                             <td><strong>Directeur(s) de la publication :</strong></td>
                                                                                             <td>
@@ -110,7 +118,7 @@
                                                                                         </tr>
                                                                                 {% endif %}
 
-                                                                                {% if s.editeur %}
+                                                                                {% if s.editeur.all %}
                                                                                         <tr>
                                                                                             <td><strong>Éditeur(s) :</strong></td>
                                                                                             <td>
@@ -202,7 +210,7 @@
                                                                                 </tr>
                                                                                 {% endif %}
 
-                                                                                {% if s.directeur_collection %}
+                                                                                {% if s.directeur_collection.all %}
                                                                                     <tr>
                                                                                         <td><strong>Directeur(s) de la collection :</strong></td>
                                                                                         <td>
@@ -249,7 +257,7 @@
                                                                                 </tr>
                                                                                 {% endif %}
 
-                                                                                {% if s.mot_cle %}
+                                                                                {% if s.mot_cle.all %}
                                                                                     <tr>
                                                                                         <td><strong>Mot(s) clé(s) :</strong></td>
                                                                                         <td>
@@ -280,7 +288,7 @@
                                                                                     <td>{{ s.fonds }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
-                                                                                {% if s.support %}
+                                                                                {% if s.support.all %}
                                                                                 <tr>
                                                                                     <td><strong>Support(s) :</strong></td>
                                                                                     <td>
