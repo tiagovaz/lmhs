@@ -132,6 +132,8 @@ STATIC_URL = '/static/'
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 MEDIA_ROOT = PROJECT_ROOT + '/media/'
 MEDIA_URL = '/media/'
+STATIC_ROOT='/static/'
+
 
 FIXTURE_DIRS = (
    'lmhsweb/fixtures/',
