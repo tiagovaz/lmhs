@@ -299,11 +299,11 @@ class Main(models.Model):
     auteur = models.ManyToManyField('Auteur')
     collection = models.ForeignKey("Collection", null=True)
     commentaire = models.TextField(null=True)
-    cote_annee = models.IntegerField()
+    cote_annee = models.IntegerField(blank=True, null=True)
     cote_auteur = models.ForeignKey("CoteAuteur")
     cote_numero = models.IntegerField(blank=True, null=True)
     cote_prefixe = models.CharField(max_length=20)
-    protection_droit_auteur = models.BooleanField(db_column='Protection_droit_auteur', blank=True, default=False)  # Field name made lowercase.
+    protection_droit_auteur = models.NullBooleanField(db_column='Protection_droit_auteur', blank=True, null=True, default=None)  # Field name made lowercase.
     date = models.CharField(blank=True, null=True, max_length=100)
     date_fin = models.CharField(blank=True, null=True, max_length=100)
     depouillement = models.TextField(null=True)
