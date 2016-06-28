@@ -42,29 +42,29 @@
             </div>
 
             <div class="col-sm-9">
-                {% for i in items %}
+                {% for s in items %}
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><b>{{ i.titre }}</b></div>
+                                <div class="panel-heading"><b>{{ s.titre }}</b></div>
                                 <div class="panel-body">
-                                    {% if i.type == "Iconographie" %}
-                                        {{ i.sujet }}<br>
-                                        {{ i.genre }}<br>
-                                        {{ i.auteur }}<br>
-                                        {% if i.date %}
-                                            {{ i.date }}<br>
+                                    {% if s.type == "Iconographie" %}
+                                        {{ s.sujet }}<br>
+                                        {{ s.genre }}<br>
+                                        {{ s.auteur }}<br>
+                                        {% if s.date %}
+                                            {{ s.date }}<br>
                                         {% endif %}
                                     {% else %}
-                                        {% for a in i.auteur.all %}
+                                        {% for a in s.auteur.all %}
                                             {{ a }}<br>
                                         {% endfor %}
                                         <p></p>
-                                        {% if i.date %}
-                                            {{ i.date }}<br>
+                                        {% if s.date %}
+                                            {{ s.date }}<br>
                                         {% endif %}
                                     {% endif %}
                                         <p></p>
-                                    <div class="modal fade" id="ManageRequestModal-{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="requestLabel">
+                                    <div class="modal fade" id="ManageRequestModal-{{s.id}}" tabindex="-1" role="dialog" aria-labelledby="requestLabel">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -72,13 +72,11 @@
                                                     <h4 class="modal-title" id="requestLabel">
                                                         <strong>
                                                         <center>
-                                                        Cote : {{ i.cote_calcul }}
+                                                        Cote : {{ s.cote_calcul }}
                                                         </center>
                                                         </strong>
                                                     </h4>
                                                 </div>
-                                                {% for s in all %}
-                                                    {% if s.notice_id == i.notice_id %}
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-sm-12">
@@ -312,12 +310,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% endif %}
-                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>
-                                    <a data-toggle="modal" data-target="#ManageRequestModal-{{ i.id }}" class="btn btn-xs btn-success">
+                                    <a data-toggle="modal" data-target="#ManageRequestModal-{{ s.id }}" class="btn btn-xs btn-success">
                                          <i class="fa fa-file-text-o"></i> &nbsp; <strong>Consulter</strong>
                                     </a>
                                 </div>
