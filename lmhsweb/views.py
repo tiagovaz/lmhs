@@ -45,7 +45,7 @@ class SearchForm(generic.CreateView):
     template_name = 'search.html'
     form_class = Search
 
-    @method_decorator(login_required)
+#    @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(SearchForm, self).dispatch(*args, **kwargs)
 
