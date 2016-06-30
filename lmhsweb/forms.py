@@ -3,8 +3,6 @@
 from dal import autocomplete
 from django import forms
 from models import *
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, Div
 
 
 class Search(forms.ModelForm):
@@ -13,40 +11,37 @@ class Search(forms.ModelForm):
     auteur__nom = forms.CharField(label="Auteur")
     mot_cle__nom = forms.CharField(label="Mot-clé")
 
+#    form_method = 'GET'
+#    form_action = '/list/'
+#    add_input(Submit('submit', 'Chercher'))
+#    layout = Layout (
+#                Div(
+#                        Div( 'auteur__nom', css_class='col-sm-6'),
+#                        Div( 'recherche_pdf', css_class='col-sm-6'),
+#                        css_class='row'
+#                ),
+#                Div(
+#
+#                        Div( 'titre', css_class='col-sm-6'),
+#                        Div( 'tousIndex_calcul', css_class='col-sm-6'),
+#                        css_class='row'
+#                ),
+#                Div(
+#                        Div( 'date', css_class='col-sm-6'),
+#                        Div( 'projet', css_class='col-sm-6'),
+#                        css_class='row'
+#                ),
+#                Div(
+#                        Div( 'mot_cle__nom', css_class='col-sm-6'),
+#                        Div( 'type', css_class='col-sm-6'),
+#                        css_class='row'
+#                ),
+#        )
+#
     class Meta:
         model = Main
-        fields = '__all__'
+        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'recherche_pdf', 'tousIndex_calcul', 'projet', 'type']
 
-    def __init__(self, *args, **kwargs):
-        super(Search, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper = FormHelper()
-        self.helper.form_method = 'GET'
-        self.helper.form_action = '/list/'
-        self.helper.add_input(Submit('submit', 'Chercher'))
-        self.helper.layout = Layout (
-                    Div(
-                            Div( 'auteur__nom', css_class='col-sm-6'),
-                            Div( 'recherche_pdf', css_class='col-sm-6'),
-                            css_class='row'
-                    ),
-                    Div(
-
-                            Div( 'titre', css_class='col-sm-6'),
-                            Div( 'tousIndex_calcul', css_class='col-sm-6'),
-                            css_class='row'
-                    ),
-                    Div(
-                            Div( 'date', css_class='col-sm-6'),
-                            Div( 'projet', css_class='col-sm-6'),
-                            css_class='row'
-                    ),
-                    Div(
-                            Div( 'mot_cle__nom', css_class='col-sm-6'),
-                            Div( 'type', css_class='col-sm-6'),
-                            css_class='row'
-                    ),
-            )
 
 
 class MainAdminForm(forms.ModelForm):

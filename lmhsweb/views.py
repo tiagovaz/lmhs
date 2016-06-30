@@ -40,17 +40,25 @@ class MainList(generic.View):
             items = paginator.page(paginator.num_pages)
         return render(request, 'result.html', {'items': items, 'all': all_main_registers, 'form' : all_main_registers.form, 'data_total' : data_total})
 
-class SearchForm(generic.CreateView):
-    model = Main
-    template_name = 'search.html'
-    form_class = Search
+class SearchForm(generic.View):
+    def get(self, request):
+        search_form = Search()
+        return render(request, 'search.html', {'form': search_form})
 
-#    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(SearchForm, self).dispatch(*args, **kwargs)
+    def post(self, request):
+        pass
 
-    def get_success_url(self):
-        return self.object.get_absolute_url()
+#class SearchForm(generic.CreateView):
+#    model = Main
+#    template_name = 'search.html'
+#    form_class = Search
+#
+##    @method_decorator(login_required)
+#    def dispatch(self, *args, **kwargs):
+#        return super(SearchForm, self).dispatch(*args, **kwargs)
+#
+#    def get_success_url(self):
+#        return self.object.get_absolute_url()
 
 class Login(generic.TemplateView):
     template_name = 'registration/login.html'

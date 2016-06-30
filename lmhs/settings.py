@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'bootstrap3_datepicker',
     'bootstrap_pagination',
     'django_forms_bootstrap',
-    'crispy_forms',
     'django_tables2',
     'bootstrap3',
     'lmhsweb',

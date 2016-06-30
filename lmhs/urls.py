@@ -29,7 +29,7 @@ urlpatterns = [
                   ),
                   url(
                       r'^$',
-                      MainList.as_view(),
+                      SearchForm.as_view(),
                       name='event'
                   ),
                   url(
