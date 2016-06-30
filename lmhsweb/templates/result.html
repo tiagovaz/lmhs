@@ -14,7 +14,18 @@
                         {% else %}
                             {{ data_total }} notices trouvées
                         {% endif %}
-                    </small></h2>
+                        {% if user.is_authenticated %}
+                        <span class="pull-left">
+                            <a data-toggle="modal" data-target="#CommentModal" class="btn btn-xs btn-success">
+                            <i class="fa fa-plus"></i>
+                                Nouveau
+                            </a>
+                        </span>
+
+
+                        {% endif %}
+                    </small>
+                </h2>
                 </center>
                 <p class="text-left"><a href="/search">Nouvelle recherche</a></p>
 
@@ -45,12 +56,32 @@
                 {% for s in items %}
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><b>{{ s.titre }}</b></div>
+                                <div class="panel-heading">
+                                <b>{{ s.titre }}</b>
+                                {% if user.is_authenticated %}
+                                    <span class="pull-right">
+                                        <a class="btn btn-xs btn-warning" href=''>
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-xs btn-danger" href=''>
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </span>
+                                {% endif %}
+                                </div>
                                 <div class="panel-body">
                                     {% if s.type == "Iconographie" %}
-                                        {{ s.sujet }}<br>
-                                        {{ s.genre }}<br>
-                                        {{ s.auteur }}<br>
+                                        {% if s.sujet %}
+                                            {{ s.sujet }}<br>
+                                        {% endif %}
+                                        {% if s.genre %}
+                                            {{ s.genre }}<br>
+                                        {% endif %}
+                                        {% if s.auteur.all %}
+                                            {% for a in s.auteur.all %}
+                                                {{ a }}<br>
+                                            {% endfor %}
+                                        {% endif %}
                                         {% if s.date %}
                                             {{ s.date }}<br>
                                         {% endif %}

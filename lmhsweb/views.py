@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 
 from lmhsweb.filters import MainFilter
-from lmhsweb.forms import Search
+from lmhsweb.forms import Search, Create
 from lmhsweb.models import Main, TypeEvenement, Auteur, DirecteurCollection, DirecteurPublication, Editeur, MotCle, \
     Support, Traducteur, Collection, Fonds, LangueOrigine, Localisation, MaisonEdition, Medium, \
     MethodeReproduction, NomOrg, Projet, Genre
@@ -48,17 +48,17 @@ class SearchForm(generic.View):
     def post(self, request):
         pass
 
-#class SearchForm(generic.CreateView):
-#    model = Main
-#    template_name = 'search.html'
-#    form_class = Search
-#
-##    @method_decorator(login_required)
-#    def dispatch(self, *args, **kwargs):
-#        return super(SearchForm, self).dispatch(*args, **kwargs)
-#
-#    def get_success_url(self):
-#        return self.object.get_absolute_url()
+class CreateForm(generic.CreateView):
+    model = Main
+    template_name = 'create.html'
+    form_class = Create
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CreateForm, self).dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
 
 class Login(generic.TemplateView):
     template_name = 'registration/login.html'

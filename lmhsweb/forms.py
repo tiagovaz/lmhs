@@ -11,46 +11,18 @@ class Search(forms.ModelForm):
     auteur__nom = forms.CharField(label="Auteur")
     mot_cle__nom = forms.CharField(label="Mot-clé")
 
-#    form_method = 'GET'
-#    form_action = '/list/'
-#    add_input(Submit('submit', 'Chercher'))
-#    layout = Layout (
-#                Div(
-#                        Div( 'auteur__nom', css_class='col-sm-6'),
-#                        Div( 'recherche_pdf', css_class='col-sm-6'),
-#                        css_class='row'
-#                ),
-#                Div(
-#
-#                        Div( 'titre', css_class='col-sm-6'),
-#                        Div( 'tousIndex_calcul', css_class='col-sm-6'),
-#                        css_class='row'
-#                ),
-#                Div(
-#                        Div( 'date', css_class='col-sm-6'),
-#                        Div( 'projet', css_class='col-sm-6'),
-#                        css_class='row'
-#                ),
-#                Div(
-#                        Div( 'mot_cle__nom', css_class='col-sm-6'),
-#                        Div( 'type', css_class='col-sm-6'),
-#                        css_class='row'
-#                ),
-#        )
-#
     class Meta:
         model = Main
         fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'recherche_pdf', 'tousIndex_calcul', 'projet', 'type']
 
 
-
-class MainAdminForm(forms.ModelForm):
+class Create(forms.ModelForm):
     class Meta:
         model = Main
         fields = ('__all__')
         widgets = {
             'type_evenement': autocomplete.ModelSelect2('type_evenement-autocomplete'),
-            'projet': autocomplete.ModelSelect2('projet-autocomplete'),
+            'projet': autocomplete.ModelSelect2(url='projet-autocomplete'),
             'nom_org': autocomplete.ModelSelect2('nom_org-autocomplete'),
             'methode_reproduction': autocomplete.ModelSelect2('methode_reproduction-autocomplete'),
             'medium': autocomplete.ModelSelect2('medium-autocomplete'),

@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from lmhsweb.forms import MainAdminForm
+from lmhsweb.forms import Create
 from models import *
 
 
 class MainAdmin(admin.ModelAdmin):
-    form = MainAdminForm
+    form = Create
 admin.site.register(Main, MainAdmin)
 
 admin.site.register(Auteur)
