@@ -9,7 +9,13 @@ PYTHONIOENCODING='utf-8'
 cote_auteur_list = []
 type_evenement_list = []
 author_list = ['Anonyme']
+directeur_collection_list = []
+directeur_publication_list = []
 collection_list = []
+editeur_list = []
+traducteur_list = []
+mot_cle_list = []
+support_list = []
 fonds_list = []
 genre_list = []
 langue_origine_list = []
@@ -121,6 +127,55 @@ with open('principal.csv', 'rb') as csvfile:
 # Many-to-many fields #
 #######################
 
+            traducteur_string = row['traducteur']
+            traducteur_split = traducteur_string.splitlines()
+            row_traducteur = [a.strip() for a in traducteur_split if a]
+
+            if row_traducteur:
+                for traducteur in row_traducteur:
+                    if traducteur not in traducteur_list:
+                        traducteur_list.append(traducteur)
+                        traducteur_id = traducteur_list.index(traducteur)+1
+                        traducteur_fixture = """
+{
+  "model": "lmhsweb.traducteur",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (traducteur_id,traducteur)
+                        fixtures_file.write(traducteur_fixture)
+
+                fields['traducteur'] = [traducteur_list.index(traducteur)+1 for traducteur in row_traducteur]
+
+# ===========
+
+
+            support_string = row['support']
+            support_split = support_string.splitlines()
+            row_support = [a.strip() for a in support_split if a]
+
+            if row_support:
+                for support in row_support:
+                    if support not in support_list:
+                        support_list.append(support)
+                        support_id = support_list.index(support)+1
+                        support_fixture = """
+{
+  "model": "lmhsweb.support",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (support_id,support)
+                        fixtures_file.write(support_fixture)
+
+                fields['support'] = [support_list.index(support)+1 for support in row_support]
+
+# ===========
+
             authors_string = row['auteur']
             authors_split = authors_string.split(';')
             row_authors = [a.strip() for a in authors_split if a]
@@ -140,59 +195,108 @@ with open('principal.csv', 'rb') as csvfile:
   }
 },""" % (author_id,author)
                         fixtures_file.write(author_fixture)
-            
+
                 fields['auteur'] = [author_list.index(author)+1 for author in row_authors]
 
-#FIXME: add the followin commented fields, based on the 'auteur' ManyToMany
-#{
-#  "model": "lmhsweb.directeurcollection",
-#  "pk": 1,
-#  "fields":
-#  {
-#    "nom": "asd"
-#  }
-#},
-#{
-#  "model": "lmhsweb.directeurpublication",
-#  "pk": 1,
-#  "fields":
-#  {
-#    "nom": "czxczxc"
-#  }
-#},
-#{
-#  "model": "lmhsweb.editeur",
-#  "pk": 1,
-#  "fields":
-#  {
-#    "nom": "xcvxcv"
-#  }
-#},
-#{
-#  "model": "lmhsweb.motcle",
-#  "pk": 1,
-#  "fields":
-#  {
-#    "nom": "adasd"
-#  }
-#},
-#{
-#  "model": "lmhsweb.support",
-#  "pk": 1,
-#  "fields":
-#  {
-#    "nom": "asdasd"
-#  }
-#}, 
-#{
-#  "model": "lmhsweb.traducteur",
-#  "pk": 1,
-#  "fields":
-#  {
-#    "nom": "asdasd"
-#  }
-#},
- 
+# ===========
+
+
+            mot_cle_string = row['mot_cle']
+            mot_cle_split = mot_cle_string.split(';')
+            row_mot_cle = [a.strip().strip('"') for a in mot_cle_split if a]
+
+            if row_mot_cle:
+                for mot_cle in row_mot_cle:
+                    if mot_cle not in mot_cle_list:
+                        print mot_cle
+                        mot_cle_list.append(mot_cle)
+                        mot_cle_id = mot_cle_list.index(mot_cle)+1
+                        mot_cle_fixture = """
+{
+  "model": "lmhsweb.motcle",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (mot_cle_id, mot_cle)
+                        fixtures_file.write(mot_cle_fixture)
+
+                fields['mot_cle'] = [mot_cle_list.index(mot_cle)+1 for mot_cle in row_mot_cle]
+
+# ===========
+
+            editeur_string = row['editeur']
+            editeur_split = editeur_string.split(';')
+            row_editeur = [a.strip() for a in editeur_split if a]
+
+            if row_editeur:
+                for editeur in row_editeur:
+                    if editeur not in editeur_list:
+                        editeur_list.append(editeur)
+                        editeur_id = editeur_list.index(editeur)+1
+                        editeur_fixture = """
+{
+  "model": "lmhsweb.editeur",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (editeur_id,editeur)
+                        fixtures_file.write(editeur_fixture)
+
+                fields['editeur'] = [editeur_list.index(editeur)+1 for editeur in row_editeur]
+
+# ===========
+
+            directeur_collection_string = row['directeur_collection']
+            directeur_collection_split = directeur_collection_string.split(';')
+            row_directeur_collection = [a.strip() for a in directeur_collection_split if a]
+
+
+            if row_directeur_collection:
+                for directeur_collection in row_directeur_collection:
+                    if directeur_collection not in directeur_collection_list:
+                        directeur_collection_list.append(directeur_collection)
+                        directeur_collection_id = directeur_collection_list.index(directeur_collection)+1
+                        directeur_collection_fixture = """
+{
+  "model": "lmhsweb.directeurcollection",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (directeur_collection_id, directeur_collection)
+                        fixtures_file.write(directeur_collection_fixture)
+
+                fields['directeur_collection'] = [directeur_collection_list.index(directeur_collection)+1 for directeur_collection in row_directeur_collection]
+
+# ==========
+
+            directeur_publication_string = row['directeur_publication']
+            directeur_publication_split = directeur_publication_string.split(';')
+            row_directeur_publication = [a.strip() for a in directeur_publication_split if a]
+
+            if row_directeur_publication:
+                for directeur_publication in row_directeur_publication:
+                    if directeur_publication not in directeur_publication_list:
+                        directeur_publication_list.append(directeur_publication)
+                        directeur_publication_id = directeur_publication_list.index(directeur_publication)+1
+                        directeur_publication_fixture = """
+{
+  "model": "lmhsweb.directeurpublication",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (directeur_publication_id, directeur_publication)
+                        fixtures_file.write(directeur_publication_fixture)
+
+                fields['directeur_publication'] = [directeur_publication_list.index(directeur_publication)+1 for directeur_publication in row_directeur_publication]
+
 #######################
 # Foreign-key fields #
 #######################
@@ -200,7 +304,6 @@ with open('principal.csv', 'rb') as csvfile:
             cote_auteur = row['cote_auteur'].strip()
             if cote_auteur.strip():
                 if cote_auteur not in cote_auteur_list:
-                    print cote_auteur
                     cote_auteur_list.append(cote_auteur)
                     cote_auteur_id = cote_auteur_list.index(cote_auteur)+1
                     cote_auteur_fixture = """
@@ -363,7 +466,6 @@ with open('principal.csv', 'rb') as csvfile:
             methode_reproduction = row['methode_reproduction'].strip()
             if methode_reproduction.strip():
                 if methode_reproduction not in methode_reproduction_list:
-                    print methode_reproduction.strip()
                     methode_reproduction_list.append(methode_reproduction)
                     methode_reproduction_id = methode_reproduction_list.index(methode_reproduction)+1
                     methode_reproduction_fixture = """
