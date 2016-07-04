@@ -53,6 +53,11 @@ class CreateForm(generic.CreateView):
     template_name = 'create.html'
     form_class = Create
 
+    def get_form_kwargs(self):
+        kwargs = super(CreateForm, self ).get_form_kwargs()
+        kwargs['type'] = self.request.GET.get('type', '')
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(CreateForm, self).dispatch(*args, **kwargs)

@@ -17,6 +17,15 @@ class Search(forms.ModelForm):
 
 
 class Create(forms.ModelForm):
+    print type
+    projet = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    def __init__( self, type, *args, **kwargs ):
+        super(Create, self).__init__( *args, **kwargs )
+        self.type = type
+        if self.type == "Livre":
+            del self.fields['titre']
+
     class Meta:
         model = Main
         fields = ('__all__')

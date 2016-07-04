@@ -50,7 +50,7 @@
                             <li class="dropdown-header">Sélectionnez le type</li>
                             {% types as type_list %}
                             {% for t in type_list %}
-                                <li><a href=''>{{ t }}</a></li>
+                                <li><a href='/create/?type={{ t }}'>{{ t }}</a></li>
                             {% endfor %}
                         </ul>
                         <!-- /.dropdown-user -->
