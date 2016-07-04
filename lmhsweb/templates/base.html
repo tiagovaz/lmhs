@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load i18n %}
+{% load notice_types %}
 
 <html>
     <head>
@@ -43,7 +44,21 @@
                     {% if user.is_authenticated %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>{{ user }}<i class="fa fa-caret-down"></i>
+                            <i class="fa fa-add fa-fw"></i>Nouvelle notice <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Sélectionnez le type</li>
+                            {% types as type_list %}
+                            {% for t in type_list %}
+                                <li><a href=''>{{ t }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>{{ user }} <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">{% trans "Compte" %}</li>
