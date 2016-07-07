@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    url(r'^delete/(?P<pk>\d+)/$', NoticeDelete.as_view(), name="delete_notice"),
+
     url(r'^admin/', admin.site.urls),
                   url(
                       r'^list/$',

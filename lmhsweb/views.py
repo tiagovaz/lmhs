@@ -12,6 +12,15 @@ from lmhsweb.models import Main, TypeEvenement, Auteur, DirecteurCollection, Dir
     MethodeReproduction, NomOrg, Projet, Genre
 
 from django.db.models import Q
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy, resolve
+
+
+class NoticeDelete(DeleteView):
+    model = Main
+    success_url = reverse_lazy('event_list') # This is where this view will
+                                            # redirect the user
+    template_name = 'delete_notice.html'
 
 class MainList(generic.View):
     def get(self, request):
