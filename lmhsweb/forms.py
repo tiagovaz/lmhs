@@ -17,14 +17,36 @@ class Search(forms.ModelForm):
 
 
 class Create(forms.ModelForm):
-    print type
-    projet = forms.CharField(widget=forms.HiddenInput(), required=False)
+    #projet = forms.CharField(widget=forms.HiddenInput(), required=False)
+
 
     def __init__( self, type, *args, **kwargs ):
         super(Create, self).__init__( *args, **kwargs )
         self.type = type
         if self.type == "Livre":
-            del self.fields['titre']
+            del self.fields['annee_enregistrement']
+            del self.fields['annee_production']
+            del self.fields['cote_calcul']
+            del self.fields['cote_calcul_url']
+            del self.fields['date_fin']
+            del self.fields['depouillement']
+            del self.fields['en_collection']
+            del self.fields['genre']
+            del self.fields['instrumentation']
+            del self.fields['interprete']
+            del self.fields['lieu_conservation']
+            del self.fields['localisation']
+            del self.fields['medium']
+            del self.fields['methode_reproduction']
+            del self.fields['no_page']
+            del self.fields['no_volume']
+            del self.fields['notice_id']
+            del self.fields['nom_org']
+            del self.fields['projet']
+            del self.fields['source']
+            del self.fields['sujet']
+            del self.fields['support']
+            del self.fields['type_evenement']
 
     class Meta:
         model = Main
@@ -41,6 +63,8 @@ class Create(forms.ModelForm):
             'genre': autocomplete.ModelSelect2('genre-autocomplete'),
             'fonds': autocomplete.ModelSelect2('fonds-autocomplete'),
             'collection': autocomplete.ModelSelect2('collection-autocomplete'),
+            'cote_prefixe': autocomplete.ModelSelect2('cote_prefixe-autocomplete'),
+            'cote_auteur': autocomplete.ModelSelect2('cote_auteur-autocomplete'),
             'auteur': autocomplete.ModelSelect2Multiple('auteur-autocomplete'),
             'directeur_collection': autocomplete.ModelSelect2Multiple('directeur_collection-autocomplete'),
             'directeur_publication': autocomplete.ModelSelect2Multiple('directeur_publication-autocomplete'),

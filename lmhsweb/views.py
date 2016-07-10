@@ -9,7 +9,7 @@ from lmhsweb.filters import MainFilter
 from lmhsweb.forms import Search, Create
 from lmhsweb.models import Main, TypeEvenement, Auteur, DirecteurCollection, DirecteurPublication, Editeur, MotCle, \
     Support, Traducteur, Collection, Fonds, LangueOrigine, Localisation, MaisonEdition, Medium, \
-    MethodeReproduction, NomOrg, Projet, Genre
+    MethodeReproduction, NomOrg, Projet, Genre, CotePrefixe, CoteAuteur
 
 from django.db.models import Q
 from django.views.generic.edit import DeleteView
@@ -72,7 +72,8 @@ class CreateForm(generic.CreateView):
         return super(CreateForm, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
-        return self.object.get_absolute_url()
+        #return self.object.get_absolute_url()
+        return '/list/'
 
 class Login(generic.TemplateView):
     template_name = 'registration/login.html'
@@ -291,5 +292,29 @@ class GenreAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(nom__icontains=self.q)
+
+        return qs
+
+class CotePrefixeAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return CotePrefixe.objects.none()
+
+        qs = CotePrefixe.objects.all()
+
+        if self.q:
+            qs = qs.filter(cote__icontains=self.q)
+
+        return qs
+
+class CoteAuteurAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return CoteAuteur.objects.none()
+
+        qs = CoteAuteur.objects.all()
+
+        if self.q:
+            qs = qs.filter(cote__icontains=self.q)
 
         return qs

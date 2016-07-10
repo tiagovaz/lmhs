@@ -7,6 +7,7 @@ import json
 PYTHONIOENCODING='utf-8'
 
 cote_auteur_list = []
+cote_prefixe_list = []
 type_evenement_list = []
 author_list = ['Anonyme']
 directeur_collection_list = []
@@ -28,6 +29,8 @@ medium_list = []
 
 count = 0
 
+type_list = []
+
 with open('principal.csv', 'rb') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=',')
 
@@ -38,6 +41,16 @@ with open('principal.csv', 'rb') as csvfile:
             
             main_fixture = {}
             fields = {}
+
+            if row['type'] == 'Livre':
+                for f in row:
+                    if row[f] != "":
+                        print f, row[f]
+                        break
+                    else:
+                        print f, "None"
+                        type_list.append(f)
+            
 
 ##################
 # Boolfields #
@@ -75,9 +88,6 @@ with open('principal.csv', 'rb') as csvfile:
             if row['cote_calcul_url']:
                 fields['cote_calcul_url'] = row['cote_calcul_url']
                
-            if row['cote_prefixe']:
-                fields['cote_prefixe'] = row['cote_prefixe']
-
             if row['notice_ID']:
                 fields['notice_id'] = row['notice_ID']
 
@@ -208,7 +218,6 @@ with open('principal.csv', 'rb') as csvfile:
             if row_mot_cle:
                 for mot_cle in row_mot_cle:
                     if mot_cle not in mot_cle_list:
-                        print mot_cle
                         mot_cle_list.append(mot_cle)
                         mot_cle_id = mot_cle_list.index(mot_cle)+1
                         mot_cle_fixture = """
@@ -300,6 +309,23 @@ with open('principal.csv', 'rb') as csvfile:
 #######################
 # Foreign-key fields #
 #######################
+            cote_prefixe = row['cote_prefixe'].strip()
+            if cote_prefixe.strip():
+                if cote_prefixe not in cote_prefixe_list:
+                    cote_prefixe_list.append(cote_prefixe)
+                    cote_prefixe_id = cote_prefixe_list.index(cote_prefixe)+1
+                    cote_prefixe_fixture = """
+{
+  "model": "lmhsweb.coteprefixe",
+  "pk": %d,
+  "fields":
+  {
+    "cote": "%s"
+  }
+},""" % (cote_prefixe_id,cote_prefixe.strip())
+
+                    fixtures_file.write(cote_prefixe_fixture)
+                fields['cote_prefixe'] = cote_prefixe_id
 
             cote_auteur = row['cote_auteur'].strip()
             if cote_auteur.strip():
@@ -590,4 +616,7 @@ with open('principal.csv', 'rb') as csvfile:
 
         fixtures_file.seek(fixtures_file.tell()-1)
         fixtures_file.write('\n]')
+
+print list(set(type_list))
+
 

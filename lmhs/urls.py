@@ -44,6 +44,8 @@ urlpatterns = [
                   url(r'^create/(?P<type>\w{0,50})$', CreateForm.as_view()),
                   url(r'^type_evenement-autocomplete/$', TypeEvenementAutocomplete.as_view(), name='type_evenement-autocomplete', ),
                   url(r'^auteur-autocomplete/$', AuteurAutocomplete.as_view(), name='auteur-autocomplete', ),
+                  url(r'^cote_auteur-autocomplete/$', CoteAuteurAutocomplete.as_view(), name='cote_auteur-autocomplete', ),
+                  url(r'^cote_prefixe-autocomplete/$', CotePrefixeAutocomplete.as_view(), name='cote_prefixe-autocomplete', ),
                   url(r'^directeur_collection-autocomplete/$', DirecteurCollectionAutocomplete.as_view(), name='directeur_collection-autocomplete', ),
                   url(r'^directeur_publication-autocomplete/$', DirecteurPublicationAutocomplete.as_view(), name='directeur_publication-autocomplete', ),
                   url(r'^editeur-autocomplete/$', EditeurAutocomplete.as_view(), name='editeur-autocomplete', ),
