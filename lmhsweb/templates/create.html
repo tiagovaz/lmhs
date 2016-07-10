@@ -47,9 +47,107 @@
                     <div class="row">
                         <div class="col-lg-12">
                 		<form method="post">
-                                    {% csrf_token %}
-                		    {{ form|as_bootstrap }}
-                		    <div class="form-actions">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div id="div_id_cote_prefixe" class="form-group  ">
+                                        <label for="id_cote_prefixe" class="control-label  ">
+                                        Cote prefixe
+                                        </label>
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe">
+                                                <option value="" selected="selected">---------</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div id="div_id_cote_auteur" class="form-group  ">
+                                        <label for="id_cote_auteur" class="control-label  ">
+                                        Cote auteur
+                                        </label>
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_auteur-autocomplete/" id="id_cote_auteur" name="cote_auteur">
+                                                <option value="" selected="selected">---------</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div id="div_id_cote_annee" class="form-group  ">
+                                        <label for="id_cote_annee" class="control-label  ">
+                                        Cote année
+                                        </label>
+                                        <div class="">
+                                            <input class=" form-control" id="id_cote_annee" maxlength="100" name="cote_annee" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div id="div_id_cote_numero" class="form-group  ">
+                                        <label for="id_cote_numero" class="control-label  ">
+                                        Cote numéro
+                                        </label>
+                                        <div class="">
+                                            <input class=" form-control" id="id_cote_numero" maxlength="100" name="cote_numero" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <div id="div_id_titre" class="form-group  ">
+                                        <label for="id_titre" class="control-label required-field ">Titre</label>
+                                        <div class="">
+                                            <input class=" form-control" id="id_titre" maxlength="100" name="titre" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div id="div_id_protection_droit_auteur" class="form-group  ">
+                                            <label for="id_protection_droit_auteur" class="control-label required-field ">
+                                                Droit d'auteur
+                                            </label>
+                                            <div class="">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio"  name="protection_droit_auteur" id="id_protection_droit_auteur_1" value="0"> Non
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio"  name="protection_droit_auteur" id="id_protection_droit_auteur_2" value="1"> Oui
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            {% for field in form %}
+                                {% if field.name == "type" %}
+                                    <input class=" form-control" id="id_type" name="type" type="hidden" value="{{ field.value }}" />
+                                    {% if field.value == "Affiche" %}
+                                    {% elif field.value == "Annonce de concours" %}
+                                    {% elif field.value == "Article de périodique" %}
+                                    {% elif field.value == "Catalogue" %}
+                                    {% elif field.value == "Conférence" %}
+                                    {% elif field.value == "Document non publié" %}
+                                    {% elif field.value == "Extrait de livre" %}
+                                    {% elif field.value == "Iconographie" %}
+                                    {% elif field.value == "Livre" %}
+                                        {% include "forms/livre.html" %}
+                                    {% elif field.value == "Matériel audiovisuel" %}
+                                    {% elif field.value == "Partition" %}
+                                    {% elif field.value == "Périodique" %}
+                                    {% elif field.value == "Photographie" %}
+                                    {% elif field.value == "Programme" %}
+                                    {% elif field.value == "Référence" %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            <div class="form-actions">
                 		      <button type="submit" class="btn btn-primary" name="submit">Enregistrer</button>
                               <button type="reset" class="btn btn-danger">Réinitialiser</button>
                 		    </div>
