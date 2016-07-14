@@ -30,13 +30,12 @@ class MainList(generic.View):
         type = request.GET.get('type', '')
         date = request.GET.get('date', '')
         mot_cle = request.GET.get('mot_cle', '')
+        pdf_text = request.GET.get('pdf_text', '')
         #tousindex_calcul = request.GET['tousIndex_calcul']
 
         data = MainFilter(self.request.GET, queryset=Main.objects.all())
         data_total = data.count()
         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all())
-
-        print data
 
         paginator = Paginator(data, 25)
         page = request.GET.get('page')

@@ -3,11 +3,7 @@ from django.contrib import admin
 from lmhsweb.forms import Create
 from models import *
 
-
-class MainAdmin(admin.ModelAdmin):
-    form = Create
-admin.site.register(Main, MainAdmin)
-
+admin.site.register(Main)
 admin.site.register(Auteur)
 admin.site.register(CoteAuteur)
 admin.site.register(Collection)
@@ -30,3 +26,5 @@ admin.site.register(City)
 admin.site.register(State)
 admin.site.register(Country)
 admin.site.register(MotCle)
+
+

@@ -5,6 +5,15 @@ from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+from cStringIO import StringIO
+import os
+from django.conf import settings
+
+
 TYPE_CHOICES = (
     (
         "Affiche",
@@ -302,6 +311,7 @@ class Traducteur(models.Model):
     class Meta:
         verbose_name = "Traducteur"
 
+
 @python_2_unicode_compatible
 class Main(models.Model):
     annee_1re_publication = models.IntegerField(blank=True, null=True)
@@ -354,6 +364,32 @@ class Main(models.Model):
     # state = models.ForeignKey('State', null=True, blank=True)
     # country = models.ForeignKey('Country', null=True, blank=True)
 
+    pdf_file = models.FileField(
+        null=True,
+        blank=True
+    )
+    pdf_text = models.TextField(blank=True, null=True)
+
+    def convert_pdf_to_txt(self, path):
+        rsrcmgr = PDFResourceManager()
+        retstr = StringIO()
+        codec = 'utf-8'
+        laparams = LAParams()
+        device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+        fp = file(path, 'rb')
+        interpreter = PDFPageInterpreter(rsrcmgr, device)
+        password = ""
+        maxpages = 0
+        caching = True
+        pagenos=set()
+        for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
+            interpreter.process_page(page)
+        fp.close()
+        device.close()
+        str = retstr.getvalue()
+        retstr.close()
+        return str
+
     type = models.CharField(
         choices=TYPE_CHOICES,
         max_length=100,
@@ -385,10 +421,13 @@ class Main(models.Model):
         self.notice_id = notice_id
         self.cote_calcul = cote_calcul
         self.cote_calcul_url = cote_calcul_url
+        super(Main, self).save()
 
-        print self.notice_id
+        if self.pdf_file:
+            self.pdf_text = self.convert_pdf_to_txt(str(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name)))
 
         super(Main, self).save()
+
 
     class Meta:
         verbose_name = "Principale"

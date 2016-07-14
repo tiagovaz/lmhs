@@ -6,14 +6,14 @@ from models import *
 
 
 class Search(forms.ModelForm):
-    recherche_pdf = forms.CharField(label="Recherche plein text")
+    pdf_text = forms.CharField(label="Recherche plein text")
     tousIndex_calcul = forms.CharField(label="Tous")
     auteur__nom = forms.CharField(label="Auteur")
     mot_cle__nom = forms.CharField(label="Mot-clé")
 
     class Meta:
         model = Main
-        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'recherche_pdf', 'tousIndex_calcul', 'projet', 'type']
+        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'tousIndex_calcul', 'projet', 'type']
 
 
 class Create(forms.ModelForm):
