@@ -5,3 +5,4 @@ django-bootstrap3
 django-crispy-forms
 django-filter
 django-bootstrap-pagination
+pdfminer
