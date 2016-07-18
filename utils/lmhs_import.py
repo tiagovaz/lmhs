@@ -15,6 +15,7 @@ directeur_publication_list = []
 collection_list = []
 editeur_list = []
 traducteur_list = []
+nom_org_list = []
 mot_cle_list = []
 support_list = []
 fonds_list = []
@@ -136,6 +137,28 @@ with open('principal.csv', 'rb') as csvfile:
 #######################
 # Many-to-many fields #
 #######################
+
+            nom_org_string = row['nom_org']
+            nom_org_split = nom_org_string.splitlines()
+            row_nom_org = [a.strip() for a in nom_org_split if a]
+
+            if row_nom_org:
+                for nom_org in row_nom_org:
+                    if nom_org not in nom_org_list:
+                        nom_org_list.append(nom_org)
+                        nom_org_id = nom_org_list.index(nom_org)+1
+                        nom_org_fixture = """
+{
+  "model": "lmhsweb.nomorg",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (nom_org_id,nom_org)
+                        fixtures_file.write(nom_org_fixture)
+
+                fields['nom_org'] = [nom_org_list.index(nom_org)+1 for nom_org in row_nom_org]
 
             traducteur_string = row['traducteur']
             traducteur_split = traducteur_string.splitlines()
@@ -471,23 +494,6 @@ with open('principal.csv', 'rb') as csvfile:
                     fixtures_file.write(projet_fixture)
                 fields['projet'] = projet_id
                      
-            nom_org = row['nom_org']
-            if nom_org.strip():
-                if nom_org not in nom_org_list:
-                    nom_org_list.append(nom_org)
-                    nom_org_id = nom_org_list.index(nom_org)+1
-                    nom_org_fixture = """
-{
-  "model": "lmhsweb.nomorg",
-  "pk": %d,
-  "fields":
-  {
-    "nom": "%s"
-  }
-},""" % (nom_org_id,nom_org.strip())
-
-                    fixtures_file.write(nom_org_fixture)
-                fields['nom_org'] = nom_org_id 
                      
             methode_reproduction = row['methode_reproduction'].strip()
             if methode_reproduction.strip():
