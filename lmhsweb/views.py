@@ -1,7 +1,7 @@
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import generic
 
@@ -73,6 +73,33 @@ class CreateForm(generic.CreateView):
     def get_success_url(self):
         #return self.object.get_absolute_url()
         return '/list/'
+
+class UpdateForm(generic.UpdateView):
+    model = Main
+    template_name = "update.html"
+    form_class = Create
+    #fields = ('__all__')
+
+    def get_form_kwargs(self):
+        kwargs = super(UpdateForm, self ).get_form_kwargs()
+        kwargs['type'] = self.request.GET.get('type', '')
+        return kwargs
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        main = get_object_or_404(
+            Main,
+            id=kwargs['pk']
+        )
+        return super(UpdateForm, self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return '/list/'
+        # return reverse_lazy(
+        #     'result',
+        #     kwargs={'pk': self.kwargs['pk']}
+        # )
+
 
 class Login(generic.TemplateView):
     template_name = 'registration/login.html'

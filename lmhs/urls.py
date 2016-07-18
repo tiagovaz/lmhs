@@ -42,6 +42,7 @@ urlpatterns = [
                   url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name="logout"),
                   url(r'^search/$', SearchForm.as_view()),
                   url(r'^create/(?P<type>\w{0,50})$', CreateForm.as_view()),
+                  url(r'^update/(?P<pk>\d+)/$', UpdateForm.as_view(), name='update'),
                   url(r'^type_evenement-autocomplete/$', TypeEvenementAutocomplete.as_view(), name='type_evenement-autocomplete', ),
                   url(r'^auteur-autocomplete/$', AuteurAutocomplete.as_view(), name='auteur-autocomplete', ),
                   url(r'^cote_auteur-autocomplete/$', CoteAuteurAutocomplete.as_view(), name='cote_auteur-autocomplete', ),

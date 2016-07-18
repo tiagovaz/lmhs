@@ -50,7 +50,7 @@
                                 <b>{{ s.titre }}</b>
                                 {% if user.is_authenticated %}
                                     <span class="pull-right">
-                                        <a class="btn btn-xs btn-warning" href=''>
+                                        <a class="btn btn-xs btn-warning" href="/update/{{s.id}}?type={{s.type}}">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                             <!-- Manage request modal -->
