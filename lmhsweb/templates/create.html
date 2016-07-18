@@ -129,21 +129,35 @@
                                 {% if field.name == "type" %}
                                     <input class=" form-control" id="id_type" name="type" type="hidden" value="{{ field.value }}" />
                                     {% if field.value == "Affiche" %}
+                                        {% include "forms/affiche.html" %}
                                     {% elif field.value == "Annonce de concours" %}
+                                        {% include "forms/concours.html" %}
                                     {% elif field.value == "Article de périodique" %}
+                                        {% include "forms/article_de_periodique.html" %}
                                     {% elif field.value == "Catalogue" %}
+                                        {% include "forms/catalogue.html" %}
                                     {% elif field.value == "Conférence" %}
+                                        {% include "forms/conference.html" %}
                                     {% elif field.value == "Document non publié" %}
+                                        {% include "forms/doc_non_publie.html" %}
                                     {% elif field.value == "Extrait de livre" %}
+                                        {% include "forms/extrait.html" %}
                                     {% elif field.value == "Iconographie" %}
+                                        {% include "forms/iconographie.html" %}
                                     {% elif field.value == "Livre" %}
                                         {% include "forms/livre.html" %}
                                     {% elif field.value == "Matériel audiovisuel" %}
+                                        {% include "forms/audiovisuel.html" %}
                                     {% elif field.value == "Partition" %}
+                                        {% include "forms/partition.html" %}
                                     {% elif field.value == "Périodique" %}
+                                        {% include "forms/periodique.html" %}
                                     {% elif field.value == "Photographie" %}
+                                        {% include "forms/livre.html" %}
                                     {% elif field.value == "Programme" %}
+                                        {% include "forms/programme.html" %}
                                     {% elif field.value == "Référence" %}
+                                        {% include "forms/livre.html" %}
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
@@ -151,6 +165,7 @@
                 		      <button type="submit" class="btn btn-primary" name="submit">Enregistrer</button>
                               <button type="reset" class="btn btn-danger">Réinitialiser</button>
                 		    </div>
+                            {{form|as_bootstrap}}
                 		</form>
                         </div>
                     </div>

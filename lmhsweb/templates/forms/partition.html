@@ -9,19 +9,12 @@
     </div>
 </div>
 
-<div id="div_id_editeur" class="form-group  ">
-    <label for="id_editeur" class="control-label  ">Éditeur(s)</label>
-        <div class="">
-            <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/editeur-autocomplete/" id="id_editeur" name="editeur">
-            </select>
-        </div>
-</div>
 
-    <div id="div_id_directeur_publication" class="form-group  ">
+    <div id="div_id_depouillement" class="form-group  ">
 
 
-            <label for="id_directeur_publication" class="control-label  ">
-                Directeur(s) de la publication
+            <label for="id_depouillement" class="control-label  ">
+                Depouillement
             </label>
 
 
@@ -30,8 +23,8 @@
 
 
                 <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/directeur_publication-autocomplete/" id="id_directeur_publication" name="directeur_publication">
-</select>
+                    <textarea class=" form-control" cols="40" id="id_depouillement" name="depouillement" rows="10">
+</textarea>
 
 
                 </div>
@@ -39,6 +32,27 @@
 
     </div>
 
+    <div id="div_id_instrumentation" class="form-group  ">
+
+
+            <label for="id_instrumentation" class="control-label  ">
+                Instrumentation
+            </label>
+
+
+
+
+
+
+                <div class="">
+                    <textarea class=" form-control" cols="40" id="id_instrumentation" name="instrumentation" rows="10">
+</textarea>
+
+
+                </div>
+
+
+    </div>
 
     <div id="div_id_lieu" class="form-group  ">
 
@@ -60,6 +74,7 @@
 
 
     </div>
+
 
     <div id="div_id_maison_edition" class="form-group  ">
 
@@ -84,7 +99,6 @@
 
     </div>
 
-
     <div id="div_id_date" class="form-group  ">
             <label for="id_date" class="control-label  ">
                 Date
@@ -95,14 +109,12 @@
     </div>
 
 
-
     <div id="div_id_annee_1re_publication" class="form-group  ">
 
 
             <label for="id_annee_1re_publication" class="control-label  ">
-                Annee de 1re publication
+                Année de 1re publication
             </label>
-
                 <div class="">
                     <input class=" form-control" id="id_annee_1re_publication" name="annee_1re_publication" type="number" />
 
@@ -112,19 +124,7 @@
 
     </div>
 
-    <div id="div_id_nb_volume" class="form-group  ">
 
-
-            <label for="id_nb_volume" class="control-label  ">
-                Nombre de volume
-            </label>
-
-                <div class="">
-                    <input class=" form-control" id="id_nb_volume" maxlength="20" name="nb_volume" type="text" />
-                </div>
-
-
-    </div>
 
     <div id="div_id_nb_page" class="form-group  ">
 
@@ -135,77 +135,6 @@
 
                 <div class="">
                     <input class=" form-control" id="id_nb_page" maxlength="20" name="nb_page" type="text" />
-
-
-                </div>
-
-
-    </div>
-
-    <div id="div_id_collection" class="form-group  ">
-
-
-            <label for="id_collection" class="control-label  ">
-                Collection
-            </label>
-
-                <div class="">
-                    <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/collection-autocomplete/" id="id_collection" name="collection">
-<option value="" selected="selected">---------</option>
-</select>
-
-
-                </div>
-
-
-    </div>
-
-
-    <div id="div_id_directeur_collection" class="form-group  ">
-
-
-            <label for="id_directeur_collection" class="control-label  ">
-                Directeur(s) de la collection
-            </label>
-
-                <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/directeur_collection-autocomplete/" id="id_directeur_collection" name="directeur_collection">
-</select>
-
-
-                </div>
-
-
-    </div>
-
-    <div id="div_id_langue_origine" class="form-group  ">
-
-
-            <label for="id_langue_origine" class="control-label  ">
-                Langue d'origine
-            </label>
-
-                <div class="">
-                    <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/langue_origine-autocomplete/" id="id_langue_origine" name="langue_origine">
-<option value="" selected="selected">---------</option>
-</select>
-
-
-                </div>
-
-
-    </div>
-
-    <div id="div_id_traducteur" class="form-group  ">
-
-
-            <label for="id_traducteur" class="control-label  ">
-                Traducteur(s)
-            </label>
-
-                <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/traducteur-autocomplete/" id="id_traducteur" name="traducteur">
-</select>
 
 
                 </div>
@@ -274,9 +203,4 @@
                     <input class=" form-control" id="id_nb_exemplaire" name="nb_exemplaire" type="number" />
                 </div>
     </div>
-
-
-
-
-
 

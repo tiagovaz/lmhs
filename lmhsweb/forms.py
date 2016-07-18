@@ -63,7 +63,7 @@ class Create(forms.ModelForm):
         widgets = {
             'type_evenement': autocomplete.ModelSelect2('type_evenement-autocomplete'),
             'projet': autocomplete.ModelSelect2(url='projet-autocomplete'),
-            'nom_org': autocomplete.ModelSelect2('nom_org-autocomplete'),
+            'nom_org': autocomplete.ModelSelect2Multiple('nom_org-autocomplete'),
             'methode_reproduction': autocomplete.ModelSelect2('methode_reproduction-autocomplete'),
             'medium': autocomplete.ModelSelect2('medium-autocomplete'),
             'maison_edition': autocomplete.ModelSelect2('maison_edition-autocomplete'),
