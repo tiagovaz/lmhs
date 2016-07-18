@@ -128,14 +128,14 @@
                                                                             <table class='table table-hover table-condensed'>
                                                                                 {% if s.type_evenement %}
                                                                                 <tr>
-                                                                                    <td><strong>Type d'événement :</strong></td>
+                                                                                    <td><strong>Type d'événement&nbsp;:</strong></td>
                                                                                     <td>{{ s.type_evenement }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.auteur.all %}
                                                                                         <tr>
-                                                                                            <td><strong>Auteur(s) :</strong></td>
+                                                                                            <td><strong>Auteur(s)&nbsp;:</strong></td>
                                                                                             <td>
                                                                                                 {% for a in s.auteur.all %}
                                                                                                     {{ a }} <br>
@@ -146,7 +146,7 @@
 
                                                                                 {% if s.directeur_publication.all %}
                                                                                         <tr>
-                                                                                            <td><strong>Directeur(s) de la publication :</strong></td>
+                                                                                            <td><strong>Directeur(s) de la publication&nbsp;:</strong></td>
                                                                                             <td>
                                                                                                 {% for dp in s.directeur_publication.all %}
                                                                                                     {{ dp }} <br>
@@ -157,7 +157,7 @@
 
                                                                                 {% if s.editeur.all %}
                                                                                         <tr>
-                                                                                            <td><strong>Éditeur(s) :</strong></td>
+                                                                                            <td><strong>Éditeur(s)&nbsp;:</strong></td>
                                                                                             <td>
                                                                                                 {% for e in s.editeur.all %}
                                                                                                     {{ e }} <br>
@@ -168,7 +168,7 @@
 
                                                                                 {% if s.nom_org.all %}
                                                                                     <tr>
-                                                                                        <td><strong>Organisme(s) :</strong></td>
+                                                                                        <td><strong>Organisme(s)&nbsp;:</strong></td>
                                                                                         <td>
                                                                                                 {% for o in s.nom_org.all %}
                                                                                                     {{ o }} <br>
@@ -180,14 +180,14 @@
 
                                                                                 {% if s.instrumentation %}
                                                                                 <tr>
-                                                                                    <td><strong>Instrumentation :</strong></td>
+                                                                                    <td><strong>Instrumentation&nbsp;:</strong></td>
                                                                                     <td>{{ s.instrumentation }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.type %}
                                                                                 <tr>
-                                                                                    <td><strong>Type de document :</strong></td>
+                                                                                    <td><strong>Type de document&nbsp;:</strong></td>
                                                                                     <td>{{ s.type }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
@@ -195,7 +195,7 @@
                                                                                 {% for sl in s.support.all %}
                                                                                     {% if sl.nom == "En ligne" %}
                                                                                         <tr>
-                                                                                            <td><strong>Support(s) en ligne(s) :</strong></td>
+                                                                                            <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
                                                                                             <td><a href='http://oicrm.org/wp-content/rechercheBDlmhs/PDF/public/{{ s.cote_calcul_url }}.pdf'>PDF</a></td>
                                                                                         </tr>
                                                                                     {% endif %}
@@ -203,18 +203,18 @@
 
                                                                                 {% if s.projet %}
                                                                                 <tr>
-                                                                                    <td><strong>Projet :</strong></td>
+                                                                                    <td><strong>Projet&nbsp;:</strong></td>
                                                                                     <td>{{ s.projet }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.date_fin and s.date %}
                                                                                 <tr>
-                                                                                    <td><strong>Date de début :</strong></td>
+                                                                                    <td><strong>Date de début&nbsp;:</strong></td>
                                                                                     <td>{{ s.date }}</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td><strong>Date de fin :</strong></td>
+                                                                                    <td><strong>Date de fin&nbsp;:</strong></td>
                                                                                     <td>{{ s.date_fin }}</td>
                                                                                 </tr>
                                                                                 {% elif s.date %}
@@ -226,35 +226,35 @@
 
                                                                                 {% if s.maison_edition %}
                                                                                 <tr>
-                                                                                    <td><strong>Maison d'édition :</strong></td>
+                                                                                    <td><strong>Maison d'édition&nbsp;:</strong></td>
                                                                                     <td>{{ s.maison_edition }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.no_page %}
                                                                                 <tr>
-                                                                                    <td><strong>Numéro(s) de page :</strong></td>
+                                                                                    <td><strong>Numéro(s) de page&nbsp;:</strong></td>
                                                                                     <td>{{ s.no_page }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.nb_page %}
                                                                                 <tr>
-                                                                                    <td><strong>Nombre de page :</strong></td>
+                                                                                    <td><strong>Nombre de page&nbsp;:</strong></td>
                                                                                     <td>{{ s.nb_page }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.collection %}
                                                                                 <tr>
-                                                                                    <td><strong>Collection :</strong></td>
+                                                                                    <td><strong>Collection&nbsp;:</strong></td>
                                                                                     <td>{{ s.collection }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.directeur_collection.all %}
                                                                                     <tr>
-                                                                                        <td><strong>Directeur(s) de la collection :</strong></td>
+                                                                                        <td><strong>Directeur(s) de la collection&nbsp;:</strong></td>
                                                                                         <td>
                                                                                         {% for dc in s.directeur_collection.all %}
                                                                                             {{ dc }}<br>
@@ -266,28 +266,28 @@
 
                                                                                 {% if s.source %}
                                                                                 <tr>
-                                                                                    <td><strong>Source :</strong></td>
+                                                                                    <td><strong>Source&nbsp;:</strong></td>
                                                                                     <td>{{ s.source }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.genre %}
                                                                                 <tr>
-                                                                                    <td><strong>Genre :</strong></td>
+                                                                                    <td><strong>Genre&nbsp;:</strong></td>
                                                                                     <td>{{ s.genre }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.sujet %}
                                                                                 <tr>
-                                                                                    <td><strong>Sujet :</strong></td>
+                                                                                    <td><strong>Sujet&nbsp;:</strong></td>
                                                                                     <td>{{ s.sujet }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.medium %}
                                                                                 <tr>
-                                                                                    <td><strong>Médium :</strong></td>
+                                                                                    <td><strong>Médium&nbsp;:</strong></td>
                                                                                     <td>{{ s.medium }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
@@ -301,7 +301,7 @@
 
                                                                                 {% if s.mot_cle.all %}
                                                                                     <tr>
-                                                                                        <td><strong>Mot(s) clé(s) :</strong></td>
+                                                                                        <td><strong>Mot(s) clé(s)&nbsp;:</strong></td>
                                                                                         <td>
                                                                                         {% for mc in s.mot_cle.all %}
                                                                                             {{ mc }}<br>
@@ -312,27 +312,27 @@
 
                                                                                 {% if s.lieu %}
                                                                                 <tr>
-                                                                                    <td><strong>Lieu :</strong></td>
+                                                                                    <td><strong>Lieu&nbsp;:</strong></td>
                                                                                     <td>{{ s.lieu }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.nb_exemplaire %}
                                                                                 <tr>
-                                                                                    <td><strong>Nombre d'exemplaire :</strong></td>
+                                                                                    <td><strong>Nombre d'exemplaire&nbsp;:</strong></td>
                                                                                     <td>{{ s.nb_exemplaire }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.fonds %}
                                                                                 <tr>
-                                                                                    <td><strong>Fonds :</strong></td>
+                                                                                    <td><strong>Fonds&nbsp;:</strong></td>
                                                                                     <td>{{ s.fonds }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
                                                                                 {% if s.support.all %}
                                                                                 <tr>
-                                                                                    <td><strong>Support(s) :</strong></td>
+                                                                                    <td><strong>Support(s)&nbsp;:</strong></td>
                                                                                     <td>
                                                                                     {% for sup in s.support.all %}
                                                                                         {{ sup }}<br>
@@ -342,7 +342,7 @@
                                                                                 {% endif %}
                                                                                 {% if s.commentaire %}
                                                                                 <tr>
-                                                                                    <td><strong>Commentaire :</strong></td>
+                                                                                    <td><strong>Commentaire&nbsp;:</strong></td>
                                                                                     <td>{{ s.commentaire }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
