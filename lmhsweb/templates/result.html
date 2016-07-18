@@ -166,11 +166,16 @@
                                                                                         </tr>
                                                                                 {% endif %}
 
-                                                                                {% if s.nom_org %}
-                                                                                <tr>
-                                                                                    <td><strong>Organisme(s) :</strong></td>
-                                                                                    <td>{{ s.nom_org }}</td>
-                                                                                </tr>
+                                                                                {% if s.nom_org.all %}
+                                                                                    <tr>
+                                                                                        <td><strong>Organisme(s) :</strong></td>
+                                                                                        <td>
+                                                                                                {% for o in s.nom_org.all %}
+                                                                                                    {{ o }} <br>
+                                                                                                {% endfor %}
+
+                                                                                        </td>
+                                                                                    </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.instrumentation %}
