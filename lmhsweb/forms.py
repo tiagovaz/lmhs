@@ -6,7 +6,7 @@ from models import *
 
 
 class Search(forms.ModelForm):
-    pdf_text = forms.CharField(label="Recherche plein text")
+    pdf_text = forms.CharField(label="Recherche plein texte")
     tousIndex_calcul = forms.CharField(label="Tous")
     auteur__nom = forms.CharField(label="Auteur")
     mot_cle__nom = forms.CharField(label="Mot-clé")
