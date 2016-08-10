@@ -28,6 +28,8 @@ class Create(forms.ModelForm):
     def __init__( self, type, *args, **kwargs ):
          super(Create, self).__init__( *args, **kwargs )
          self.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial=type)
+         self.pdf_file = forms.FileField(label='Sélectionnez le fichier PDF')
+
     #     self.type = type
     #
     #     if self.type == "LivreX":
@@ -57,9 +59,7 @@ class Create(forms.ModelForm):
 
     class Meta:
         model = Main
-
         fields = ('__all__')
-
         widgets = {
             'type_evenement': autocomplete.ModelSelect2('type_evenement-autocomplete'),
             'projet': autocomplete.ModelSelect2(url='projet-autocomplete'),

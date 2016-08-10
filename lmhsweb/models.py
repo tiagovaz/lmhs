@@ -10,7 +10,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from cStringIO import StringIO
-import os
+import os, sys
 from django.conf import settings
 
 
@@ -364,10 +364,10 @@ class Main(models.Model):
     # state = models.ForeignKey('State', null=True, blank=True)
     # country = models.ForeignKey('Country', null=True, blank=True)
 
-    pdf_file = models.FileField(
-        null=True,
-        blank=True
-    )
+    pdf_file = models.FileField(upload_to='.',
+                                blank=True,
+                                null=True
+                                )
     pdf_text = models.TextField(blank=True, null=True)
 
     def convert_pdf_to_txt(self, path):
@@ -424,7 +424,10 @@ class Main(models.Model):
         super(Main, self).save()
 
         if self.pdf_file:
+            os.rename(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name), os.path.join(settings.MEDIA_ROOT, self.cote_calcul_url+".pdf"))
+            self.pdf_file.name = self.cote_calcul_url + ".pdf"
             self.pdf_text = self.convert_pdf_to_txt(str(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name)))
+
 
         super(Main, self).save()
 

@@ -1,3 +1,4 @@
+django==1.9.6
 django-extensions
 django-autocomplete-light
 django-bootstrap3-datepicker
@@ -5,4 +6,6 @@ django-bootstrap3
 django-crispy-forms
 django-filter
 django-bootstrap-pagination
+django-forms-bootstrap
+django-tables2
 pdfminer

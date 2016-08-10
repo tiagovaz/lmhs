@@ -62,7 +62,7 @@ class CreateForm(generic.CreateView):
     form_class = Create
 
     def get_form_kwargs(self):
-        kwargs = super(CreateForm, self ).get_form_kwargs()
+        kwargs = super(CreateForm, self).get_form_kwargs()
         kwargs['type'] = self.request.GET.get('type', '')
         return kwargs
 
