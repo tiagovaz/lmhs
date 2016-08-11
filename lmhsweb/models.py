@@ -428,7 +428,6 @@ class Main(models.Model):
             self.pdf_file.name = self.cote_calcul_url + ".pdf"
             self.pdf_text = self.convert_pdf_to_txt(str(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name)))
 
-
         super(Main, self).save()
 
 

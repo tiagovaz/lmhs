@@ -169,7 +169,7 @@ class MotCleAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated():
             return MotCle.objects.none()
 
-        qs = MotCle.objects.all()
+        qs = MotCle.objects.all().order_by('nom')
 
         if self.q:
             qs = qs.filter(nom__icontains=self.q)
