@@ -13,7 +13,7 @@ class Search(forms.ModelForm):
 
     class Meta:
         model = Main
-        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'tousIndex_calcul', 'projet', 'type']
+        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source', 'tousIndex_calcul', 'projet', 'type']
 
 
 class Create(forms.ModelForm):

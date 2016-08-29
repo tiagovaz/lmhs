@@ -13,6 +13,7 @@ class MainFilter(django_filters.FilterSet):
     auteur__nom = django_filters.CharFilter(label="Auteur", lookup_expr='icontains')
     mot_cle__nom = django_filters.CharFilter(label="Mot clé", lookup_expr='icontains')
     pdf_text = django_filters.CharFilter(label="Recherche PDF", lookup_expr='icontains')
+    source = django_filters.CharFilter(label="Source", lookup_expr='icontains')
     type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='icontains')
 
     class Meta:
@@ -21,6 +22,7 @@ class MainFilter(django_filters.FilterSet):
             'titre',
             'type',
             'projet',
+            'source',
             'auteur__nom',
             'mot_cle__nom',
             'date'
