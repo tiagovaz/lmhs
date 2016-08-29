@@ -31,11 +31,12 @@ class MainList(generic.View):
         date = request.GET.get('date', '')
         mot_cle = request.GET.get('mot_cle', '')
         pdf_text = request.GET.get('pdf_text', '')
+        source = request.GET.get('source', '')
         #tousindex_calcul = request.GET['tousIndex_calcul']
 
-        data = MainFilter(self.request.GET, queryset=Main.objects.all())
+        data = MainFilter(self.request.GET, queryset=Main.objects.all().order_by('date'))
         data_total = data.count()
-        all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all())
+        all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all().order_by('date'))
 
         paginator = Paginator(data, 25)
         page = request.GET.get('page')

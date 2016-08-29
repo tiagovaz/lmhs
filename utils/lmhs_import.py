@@ -10,6 +10,7 @@ cote_auteur_list = []
 cote_prefixe_list = []
 type_evenement_list = []
 author_list = ['Anonyme']
+project_list = []
 directeur_collection_list = []
 directeur_publication_list = []
 collection_list = []
@@ -230,6 +231,30 @@ with open('principal.csv', 'rb') as csvfile:
                         fixtures_file.write(author_fixture)
 
                 fields['auteur'] = [author_list.index(author)+1 for author in row_authors]
+# ===========
+
+            projects_string = row['projet']
+            projects_split = projects_string.split(';')
+            row_projects = [a.strip() for a in projects_split if a]
+
+            if row_projects:
+                for project in row_projects:
+                    if project not in project_list:
+                        project_list.append(project)
+                        project_id = project_list.index(project)+1
+                        project_fixture = """
+{
+  "model": "lmhsweb.projet",
+  "pk": %d,
+  "fields":
+  {
+    "nom": "%s"
+  }
+},""" % (project_id,project)
+                        fixtures_file.write(project_fixture)
+
+                fields['projet'] = [project_list.index(project)+1 for project in row_projects]
+
 
 # ===========
 
@@ -475,25 +500,6 @@ with open('principal.csv', 'rb') as csvfile:
 
                     fixtures_file.write(localisation_fixture)
                 fields['localisation'] = localisation_id
-                     
-            projet = row['projet']
-            if projet.strip():
-                if projet not in projet_list:
-                    projet_list.append(projet)
-                    projet_id = projet_list.index(projet)+1
-                    projet_fixture = """
-{
-  "model": "lmhsweb.projet",
-  "pk": %d,
-  "fields":
-  {
-    "nom": "%s"
-  }
-},""" % (projet_id,projet.strip())
-
-                    fixtures_file.write(projet_fixture)
-                fields['projet'] = projet_id
-                     
                      
             methode_reproduction = row['methode_reproduction'].strip()
             if methode_reproduction.strip():
