@@ -22,6 +22,7 @@ class MainFilter(django_filters.FilterSet):
     mot_cle__nom = django_filters.CharFilter(label="Mot clé", lookup_expr='icontains')
     pdf_text = django_filters.CharFilter(label="Recherche PDF", lookup_expr='icontains')
     source = django_filters.CharFilter(label="Source", lookup_expr='icontains')
+    date = django_filters.CharFilter(label="Date", lookup_expr='icontains')
     type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='icontains')
     projet__nom = django_filters.ChoiceFilter(label="Projet", choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), lookup_expr='icontains')
 
