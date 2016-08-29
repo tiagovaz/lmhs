@@ -2,6 +2,7 @@
  # -*- coding: utf-8 -*-
 from dal import autocomplete
 from django import forms
+from django.db.models.fields import BLANK_CHOICE_DASH
 from models import *
 
 
@@ -9,12 +10,15 @@ class Search(forms.ModelForm):
     pdf_text = forms.CharField(label="Recherche plein texte")
     tousIndex_calcul = forms.CharField(label="Tous")
     auteur__nom = forms.CharField(label="Auteur")
+
+    PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
+
+    projet__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), required=False, label="Projet")
     mot_cle__nom = forms.CharField(label="Mot-clé")
 
     class Meta:
         model = Main
-        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source', 'tousIndex_calcul', 'projet', 'type']
-
+        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source', 'tousIndex_calcul', 'projet__nom', 'type']
 
 class Create(forms.ModelForm):
 
@@ -62,7 +66,7 @@ class Create(forms.ModelForm):
         fields = ('__all__')
         widgets = {
             'type_evenement': autocomplete.ModelSelect2('type_evenement-autocomplete'),
-            'projet': autocomplete.ModelSelect2(url='projet-autocomplete'),
+            'projet': autocomplete.ModelSelect2Multiple(url='projet-autocomplete'),
             'nom_org': autocomplete.ModelSelect2Multiple('nom_org-autocomplete'),
             'methode_reproduction': autocomplete.ModelSelect2('methode_reproduction-autocomplete'),
             'medium': autocomplete.ModelSelect2('medium-autocomplete'),

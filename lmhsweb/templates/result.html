@@ -103,7 +103,7 @@
                                         {% endif %}
                                         <p></p>
                                         {% if s.source %}
-                                            {{ s.source }}<br>
+                                            <b>Source :</b> {{ s.source }}<br>
                                         {% endif %}
                                     {% endif %}
                                         <p></p>
@@ -205,11 +205,16 @@
                                                                                     {% endif %}
                                                                                 {% endfor %}
 
-                                                                                {% if s.projet %}
-                                                                                <tr>
-                                                                                    <td><strong>Projet&nbsp;:</strong></td>
-                                                                                    <td>{{ s.projet }}</td>
-                                                                                </tr>
+                                                                                {% if s.projet.all %}
+                                                                                    <tr>
+                                                                                        <td><strong>Projet(s)&nbsp;:</strong></td>
+                                                                                        <td>
+                                                                                                {% for pr in s.projet.all %}
+                                                                                                    {{ pr }} <br>
+                                                                                                {% endfor %}
+
+                                                                                        </td>
+                                                                                    </tr>
                                                                                 {% endif %}
 
                                                                                 {% if s.date_fin and s.date %}

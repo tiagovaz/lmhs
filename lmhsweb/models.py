@@ -353,7 +353,7 @@ class Main(models.Model):
     no_volume = models.CharField(blank=True, max_length=20)
     notice_id = models.CharField(max_length=100, null=True, blank=True)
     nom_org = models.ManyToManyField("NomOrg", null=True, blank=True)
-    projet = models.ForeignKey("Projet", null=True, blank=True)
+    projet = models.ManyToManyField("Projet", null=True, blank=True)
     source = models.CharField(blank=True, max_length=200, null=True)
     sujet = models.TextField(null=True, blank=True)
     support = models.ManyToManyField('Support', null=True, blank=True)
@@ -403,6 +403,8 @@ class Main(models.Model):
         return reverse_lazy('notice', args=[self.id])
 
     def save(self):
+
+        # build cotes
         if self.cote_auteur:
             notice_id = self.cote_prefixe.cote + str(self.cote_auteur.cote)
             cote_calcul = self.cote_prefixe.cote + " " + str(self.cote_auteur.cote)
@@ -423,12 +425,19 @@ class Main(models.Model):
         self.cote_calcul_url = cote_calcul_url
         super(Main, self).save()
 
+        # extract pdf text
         if self.pdf_file:
             os.rename(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name), os.path.join(settings.MEDIA_ROOT, self.cote_calcul_url+".pdf"))
             self.pdf_file.name = self.cote_calcul_url + ".pdf"
             self.pdf_text = self.convert_pdf_to_txt(str(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name)))
 
         super(Main, self).save()
+
+        # save 'mots-clés'
+
+
+        super(Main, self).save()
+
 
 
     class Meta:
