@@ -7,7 +7,7 @@ from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from cStringIO import StringIO
 
-sys.path.append("/home/tiago/Hacking/lmhs")
+sys.path.append("/var/www/lmhs")
 os.environ["DJANGO_SETTINGS_MODULE"] = "lmhs.settings"
 django.setup()
 
@@ -35,7 +35,7 @@ def convert_pdf_to_txt(path):
 
 objs = Main.objects.all()
 
-pdfs_path = "/home/tiago/Hacking/lmhs/lmhsweb/media/"
+pdfs_path = "/var/www/lmhs/lmhsweb/media/"
 
 for o in objs:
     pdf_file = pdfs_path + o.cote_calcul_url + ".pdf"
