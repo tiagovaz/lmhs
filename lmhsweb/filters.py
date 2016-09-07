@@ -17,7 +17,7 @@ class MainFilter(django_filters.FilterSet):
     #PROJECT_CHOICES_FILTER.extend(list(PROJECT_CHOICES))
 
     titre = django_filters.CharFilter(label="Titre", lookup_expr='icontains')
-#    auteur__nom = django_filters.CharFilter(label="Auteur", lookup_expr='icontains')
+    auteur__nom = django_filters.CharFilter(label="Auteur", lookup_expr='icontains')
 #    projet__nom = django_filters.CharFilter(label="Projet", lookup_expr='icontains')
     mot_cle__nom = django_filters.CharFilter(label="Mot clé", lookup_expr='icontains')
     pdf_text = django_filters.CharFilter(label="Recherche PDF", lookup_expr='icontains')
