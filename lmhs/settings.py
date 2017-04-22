@@ -25,7 +25,7 @@ SECRET_KEY = 'f=0859wea4oej-$mzvtj0_$8r*@rtc2uw!u%n=wa&21d%!1x@)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'dal',
     'dal_select2',
+    'suit',
+    'easy_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'lmhsweb.context_processors.new_sort_url',
             ],
         },
     },
@@ -139,3 +142,8 @@ FIXTURE_DIRS = (
 
 FILTERS_HELP_TEXT_FILTER = False
 LOGIN_URL = '/login/'
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'LMHS'
+}
+

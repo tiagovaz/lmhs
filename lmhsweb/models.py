@@ -79,17 +79,22 @@ TYPE_CHOICES = (
 
 @python_2_unicode_compatible
 class Auteur(models.Model):
-    nom = models.CharField(max_length=200, unique=True)
+    nom = models.CharField(max_length=200, unique=False)
+    cote = models.CharField(max_length=200, unique=False, null=True, default=None, blank=True)
 
     def __str__(self):
-       return self.nom
+       if self.cote:
+           return self.nom + " (" + self.cote + ")"
+       else:
+           return self.nom
 
     class Meta:
         verbose_name = "Auteur"
 
 @python_2_unicode_compatible
 class CoteAuteur(models.Model):
-    cote = models.CharField(max_length=200, unique=True, null=True, default=None, blank=True)
+    cote = models.CharField(max_length=200, unique=False, null=True, default=None, blank=True)
+#    auteur = models.ForeignKey("Auteur", null=True, blank=True, unique=False)
 
     def __str__(self):
        return self.cote
@@ -99,7 +104,7 @@ class CoteAuteur(models.Model):
 
 @python_2_unicode_compatible
 class CotePrefixe(models.Model):
-    cote = models.CharField(max_length=20, unique=True, null=True, default=None, blank=True)
+    cote = models.CharField(max_length=20, unique=False, null=True, default=None, blank=True)
 
     def __str__(self):
        return self.cote
@@ -129,7 +134,7 @@ class Fonds(models.Model):
 
 @python_2_unicode_compatible
 class Genre(models.Model):
-    nom = models.CharField(max_length=200, unique=True)
+    nom = models.CharField(max_length=200, unique=False)
 
     def __str__(self):
        return self.nom
@@ -223,7 +228,7 @@ class NomOrg(models.Model):
 
 @python_2_unicode_compatible
 class MethodeReproduction(models.Model):
-    nom = models.CharField(max_length=200, unique=True)
+    nom = models.CharField(max_length=200, unique=False)
 
     def __str__(self):
        return self.nom
@@ -283,7 +288,7 @@ class Editeur(models.Model):
 
 @python_2_unicode_compatible
 class MotCle(models.Model):
-    nom = models.CharField(max_length=200, unique=True)
+    nom = models.CharField(max_length=200, unique=False)
 
     def __str__(self):
        return self.nom
@@ -321,7 +326,7 @@ class Main(models.Model):
     collection = models.ForeignKey("Collection", null=True, blank=True)
     commentaire = models.TextField(null=True, blank=True)
     cote_annee = models.CharField(blank=True, null=True, max_length=100)
-    cote_auteur = models.ForeignKey("CoteAuteur", null=True, default=None, blank=True)
+    cote_auteur = models.ForeignKey("Auteur", null=True, default=None, blank=True, related_name="Cote_Auteur")
     cote_calcul = models.CharField(max_length=100, null=True, blank=True)
     cote_numero = models.CharField(blank=True, null=True, max_length=100)
     cote_prefixe = models.ForeignKey("CotePrefixe", blank=True, null=True, default=None)
@@ -399,8 +404,8 @@ class Main(models.Model):
 
     type_evenement = models.ForeignKey("TypeEvenement", null=True, blank=True)
 
-    def get_absolute_url(self):
-        return reverse_lazy('notice', args=[self.id])
+#    def get_absolute_url(self):
+#        return reverse_lazy('notice', args=[self.id])
 
     def save(self):
 
@@ -425,16 +430,19 @@ class Main(models.Model):
         self.cote_calcul_url = cote_calcul_url
         super(Main, self).save()
 
-        # extract pdf text
         if self.pdf_file:
             os.rename(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name), os.path.join(settings.MEDIA_ROOT, self.cote_calcul_url+".pdf"))
             self.pdf_file.name = self.cote_calcul_url + ".pdf"
-            self.pdf_text = self.convert_pdf_to_txt(str(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name)))
+
+        # extract pdf text. IT'S NOW DONE VIA CRON
+	# self.pdf_text = self.convert_pdf_to_txt(str(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name)))
 
         super(Main, self).save()
 
         # save 'mots-clés'
-
+#        if self.mot_cle:
+#            mot_cle_list = self.mot_cle.split(";")
+#            self.mot_cle.add(*MotCle.objects.filter(nom__in=mot_cle_list))
 
         super(Main, self).save()
 

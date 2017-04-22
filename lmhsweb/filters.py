@@ -7,9 +7,10 @@ from django.db.models.fields import BLANK_CHOICE_DASH
 
 class MainFilter(django_filters.FilterSet):
 
+    PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
+    PROJECT_CHOICES_FILTER = BLANK_CHOICE_DASH + list(PROJECT_CHOICES)
     TYPE_CHOICES_FILTER = BLANK_CHOICE_DASH
     TYPE_CHOICES_FILTER.extend(list(TYPE_CHOICES))
-    PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
 
 
     #PROJECT_CHOICES = Projet.objects.all().values_list("id", "nom")
@@ -24,7 +25,7 @@ class MainFilter(django_filters.FilterSet):
     source = django_filters.CharFilter(label="Source", lookup_expr='icontains')
     date = django_filters.CharFilter(label="Date", lookup_expr='icontains')
     type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='icontains')
-    projet__nom = django_filters.ChoiceFilter(label="Projet", choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), lookup_expr='icontains')
+    projet__nom = django_filters.ChoiceFilter(label="Projet", choices=PROJECT_CHOICES_FILTER, lookup_expr='icontains')
 
     class Meta:
         model = Main

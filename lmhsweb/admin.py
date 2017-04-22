@@ -1,9 +1,15 @@
 from django.contrib import admin
-
-from lmhsweb.forms import Create
+from easy_select2 import select2_modelform
 from models import *
 
-admin.site.register(Main)
+MainForm = select2_modelform(Main, attrs={'width': '480px'})
+class MainAdmin(admin.ModelAdmin):
+    form = MainForm
+
+#from lmhsweb.forms import Create
+#from models import *
+
+admin.site.register(Main, MainAdmin)
 admin.site.register(Auteur)
 admin.site.register(CoteAuteur)
 admin.site.register(Collection)

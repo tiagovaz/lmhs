@@ -34,7 +34,9 @@ class MainList(generic.View):
         source = request.GET.get('source', '')
         #tousindex_calcul = request.GET['tousIndex_calcul']
 
-        data = MainFilter(self.request.GET, queryset=Main.objects.all().order_by('date'))
+	sort = request.GET.get('sort', 'date')
+
+        data = MainFilter(self.request.GET, queryset=Main.objects.all().order_by(sort))
         data_total = data.count()
         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all().order_by('date'))
 
@@ -122,7 +124,7 @@ class AuteurAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated():
             return Auteur.objects.none()
 
-        qs = Auteur.objects.all()
+        qs = Auteur.objects.all().exclude(cote__exact='').exclude(cote__isnull=True)
 
         if self.q:
             qs = qs.filter(nom__icontains=self.q)
@@ -328,18 +330,6 @@ class CotePrefixeAutocomplete(autocomplete.Select2QuerySetView):
             return CotePrefixe.objects.none()
 
         qs = CotePrefixe.objects.all()
-
-        if self.q:
-            qs = qs.filter(cote__icontains=self.q)
-
-        return qs
-
-class CoteAuteurAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        if not self.request.user.is_authenticated():
-            return CoteAuteur.objects.none()
-
-        qs = CoteAuteur.objects.all()
 
         if self.q:
             qs = qs.filter(cote__icontains=self.q)

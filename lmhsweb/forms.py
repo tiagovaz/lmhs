@@ -32,7 +32,8 @@ class Create(forms.ModelForm):
     def __init__( self, type, *args, **kwargs ):
          super(Create, self).__init__( *args, **kwargs )
          self.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial=type)
-         self.pdf_file = forms.FileField(label='Sélectionnez le fichier PDF')
+#         self.pdf_file = forms.FileField(label='Sélectionnez le fichier PDF')
+         self.fields['pdf_file'] = forms.FileField(label='Sélectionnez le fichier PDF')
 
     #     self.type = type
     #
@@ -77,12 +78,13 @@ class Create(forms.ModelForm):
             'fonds': autocomplete.ModelSelect2('fonds-autocomplete'),
             'collection': autocomplete.ModelSelect2('collection-autocomplete'),
             'cote_prefixe': autocomplete.ModelSelect2('cote_prefixe-autocomplete'),
-            'cote_auteur': autocomplete.ModelSelect2('cote_auteur-autocomplete'),
+#            'cote_auteur': autocomplete.ModelSelect2('cote_auteur-autocomplete'),
             'auteur': autocomplete.ModelSelect2Multiple('auteur-autocomplete'),
             'directeur_collection': autocomplete.ModelSelect2Multiple('directeur_collection-autocomplete'),
             'directeur_publication': autocomplete.ModelSelect2Multiple('directeur_publication-autocomplete'),
             'editeur': autocomplete.ModelSelect2Multiple('editeur-autocomplete'),
             'mot_cle': autocomplete.ModelSelect2Multiple('mot_cle-autocomplete'),
+            'pdf_file': forms.FileField(label='Sélectionnez le fichier PDF'),
             'support': autocomplete.ModelSelect2Multiple('support-autocomplete'),
             'traducteur': autocomplete.ModelSelect2Multiple('traducteur-autocomplete'),
         }

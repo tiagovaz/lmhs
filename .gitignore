@@ -89,3 +89,5 @@ ENV/
 .ropeproject
 #lmhs/settings.py
 db.sqlite3
+
+lmhs/settings.py

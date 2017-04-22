@@ -6,6 +6,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from cStringIO import StringIO
+import magic
 
 sys.path.append("/var/www/lmhs")
 os.environ["DJANGO_SETTINGS_MODULE"] = "lmhs.settings"
@@ -39,7 +40,12 @@ pdfs_path = "/var/www/lmhs/lmhsweb/media/"
 
 for o in objs:
     pdf_file = pdfs_path + o.cote_calcul_url + ".pdf"
-    if os.path.isfile(pdf_file):
-        print o.pk, pdf_file
-        text = convert_pdf_to_txt(pdf_file)
-        Main.objects.filter(pk=o.pk).update(pdf_text=text)
+    if os.path.isfile(pdf_file) and "PDF document" in magic.from_file(pdf_file):
+        if o.pdf_text:
+            print "Skipping %s %s" % (o.pk, pdf_file)
+            print magic.from_file(pdf_file)
+        else:
+            print "Extracting text from %s %s" % (o.pk, pdf_file)
+            print magic.from_file(pdf_file)
+            text = convert_pdf_to_txt(pdf_file)
+            Main.objects.filter(pk=o.pk).update(pdf_text=text)

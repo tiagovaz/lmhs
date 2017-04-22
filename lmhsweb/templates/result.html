@@ -43,6 +43,8 @@
             </div>
 
             <div class="col-sm-9">
+                <p class="text-center">Classer par : <a href="{{new_sort_url}}&sort=auteur__nom">auteur (a)</a> | <a href="{{new_sort_url}}&sort=-auteur__nom">auteur (d)</a> | <a href="{{new_sort_url}}&sort=date">date (a)</a> | <a href="{{new_sort_url}}&sort=-date">date (d)</a></p>
+
                 {% for s in items %}
                         <div class="col-lg-12">
                             <div class="panel panel-default">
@@ -50,7 +52,7 @@
                                 <b>{{ s.titre }}</b>
                                 {% if user.is_authenticated %}
                                     <span class="pull-right">
-                                        <a class="btn btn-xs btn-warning" href="/update/{{s.id}}?type={{s.type}}">
+                                        <a class="btn btn-xs btn-warning" href=JavaScript:newPopup('/admin/lmhsweb/main/{{s.id}}/change/?_popup=1')>
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                             <!-- Manage request modal -->
@@ -74,7 +76,7 @@
                                             <a data-toggle="modal" data-target="#DeleteRequestModal-{{ s.id }}" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-times"></i>
                                             </a>
-                                                    </span>
+                                      </span>
                                 {% endif %}
                                 </div>
                                 <div class="panel-body">
@@ -87,7 +89,7 @@
                                         {% endif %}
                                         {% if s.auteur.all %}
                                             {% for a in s.auteur.all %}
-                                                {{ a }}<br>
+                                                {{ a.nom }}<br>
                                             {% endfor %}
                                         {% endif %}
                                         {% if s.date %}
@@ -95,7 +97,7 @@
                                         {% endif %}
                                     {% else %}
                                         {% for a in s.auteur.all %}
-                                            {{ a }}<br>
+                                            {{ a.nom }}<br>
                                         {% endfor %}
                                         <p></p>
                                         {% if s.date %}
@@ -142,7 +144,7 @@
                                                                                             <td><strong>Auteur(s)&nbsp;:</strong></td>
                                                                                             <td>
                                                                                                 {% for a in s.auteur.all %}
-                                                                                                    {{ a }} <br>
+                                                                                                    {{ a.nom }} <br>
                                                                                                 {% endfor %}
                                                                                             </td>
                                                                                         </tr>
