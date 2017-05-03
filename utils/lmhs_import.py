@@ -32,6 +32,7 @@ medium_list = []
 count = 0
 
 type_list = []
+sources_list = []
 
 with open('principal.csv', 'rb') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=',')
