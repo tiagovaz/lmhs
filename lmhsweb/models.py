@@ -215,6 +215,16 @@ class Projet(models.Model):
     class Meta:
         verbose_name = "Projet"
 
+@python_2_unicode_compatible
+class Source(models.Model):
+    nom = models.CharField(max_length=200, unique=True)
+
+    def __str__(self):
+       return self.nom
+
+    class Meta:
+        verbose_name = "Source"
+
 
 @python_2_unicode_compatible
 class NomOrg(models.Model):

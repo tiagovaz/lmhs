@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import django_filters
-from lmhsweb.models import Main, TYPE_CHOICES, Projet
+from lmhsweb.models import Main, TYPE_CHOICES, Projet, Source
 from django.db.models.fields import BLANK_CHOICE_DASH
 
 
@@ -11,6 +11,8 @@ class MainFilter(django_filters.FilterSet):
     PROJECT_CHOICES_FILTER = BLANK_CHOICE_DASH + list(PROJECT_CHOICES)
     TYPE_CHOICES_FILTER = BLANK_CHOICE_DASH
     TYPE_CHOICES_FILTER.extend(list(TYPE_CHOICES))
+    SOURCES_CHOICES = Source.objects.all().values_list("nom", "nom")
+    SOURCES_CHOICES_FILTER = BLANK_CHOICE_DASH + list(SOURCES_CHOICES)
 
 
     #PROJECT_CHOICES = Projet.objects.all().values_list("id", "nom")
