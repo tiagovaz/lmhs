@@ -16,16 +16,13 @@ class MainFilter(django_filters.FilterSet):
     #PROJECT_CHOICES = Projet.objects.all().values_list("id", "nom")
     #PROJECT_CHOICES_FILTER = [('', 'Tous')]
     #PROJECT_CHOICES_FILTER.extend(list(PROJECT_CHOICES))
-    titreList = titre.split(' ')
-    for i in range(titreList.lenght):
-        titreList[i] = django_filters.CharFilter(label="Titre", lookup_expr='icontains')
-    auteur_list = auteur__nom.split(' ')
-    for i in range(auteur_list.lenght):
-        auteur_list[i] = django_filters.CharFilter(label="Auteur", lookup_expr='icontains')
+
+    titre = django_filters.CharFilter(label="Titre", lookup_expr='icontains')
+    auteur__nom = django_filters.CharFilter(label="Auteur", lookup_expr='icontains')
 #    projet__nom = django_filters.CharFilter(label="Projet", lookup_expr='icontains')
     mot_cle__nom = django_filters.CharFilter(label="Mot clé", lookup_expr='icontains')
     pdf_text = django_filters.CharFilter(label="Recherche PDF", lookup_expr='icontains')
-    source = django_filters.ChoiceFilter(label="Source", choices=SOURCES_CHOICES_FILTER, lookup_expr='icontains')
+    source = django_filters.CharFilter(label="Source", lookup_expr='icontains')
     date = django_filters.CharFilter(label="Date", lookup_expr='icontains')
     type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='icontains')
     projet__nom = django_filters.ChoiceFilter(label="Projet", choices=PROJECT_CHOICES_FILTER, lookup_expr='icontains')
