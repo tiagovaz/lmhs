@@ -8,4 +8,6 @@ django-filter
 django-bootstrap-pagination
 django-forms-bootstrap
 django-tables2
+django-suit
+django-select2
 pdfminer
