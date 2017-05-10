@@ -88,13 +88,10 @@ WSGI_APPLICATION = 'lmhs.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lmhsbd',
-        'USER': '',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
-
 
 
 # Password validation
