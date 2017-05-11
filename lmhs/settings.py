@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'lmhs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'NAME': 'db.sqlite3',
     }
 }
 
