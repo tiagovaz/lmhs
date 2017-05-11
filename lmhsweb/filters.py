@@ -6,6 +6,7 @@ from django.db.models.fields import BLANK_CHOICE_DASH
 
 
 class MainFilter(django_filters.FilterSet):
+    pass
 
     PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
     PROJECT_CHOICES_FILTER = BLANK_CHOICE_DASH + list(PROJECT_CHOICES)
