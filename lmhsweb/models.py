@@ -372,7 +372,7 @@ class Main(models.Model):
     source = models.CharField(blank=True, max_length=200, null=True)
     sujet = models.TextField(null=True, blank=True)
     support = models.ManyToManyField('Support', null=True, blank=True)
-    titre = models.CharField(max_length=100)
+    titre = models.CharField(max_length=200)
     traducteur = models.ManyToManyField('Traducteur', null=True, blank=True)
 
     # city = models.ForeignKey('City', null=True, blank=True)

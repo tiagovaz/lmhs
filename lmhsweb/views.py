@@ -16,6 +16,31 @@ from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy, resolve
 
 
+class GererAuteurs(generic.ListView):
+    model = Auteur
+    template_name = 'gerer_auteurs.html'
+    context_object_name = 'all_auteurs'
+    liste = Auteur.objects.order_by('nom')
+    def get_queryset(self):
+        return GererAuteurs.liste
+
+class AuteurDelete(generic.DeleteView):
+    model = Auteur
+    success_url = reverse_lazy('gerer_auteurs')
+
+class GererMotsCles(generic.ListView):
+    model = MotCle
+    template_name = 'gerer_motcles.html'
+    context_object_name = 'all_motcles'
+    liste = MotCle.objects.order_by('nom')
+    def get_queryset(self):
+        return GererMotsCles.liste
+
+class MotCleDelete(generic.DeleteView):
+    model = MotCle
+    success_url = reverse_lazy('gerer_motcles')
+
+
 class NoticeDelete(DeleteView):
     model = Main
     success_url = reverse_lazy('event_list') # This is where this view will

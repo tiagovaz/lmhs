@@ -44,6 +44,18 @@
                     {% if user.is_authenticated %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-add fa-fw"></i>Gérer <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Gérer les </li>
+                            <li>
+                                <a href="/gerer_auteurs">Auteurs</a>
+                                <a href="/gerer_motcles">Mots-clés</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-add fa-fw"></i>Nouvelle notice <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -71,6 +83,7 @@
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>
+
                     {% else %}
                     <li>
                         <a href='/login/?next={{request.get_full_path}}'>
@@ -82,6 +95,8 @@
                     <!-- /.dropdown -->
                 </ul>
                 <!-- /.navbar-top-links -->
+
+
 
             </nav>
 
