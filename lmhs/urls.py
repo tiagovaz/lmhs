@@ -37,9 +37,12 @@ urlpatterns = [
       SearchForm.as_view(),
       name='event'
     ),
-
-    url('^login/$', auth_views.LoginView.as_view(), name='login'),
-    url('^logout/$', auth_views.LogoutView.as_view(), name='logout'),
+    url(
+      r'^login/',
+      'django.contrib.auth.views.login',
+      name='login'
+    ),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name="logout"),
     url(r'^search/$', SearchForm.as_view()),
     url(r'^create/(?P<type>\w{0,50})$', CreateForm.as_view()),
     url(r'^update/(?P<pk>\d+)/$', UpdateForm.as_view(), name='update'),
