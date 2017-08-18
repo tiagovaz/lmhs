@@ -95,6 +95,12 @@
                                         {% if s.date %}
                                             {{ s.date }}<br>
                                         {% endif %}
+                                        {% if s.mot_cle.all %}
+                                            <b>Mots clés :</b>
+                                            {% for i in s.mot_cle.all %}
+                                                 {{ i.nom }}{% if not forloop.last %}, {% else %}{% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                     {% else %}
                                         {% for a in s.auteur.all %}
                                             {{ a.nom }}<br>
@@ -106,6 +112,12 @@
                                         <p></p>
                                         {% if s.source %}
                                             <b>Source :</b> {{ s.source }}<br>
+                                        {% endif %}
+                                        {% if s.mot_cle.all %}
+                                            <b>Mots clés :</b>
+                                            {% for i in s.mot_cle.all %}
+                                                 {{ i.nom }}{% if not forloop.last %}, {% else %}{% endif %}
+                                            {% endfor %}
                                         {% endif %}
                                     {% endif %}
                                         <p></p>

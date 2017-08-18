@@ -10,4 +10,5 @@ django-forms-bootstrap
 django-tables2
 django-suit
 django-select2
+django-easy-select2
 pdfminer

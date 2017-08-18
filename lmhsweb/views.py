@@ -28,6 +28,9 @@ class AuteurDelete(generic.DeleteView):
     model = Auteur
     success_url = reverse_lazy('gerer_auteurs')
 
+class AuteurUpdate(generic.UpdateView):
+    model = Auteur
+
 class GererMotsCles(generic.ListView):
     model = MotCle
     template_name = 'gerer_motcles.html'

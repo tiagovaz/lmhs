@@ -12,13 +12,17 @@ class Search(forms.ModelForm):
     auteur__nom = forms.CharField(label="Auteur")
 
     PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
+    SOURCE_CHOICES = Source.objects.all().values_list("nom", "nom")
+
 
     projet__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), required=False, label="Projet")
+    source__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(SOURCE_CHOICES), required=False, label="Source")
+
     mot_cle__nom = forms.CharField(label="Mot-clé")
 
     class Meta:
         model = Main
-        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source', 'tousIndex_calcul', 'projet__nom', 'type']
+        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source__nom', 'tousIndex_calcul', 'projet__nom', 'type']
 
 class Create(forms.ModelForm):
 
@@ -52,5 +56,4 @@ class Create(forms.ModelForm):
             'support': autocomplete.ModelSelect2Multiple('support-autocomplete'),
             'traducteur': autocomplete.ModelSelect2Multiple('traducteur-autocomplete'),
         }
-
 

@@ -8,6 +8,11 @@
         <div class="col-lg-12">
             <h1 class="page-header">
                 Gérer les mots-clés
+                 <a class="related-widget-wrapper-link add-related" id="add_id_mot_cle"
+                    href="JavaScript:newPopup('/admin/lmhsweb/motcle/add/?_to_field=id&amp;_popup=1');"
+                    title="Ajouter un autre mot clé">
+                    <img src="/static/media/icon-addlink.svg" alt="Ajouter"/>
+        </a>
             </h1>
         </div>
         <!-- /.col-lg-12 -->
@@ -16,13 +21,17 @@
     <ul>
         {% for motcle in all_motcles %}
             <li class="list-group-item"> {{ motcle.nom }}&nbsp;
-                <form action="{% url 'delete_motcle' motcle.id%}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <input type="hidden" name="motcle_id" value="{{ motcle.id }}" />
-                    <button type="submit" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </button>
-                </form>
+                <a class="related-widget-wrapper-link add-related" id="change_id_mot_cle"
+                    href="JavaScript:newPopup('/admin/lmhsweb/motcle/{{ motcle.id }}/change/?_to_field=id&_popup=1');"
+                    title="Modifier le mot clé">
+                    <img src="/static/media/icon-changelink.svg" alt="Modifier"/>
+                </a>
+                <a class="related-widget-wrapper-link add-related" id="delete_id_mot_cle"
+                    href="JavaScript:newPopup('/admin/lmhsweb/motcle/{{ motcle.id }}/delete/?_to_field=id&_popup=1');"
+                    title="Suprimer le mot clé">
+                    <img src="/static/media/icon-deletelink.svg" alt="Suprimer"/>
+                </a>
+
             </li>
         {% endfor %}
     </ul>
