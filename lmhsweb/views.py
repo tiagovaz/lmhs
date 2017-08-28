@@ -24,12 +24,6 @@ class GererAuteurs(generic.ListView):
     def get_queryset(self):
         return GererAuteurs.liste
 
-class AuteurDelete(generic.DeleteView):
-    model = Auteur
-    success_url = reverse_lazy('gerer_auteurs')
-
-class AuteurUpdate(generic.UpdateView):
-    model = Auteur
 
 class GererMotsCles(generic.ListView):
     model = MotCle
@@ -39,16 +33,13 @@ class GererMotsCles(generic.ListView):
     def get_queryset(self):
         return GererMotsCles.liste
 
-class MotCleDelete(generic.DeleteView):
-    model = MotCle
-    success_url = reverse_lazy('gerer_motcles')
-
 
 class NoticeDelete(DeleteView):
     model = Main
     success_url = reverse_lazy('event_list') # This is where this view will
                                             # redirect the user
     template_name = 'delete_notice.html'
+
 
 class MainList(generic.View):
     def get(self, request):
@@ -62,7 +53,7 @@ class MainList(generic.View):
         source = request.GET.get('source', '')
         #tousindex_calcul = request.GET['tousIndex_calcul']
 
-	sort = request.GET.get('sort', 'date')
+        sort = request.GET.get('sort', 'date')
 
         data = MainFilter(self.request.GET, queryset=Main.objects.all().order_by(sort))
         data_total = data.count()
@@ -79,6 +70,7 @@ class MainList(generic.View):
             items = paginator.page(paginator.num_pages)
         return render(request, 'result.html', {'items': items, 'all': all_main_registers, 'form' : all_main_registers.form, 'data_total' : data_total})
 
+
 class SearchForm(generic.View):
     def get(self, request):
         search_form = Search()
@@ -86,6 +78,7 @@ class SearchForm(generic.View):
 
     def post(self, request):
         pass
+
 
 class CreateForm(generic.CreateView):
     model = Main
