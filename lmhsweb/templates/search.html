@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-body">
 		<form action="/list/" method="get">
-                    {% csrf_token %}
+            {% csrf_token %}
 		    {{ form|as_bootstrap }}
 		    <div class="form-actions">
 		      <button type="submit" class="btn btn-primary" name="submit">Chercher</button>

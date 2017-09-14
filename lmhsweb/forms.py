@@ -14,7 +14,6 @@ class Search(forms.ModelForm):
     PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
     SOURCE_CHOICES = Source.objects.all().values_list("nom", "nom")
 
-
     projet__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), required=False, label="Projet")
     source__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(SOURCE_CHOICES), required=False, label="Source")
 

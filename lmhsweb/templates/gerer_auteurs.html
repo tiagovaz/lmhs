@@ -23,7 +23,6 @@
 
     <ul>
         {% for auteur in all_auteurs %}
-
             <li class="list-group-item"> {{ auteur.nom }}&nbsp;; {{ auteur.cote }}&nbsp;
 
                 {% if user.is_authenticated %}
