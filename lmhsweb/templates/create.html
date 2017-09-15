@@ -57,11 +57,102 @@
                                         <label for="id_cote_prefixe" class="control-label  ">
                                         Cote prefixe
                                         </label>
-                                        <div class="">
+                                         {% for field in form %}
+                                {% if field.name == "type" %}
+                                    {% if field.value == "Affiche" %}
+                                          <div class="">
                                             <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
-                                                <option value="" selected="selected">---------</option>
+                                                <option value="A" selected="selected">A</option>
                                             </select>
                                         </div>
+                                    {% elif field.value == "Annonce de concours" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="CONC" selected="selected">CONC</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Article de périodique" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="ART" selected="selected">ART</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Catalogue" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="CAT" selected="selected">CAT</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Conférence" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="CONF" selected="selected">CONF</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Document non publié" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="DNP" selected="selected">DNP</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Extrait de livre" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="EXT" selected="selected">EXT</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Iconographie" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="A" selected="selected">ICO</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Livre" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="L" selected="selected">L</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Matériel audiovisuel" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="MA" selected="selected">MA</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Partition" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="MUS" selected="selected">MUS</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Périodique" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="PER" selected="selected">PER</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Photographie" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="ICO" selected="selected">ICO</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Programme" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="PROG" selected="selected">PROG</option>
+                                            </select>
+                                        </div>
+                                    {% elif field.value == "Référence" %}
+                                        <div class="">
+                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
+                                                <option value="REF" selected="selected">REF</option>
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
                                     </div>
                                 </div>
                                 <div class="col-lg-3">

@@ -98,6 +98,7 @@ class CreateForm(generic.CreateView):
         #return self.object.get_absolute_url()
         return '/list/'
 
+
 class UpdateForm(generic.UpdateView):
     model = Main
     template_name = "update.html"

@@ -77,6 +77,7 @@ TYPE_CHOICES = (
     ),
 )
 
+
 @python_2_unicode_compatible
 class Auteur(models.Model):
     nom = models.CharField(max_length=200, unique=False)
@@ -91,6 +92,7 @@ class Auteur(models.Model):
     class Meta:
         verbose_name = "Auteur"
 
+
 @python_2_unicode_compatible
 class CoteAuteur(models.Model):
     cote = models.CharField(max_length=200, unique=False, null=True, default=None, blank=True)
@@ -102,6 +104,7 @@ class CoteAuteur(models.Model):
     class Meta:
         verbose_name = "Cote auteur"
 
+
 @python_2_unicode_compatible
 class CotePrefixe(models.Model):
     cote = models.CharField(max_length=20, unique=False, null=True, default=None, blank=True)
@@ -112,15 +115,17 @@ class CotePrefixe(models.Model):
     class Meta:
         verbose_name = "Cote prefixe"
 
+
 @python_2_unicode_compatible
 class Collection(models.Model):
     nom = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
-       return self.nom
+        return self.nom
 
     class Meta:
         verbose_name = "Collection"
+
 
 @python_2_unicode_compatible
 class Fonds(models.Model):
@@ -132,6 +137,7 @@ class Fonds(models.Model):
     class Meta:
         verbose_name = "Fonds"
 
+
 @python_2_unicode_compatible
 class Genre(models.Model):
     nom = models.CharField(max_length=200, unique=False)
@@ -142,15 +148,17 @@ class Genre(models.Model):
     class Meta:
         verbose_name = "Genre"
 
+
 @python_2_unicode_compatible
 class LangueOrigine(models.Model):
     nom = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
-       return self.nom
+        return self.nom
 
     class Meta:
         verbose_name = "Langue d'origine"
+
 
 @python_2_unicode_compatible
 class City(models.Model):
@@ -163,6 +171,7 @@ class City(models.Model):
         verbose_name = "Ville"
         verbose_name_plural = "Ville"
 
+
 @python_2_unicode_compatible
 class State(models.Model):
     name = models.CharField("Nom de la province", max_length=150, unique=True)
@@ -173,6 +182,7 @@ class State(models.Model):
     class Meta:
         verbose_name = "Province"
         verbose_name_plural = "Provinces"
+
 
 @python_2_unicode_compatible
 class Country(models.Model):
@@ -185,6 +195,7 @@ class Country(models.Model):
         verbose_name = "Pays"
         verbose_name_plural = "Pays"
 
+
 @python_2_unicode_compatible
 class Localisation(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -194,6 +205,7 @@ class Localisation(models.Model):
 
     class Meta:
         verbose_name = "Localisation"
+
 
 @python_2_unicode_compatible
 class TypeEvenement(models.Model):
@@ -205,6 +217,7 @@ class TypeEvenement(models.Model):
     class Meta:
         verbose_name = "Type d'événement"
 
+
 @python_2_unicode_compatible
 class Projet(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -214,6 +227,7 @@ class Projet(models.Model):
 
     class Meta:
         verbose_name = "Projet"
+
 
 @python_2_unicode_compatible
 class Source(models.Model):
@@ -236,6 +250,7 @@ class NomOrg(models.Model):
     class Meta:
         verbose_name = "Nom de l'organisme"
 
+
 @python_2_unicode_compatible
 class MethodeReproduction(models.Model):
     nom = models.CharField(max_length=200, unique=False)
@@ -245,6 +260,7 @@ class MethodeReproduction(models.Model):
 
     class Meta:
         verbose_name = "Méthode de réproduction"
+
 
 @python_2_unicode_compatible
 class MaisonEdition(models.Model):
@@ -256,6 +272,7 @@ class MaisonEdition(models.Model):
     class Meta:
         verbose_name = "Maison d'édition"
 
+
 @python_2_unicode_compatible
 class Medium(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -265,6 +282,7 @@ class Medium(models.Model):
 
     class Meta:
         verbose_name = "Medium"
+
 
 @python_2_unicode_compatible
 class DirecteurCollection(models.Model):
@@ -276,6 +294,7 @@ class DirecteurCollection(models.Model):
     class Meta:
         verbose_name = "Directeur de collection"
 
+
 @python_2_unicode_compatible
 class DirecteurPublication(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -285,6 +304,7 @@ class DirecteurPublication(models.Model):
 
     class Meta:
         verbose_name = "Directeur de publication"
+
 
 @python_2_unicode_compatible
 class Editeur(models.Model):
@@ -296,6 +316,7 @@ class Editeur(models.Model):
     class Meta:
         verbose_name = "Editeur"
 
+
 @python_2_unicode_compatible
 class MotCle(models.Model):
     nom = models.CharField(max_length=200, unique=False)
@@ -306,6 +327,7 @@ class MotCle(models.Model):
     class Meta:
         verbose_name = "Mot clé"
 
+
 @python_2_unicode_compatible
 class Support(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -315,6 +337,7 @@ class Support(models.Model):
 
     class Meta:
         verbose_name = "Support"
+
 
 @python_2_unicode_compatible
 class Traducteur(models.Model):
@@ -455,8 +478,6 @@ class Main(models.Model):
 #            self.mot_cle.add(*MotCle.objects.filter(nom__in=mot_cle_list))
 
         super(Main, self).save()
-
-
 
     class Meta:
         verbose_name = "Principale"
