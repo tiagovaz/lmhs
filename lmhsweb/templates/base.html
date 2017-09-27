@@ -42,6 +42,7 @@
 
                 <ul class="nav navbar-top-links navbar-right">
                     <a href="https://docs.google.com/document/d/1g53UmT3EvQzWZBjj8L3y0jiUERFHTlp1RQq7hlDsoTA/edit?ts=59945456" target="_blank">Liste des mot-clés du PHEM</a>
+
                     {% if user.is_authenticated %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -55,7 +56,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+
+                    <ul class="nav navbar-top-links navbar-right">
+                    <!--<a href="JavaScript:newPopup('/admin/lmhsweb/main/add/?_to_field=id&amp;_popup=1');">Nouvelle Notice</a>
+                    -->
+                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-add fa-fw"></i>Nouvelle notice <i class="fa fa-caret-down"></i>
                         </a>
@@ -66,6 +71,7 @@
                                 <li><a href='/create/?type={{ t }}'>{{ t }}</a></li>
                             {% endfor %}
                         </ul>
+
                         <!-- /.dropdown-user -->
                     </li>
 
@@ -78,7 +84,7 @@
                             <li>
                                 <a href='{% url "logout" %}'>
                                     <i class="fa fa-sign-out fa-fw"></i>
-                                    {% trans "Logout" %}
+                                    {% trans "Se déconnecter" %}
                                 </a>
                             </li>
                         </ul>
@@ -89,7 +95,7 @@
                     <li>
                         <a href='/login/?next={{request.get_full_path}}'>
                             <i class="fa fa-sign-in fa-fw"></i>
-                            {% trans "Login" %}
+                            {% trans "Se connecter" %}
                         </a>
                     </li>
                     {% endif %}

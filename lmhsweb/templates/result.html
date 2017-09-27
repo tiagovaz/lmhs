@@ -2,6 +2,8 @@
 {% load staticfiles %}
 {% load bootstrap_pagination %}
 {% load bootstrap3 %}
+{% load bootstrap_tags %}
+
 
 {% block content %}
                 <center>
@@ -9,7 +11,7 @@
                     <small>
                         {% if data_total == 0 %}
                             Aucune notice trouvée
-                        {% elif data_tota == 1 %}
+                        {% elif data_total == 1 %}
                             1 notice trouvée
                         {% else %}
                             {{ data_total }} notices trouvées
@@ -31,7 +33,7 @@
                         <form class="form" action="" method="get">
                             <form method="post">
                                 {% csrf_token %}
-                                {% bootstrap_form form %}
+                                {{ form|as_bootstrap }}
                                 {% buttons %}
                                     <button type="submit" class="btn btn-primary pull-right">Filtrer</button>
                                     <a class="btn btn-danger" href="/list/">Réinitialiser</a>

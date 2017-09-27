@@ -12,26 +12,28 @@ class Search(forms.ModelForm):
     auteur__nom = forms.CharField(label="Auteur")
 
     PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
-    SOURCE_CHOICES = Source.objects.all().values_list("nom", "nom")
+    # SOURCE_CHOICES = Source.objects.all().values_list("nom", "nom")
 
     projet__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), required=False, label="Projet")
-    source__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(SOURCE_CHOICES), required=False, label="Source")
+    # source__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(SOURCE_CHOICES), required=False, label="Source")
 
     mot_cle__nom = forms.CharField(label="Mot-clé")
 
     class Meta:
         model = Main
-        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source__nom', 'tousIndex_calcul', 'projet__nom', 'type']
+        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source', 'tousIndex_calcul', 'projet__nom', 'type']
+
 
 class Create(forms.ModelForm):
 
     def __init__( self, type, *args, **kwargs ):
-         super(Create, self).__init__( *args, **kwargs )
-         self.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial=type)
-         self.fields['pdf_file'] = forms.FileField(label='Sélectionnez le fichier PDF')
+        super(Create, self).__init__(*args, **kwargs)
+        self.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial=type)
+        self.fields['pdf_file'] = forms.FileField(label='Sélectionnez le fichier PDF')
+
     class Meta:
         model = Main
-        fields = ('__all__')
+        fields = '__all__'
         widgets = {
             'type_evenement': autocomplete.ModelSelect2('type_evenement-autocomplete'),
             'projet': autocomplete.ModelSelect2Multiple(url='projet-autocomplete'),

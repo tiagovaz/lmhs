@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import generic
+from django.db.models import Count
 
 from lmhsweb.filters import MainFilter
 from lmhsweb.forms import Search, Create
@@ -21,6 +22,7 @@ class GererAuteurs(generic.ListView):
     template_name = 'gerer_auteurs.html'
     context_object_name = 'all_auteurs'
     liste = Auteur.objects.order_by('nom')
+
     def get_queryset(self):
         return GererAuteurs.liste
 
@@ -30,6 +32,7 @@ class GererMotsCles(generic.ListView):
     template_name = 'gerer_motcles.html'
     context_object_name = 'all_motcles'
     liste = MotCle.objects.order_by('nom')
+
     def get_queryset(self):
         return GererMotsCles.liste
 
@@ -43,23 +46,23 @@ class NoticeDelete(DeleteView):
 
 class MainList(generic.View):
     def get(self, request):
-        titre = request.GET.get('titre', '')
-        auteur = request.GET.get('auteur', '')
-        projet = request.GET.get('projet', '')
-        type = request.GET.get('type', '')
-        date = request.GET.get('date', '')
-        mot_cle = request.GET.get('mot_cle', '')
-        pdf_text = request.GET.get('pdf_text', '')
-        source = request.GET.get('source', '')
+        #titre = request.GET.get('titre', '')
+        #auteur = request.GET.get('auteur', '')
+        #projet = request.GET.get('projet', '')
+        #type = request.GET.get('type', '')
+        #date = request.GET.get('date', '')
+        #mot_cle = request.GET.get('mot_cle', '')
+        #pdf_text = request.GET.get('pdf_text', '')
+        #source = request.GET.get('source', '')
         #tousindex_calcul = request.GET['tousIndex_calcul']
 
         sort = request.GET.get('sort', 'date')
 
         data = MainFilter(self.request.GET, queryset=Main.objects.all().order_by(sort))
-        data_total = data.count()
+        data_total = data.qs.count()
         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all().order_by('date'))
 
-        paginator = Paginator(data, 25)
+        paginator = Paginator(data.qs, 25)
         page = request.GET.get('page')
         try:
             items = paginator.page(page)
@@ -129,6 +132,7 @@ class UpdateForm(generic.UpdateView):
 class Login(generic.TemplateView):
     template_name = 'registration/login.html'
 
+
 class TypeEvenementAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -141,17 +145,19 @@ class TypeEvenementAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class AuteurAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return Auteur.objects.none()
 
-        qs = Auteur.objects.all().exclude(cote__exact='').exclude(cote__isnull=True)
+        qs = Auteur.objects.order_by('cote').exclude(cote__exact='').exclude(cote__isnull=True)
 
         if self.q:
             qs = qs.filter(nom__icontains=self.q)
 
         return qs
+
 
 class DirecteurCollectionAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -165,6 +171,7 @@ class DirecteurCollectionAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class DirecteurPublicationAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -176,6 +183,7 @@ class DirecteurPublicationAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(nom__icontains=self.q)
 
         return qs
+
 
 class EditeurAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -189,6 +197,7 @@ class EditeurAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class MotCleAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -201,6 +210,7 @@ class MotCleAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class SupportAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -212,6 +222,7 @@ class SupportAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(nom__icontains=self.q)
 
         return qs
+
 
 class TraducteurAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -238,6 +249,7 @@ class CollectionAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class FondsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -249,6 +261,7 @@ class FondsAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(nom__icontains=self.q)
 
         return qs
+
 
 class LangueOrigineAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -262,6 +275,7 @@ class LangueOrigineAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class LocalisationAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -273,6 +287,7 @@ class LocalisationAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(nom__icontains=self.q)
 
         return qs
+
 
 class MaisonEditionAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -286,6 +301,7 @@ class MaisonEditionAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class MediumAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -297,6 +313,7 @@ class MediumAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(nom__icontains=self.q)
 
         return qs
+
 
 class MethodeReproductionAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -310,6 +327,7 @@ class MethodeReproductionAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class NomOrgAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -321,6 +339,7 @@ class NomOrgAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(nom__icontains=self.q)
 
         return qs
+
 
 class ProjetAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -334,6 +353,7 @@ class ProjetAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class GenreAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
@@ -346,12 +366,13 @@ class GenreAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class CotePrefixeAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return CotePrefixe.objects.none()
 
-        qs = CotePrefixe.objects.all()
+        qs = CotePrefixe.objects.order_by('cote')
 
         if self.q:
             qs = qs.filter(cote__icontains=self.q)
