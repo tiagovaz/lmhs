@@ -2,7 +2,6 @@
 {% load staticfiles %}
 {% load bootstrap_tags %}
 
-
 {% block content %}
 
     <div class="row">
@@ -21,6 +20,8 @@
         <!-- /.col-lg-12 -->
     </div>
 
+{% if all_auteurs %}
+<div id="auteur_loop">
     <ul>
         {% for auteur in all_auteurs %}
             <li class="list-group-item"> {{ auteur.nom }}&nbsp;; {{ auteur.cote }}&nbsp;
@@ -42,6 +43,9 @@
 
         {% endfor %}
     </ul>
-
+</div>
+{% else %}
+    <h3>Il n'y a aucun auteurs dans la base de donnée</h3>
+{% endif %}
 
 {% endblock %}

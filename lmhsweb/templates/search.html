@@ -2,7 +2,31 @@
 {% load staticfiles %}
 {% load bootstrap_tags %}
 
+{% block extrascript %}
+    <!-- DatePicker JavaScript -->
+    <script type="text/javascript" src="{% static 'sbadmin2/bower_components/jquery/dist/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'datetimepicker/js/moment.js' %}"></script>
+    <script type="text/javascript" src="{% static 'sbadmin2/bower_components/bootstrap/js/transition.js' %}"></script>
+    <script type="text/javascript" src="{% static 'sbadmin2/bower_components/bootstrap/js/collapse.js' %}"></script>
+    <script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#id_start_date').datetimepicker({sideBySide: true, format: 'YYYY-MM-DD HH:mm'});
+        });
+
+        $(function () {
+            $('#id_end_date').datetimepicker({sideBySide: true, format: 'YYYY-MM-DD HH:mm'});
+        });
+    </script>
+
+    {{ form.media }}
+{% endblock %}
+
 {% block content %}
+
+
+
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
 	<p>&nbsp;</p>
@@ -12,15 +36,36 @@
                     <h3 class="panel-title"><center>Recherche - Base de données du LMHS</center></h3>
                 </div>
                 <div class="panel-body">
-		<form action="/list/" method="get">
-            {% csrf_token %}
-		    {{ form|as_bootstrap }}
-		    <div class="form-actions">
-		      <button type="submit" class="btn btn-primary" name="submit">Chercher</button>
-		    </div>
-		</form>
+
+                    <form action="/list/" method="get">
+                        {% csrf_token %}
+                        {{ form|as_bootstrap }}
+                        <div class="form-actions">
+                          <button type="submit" class="btn btn-primary" name="submit">Chercher</button>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
         </div>
+    </div>
+
+
+{% endblock %}
+
+{% block footer %}
+    <div class="col-md-10 col-md-offset-1" align="center" style="color:#808080;font-size:10px;">
+        <br>
+        <a href="http://pressemusicale.oicrm.org/" target="_blank">
+            <img class="img-responsive" src="/static/media/presse_musicale_logo.png" alt="Presse musicale" width="105" height="43" hspace="5">
+        </a>
+        <br>
+        <h5>Mention légale</h5>
+
+        <p>Les articles de presse reproduits dans la banque de données sont libres de droits. Leur diffusion dans la banque de données est non commerciale et respecte les critères d'utilisation équitable aux fins de recherche ainsi qu'établie par la Loi sur le droit d'auteur du Canada (L.R.C. (1985), ch. C-42: <a href="http://laws-lois.justice.gc.ca/fra/lois/C-42/page-9.html#h-26">http://laws-lois.justice.gc.ca/fra/lois/C-42/page-9.html#h-26</a>).
+        Les PDF des articles des revues suivantes ont été téléchargés (sauf quelques exceptions) de Gallica: Le Ménestrel, La Musique pendant la guerre, La Tribune de Saint-Gervais, Le Mercure de France, La Revue politique et littéraire «Revue bleue».
+        </p>
+        <br>
     </div>
 {% endblock %}

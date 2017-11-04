@@ -9,20 +9,23 @@ from models import *
 class Search(forms.ModelForm):
     pdf_text = forms.CharField(label="Recherche plein texte")
     tousIndex_calcul = forms.CharField(label="Tous")
-    auteur__nom = forms.CharField(label="Auteur")
+    auteur__nom = forms.CharField(label="Auteur", help_text = 'Chercher par nom de famille uniquement')
+    titre = forms.CharField(label="Titre", help_text="Séparer les termes recherchés par des virgules")
+   # auteur__nom = forms.ModelChoiceField(label="Auteur", queryset= Auteur.objects.all(), widget = autocomplete.ModelSelect2('auteur-autocomplete'))
 
     PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
     # SOURCE_CHOICES = Source.objects.all().values_list("nom", "nom")
 
     projet__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), required=False, label="Projet")
-    # source__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(SOURCE_CHOICES), required=False, label="Source")
+    # source__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + SOURCES_CHOICES, required=False, label="Source")
 
-    mot_cle__nom = forms.CharField(label="Mot-clé")
+    # source = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + SOURCES_CHOICES, label='Source')
+    mot_cle__nom = forms.CharField(label="Mot-clé", help_text = 'Pour le projet "Esthétique musicale en France (1900-1950)", on peut se référer à la liste de mots clés regroupés par catégories accessible via le lien en haut de la page.')
+    cote_calcul = forms.CharField(label="Cote", help_text='Ex. ART BARa 1928 01')
 
     class Meta:
         model = Main
-        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source', 'tousIndex_calcul', 'projet__nom', 'type']
-
+        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source', 'tousIndex_calcul', 'projet__nom', 'type', 'cote_calcul']
 
 class Create(forms.ModelForm):
 
@@ -57,4 +60,5 @@ class Create(forms.ModelForm):
             'support': autocomplete.ModelSelect2Multiple('support-autocomplete'),
             'traducteur': autocomplete.ModelSelect2Multiple('traducteur-autocomplete'),
         }
+
 

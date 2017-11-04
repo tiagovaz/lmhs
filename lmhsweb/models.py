@@ -77,6 +77,8 @@ TYPE_CHOICES = (
     ),
 )
 
+
+
 @python_2_unicode_compatible
 class Auteur(models.Model):
     nom = models.CharField(max_length=200, unique=False)
@@ -217,7 +219,7 @@ class Projet(models.Model):
 
 @python_2_unicode_compatible
 class Source(models.Model):
-    nom = models.CharField(max_length=200, unique=True)
+    nom = models.CharField(max_length=200, unique=False)
 
     def __str__(self):
        return self.nom
@@ -340,7 +342,7 @@ class Main(models.Model):
     cote_calcul = models.CharField(max_length=100, null=True, blank=True)
     cote_numero = models.CharField(blank=True, null=True, max_length=100)
     cote_prefixe = models.ForeignKey("CotePrefixe", blank=True, null=True, default=None)
-    cote_calcul_url = models.CharField(max_length=20, null=True, blank=True)
+    cote_calcul_url = models.CharField(max_length=50, null=True, blank=True)
     protection_droit_auteur = models.NullBooleanField(db_column='Protection_droit_auteur', blank=True, null=True, default=None)  # Field name made lowercase.
     date = models.CharField(blank=True, null=True, max_length=100)
     date_fin = models.CharField(blank=True, null=True, max_length=100)
@@ -376,7 +378,7 @@ class Main(models.Model):
     traducteur = models.ManyToManyField('Traducteur', null=True, blank=True)
 
     # Pour transformer le champ soure en ManyToManyField et éviter les doublons
-    source_unique = models.ManyToManyField('Source', null = True, blank = True)
+    #source_unique = models.ManyToManyField('Source', null = True, blank = True)
 
     # city = models.ForeignKey('City', null=True, blank=True)
     # state = models.ForeignKey('State', null=True, blank=True)

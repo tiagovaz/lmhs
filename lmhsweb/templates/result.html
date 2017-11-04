@@ -216,7 +216,7 @@
                                                                                     {% if sl.nom == "En ligne" %}
                                                                                         <tr>
                                                                                             <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
-                                                                                            <td><a href='/media/{{ s.cote_calcul_url }}.pdf'>PDF</a></td>
+                                                                                            <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
                                                                                         </tr>
                                                                                     {% endif %}
                                                                                 {% endfor %}
@@ -329,7 +329,7 @@
                                                                                         <td><strong>Mot(s) clé(s)&nbsp;:</strong></td>
                                                                                         <td>
                                                                                         {% for mc in s.mot_cle.all %}
-                                                                                            {{ mc }}<br>
+                                                                                            {{ mc.nom }}{% if not forloop.last %}, {% else %}{% endif %}
                                                                                         {% endfor %}
                                                                                         </td>
                                                                                     </tr>
