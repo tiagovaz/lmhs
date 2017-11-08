@@ -77,7 +77,149 @@ TYPE_CHOICES = (
     ),
 )
 
-
+# cette liste sert uniquement à la recherche à la recherche (filters)
+SOURCES_CHOICES = (
+    (
+        "L'Action française",
+        "L'Action française"
+    ),
+    (
+        "Angers-artiste",
+        "Angers-artiste"
+    ),
+    (
+        "Comoedia illustré",
+        "Comoedia illustré"
+    ),
+    (
+        "Contrepoints",
+        "Contrepoints"
+    ),
+    (
+        "Courrier musical",
+        "Courrier musical"
+    ),
+    (
+        "Le Courrier Musical et Théâtral",
+        "Le Courrier Musical et Théâtral"
+    ),
+    (
+        "Le courrier Musical, Théâtral, Cinématographique",
+        "Le courrier Musical, Théâtral, Cinématographique"
+    ),
+    (
+        "Le Devoir",
+        "Le Devoir"
+    ),
+    (
+        "L'Écho de Paris",
+        "L'Écho de Paris"
+    ),
+    (
+        "Europe",
+        "Europe"
+    ),
+    (
+        "Le Figaro",
+        "Le Figaro"
+    ),
+    (
+        "Le Gaulois",
+        "Le Gaulois"
+    ),
+    (
+        "Le Guide du concert",
+        "Le Guide du concert"
+    ),
+    (
+        "L'Intransigeant",
+        "L'Intransigeant"
+    ),
+    (
+        "Journal des débats",
+        "Journal des débats"
+    ),
+    (
+        "Mémoire et Histoire : la Résistance",
+        "Mémoire et Histoire : la Résistance"
+    ),
+    (
+        "Le Ménestrel",
+        "Le Ménéstrel"
+    ),
+    (
+        "Mercure de France",
+        "Mercure de France"
+    ),
+    (
+        "Le Mercure musical",
+        "Le Mercure musical"
+    ),
+    (
+        "Modern Music",
+        "Modern Music"
+    ),
+    (
+        "Le Monde musical",
+        "Le Monde musical"
+    ),
+    (
+        "Musique,", # La virgule (,) évite de faire sortir tous les sources contenant 'Musique'
+        "Musique"
+    ),
+    (
+        "La Musique pendant la guerre",
+        "La Musique pendant la guerre"
+    ),
+    (
+        "Le Petit Journal",
+        "Le Petit Journal"
+    ),
+    (
+        "Le Petit Parisien",
+        "Le Petit Parisien"
+    ),
+    (
+        "La Presse",
+        "La Presse"
+    ),
+    (
+        "La Revue musicale,",
+        "La Revue musicale"
+    ),
+    (
+        "La Revue musicale de Lyon",
+        "La Revue musicale de Lyon"
+    ),
+    (
+        "Revue musicale de Suisse Romande",
+        "Revue musicale de Suisse Romande"
+    ),
+    (
+        "Revue musicale (histoire et critique)",
+        "Revue musicale (histoire et critique)"
+    ),
+    (
+        "Revue musicale SIM",
+        "Revue musicale SIM"
+    ),
+     (
+        "Revue Pleyel",
+        "Revue Pleyel"
+    ),
+    (
+        "La Revue politique et littéraire «Revue bleue»",
+        "La Revue politique et littéraire «Revue bleue»"
+    ),
+    (
+        "La Revue de Paris",
+        "La Revue de Paris"
+    ),
+    (
+        "Le Temps",
+        "Le Temps"
+    ),
+)
 
 @python_2_unicode_compatible
 class Auteur(models.Model):
@@ -153,40 +295,40 @@ class LangueOrigine(models.Model):
 
     class Meta:
         verbose_name = "Langue d'origine"
-
-@python_2_unicode_compatible
-class City(models.Model):
-    name = models.CharField("Nom de la ville", max_length=150, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Ville"
-        verbose_name_plural = "Ville"
-
-@python_2_unicode_compatible
-class State(models.Model):
-    name = models.CharField("Nom de la province", max_length=150, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Province"
-        verbose_name_plural = "Provinces"
-
-@python_2_unicode_compatible
-class Country(models.Model):
-    name = models.CharField("Nom du pays", max_length=150, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Pays"
-        verbose_name_plural = "Pays"
-
+'''
+    @python_2_unicode_compatible
+    class City(models.Model):
+        name = models.CharField("Nom de la ville", max_length=150, unique=True)
+    
+        def __str__(self):
+            return self.name
+    
+        class Meta:
+            verbose_name = "Ville"
+            verbose_name_plural = "Ville"
+    
+    @python_2_unicode_compatible
+    class State(models.Model):
+        name = models.CharField("Nom de la province", max_length=150, unique=True)
+    
+        def __str__(self):
+            return self.name
+    
+        class Meta:
+            verbose_name = "Province"
+            verbose_name_plural = "Provinces"
+    
+    @python_2_unicode_compatible
+    class Country(models.Model):
+        name = models.CharField("Nom du pays", max_length=150, unique=True)
+    
+        def __str__(self):
+            return self.name
+    
+        class Meta:
+            verbose_name = "Pays"
+            verbose_name_plural = "Pays"
+'''
 @python_2_unicode_compatible
 class Localisation(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -216,16 +358,6 @@ class Projet(models.Model):
 
     class Meta:
         verbose_name = "Projet"
-
-@python_2_unicode_compatible
-class Source(models.Model):
-    nom = models.CharField(max_length=200, unique=False)
-
-    def __str__(self):
-       return self.nom
-
-    class Meta:
-        verbose_name = "Source"
 
 
 @python_2_unicode_compatible
@@ -376,9 +508,6 @@ class Main(models.Model):
     support = models.ManyToManyField('Support', null=True, blank=True)
     titre = models.CharField(max_length=600)
     traducteur = models.ManyToManyField('Traducteur', null=True, blank=True)
-
-    # Pour transformer le champ soure en ManyToManyField et éviter les doublons
-    #source_unique = models.ManyToManyField('Source', null = True, blank = True)
 
     # city = models.ForeignKey('City', null=True, blank=True)
     # state = models.ForeignKey('State', null=True, blank=True)

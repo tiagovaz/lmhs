@@ -44,7 +44,6 @@
                 <!-- /.navbar-header -->
 
                 <ul class="nav navbar-top-links navbar-right">
-                    <a href="https://docs.google.com/document/d/1g53UmT3EvQzWZBjj8L3y0jiUERFHTlp1RQq7hlDsoTA/edit?ts=59945456" target="_blank">Liste des mot-clés du PHEM</a>
 
                     {% if user.is_authenticated %}
                     <li class="dropdown">
@@ -61,9 +60,9 @@
                     </li>
 
                     <ul class="nav navbar-top-links navbar-right">
-                        <!--
+
                     <a href="JavaScript:newPopup('/admin/lmhsweb/main/add/?_to_field=id&amp;_popup=1');">Nouvelle Notice</a>
-                    -->
+                    <!--
                      <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-add fa-fw"></i>Nouvelle notice <i class="fa fa-caret-down"></i>
@@ -75,7 +74,7 @@
                                 <li><a href='/create/?type={{ t }}'>{{ t }}</a></li>
                             {% endfor %}
                         </ul>
-
+-->
                         <!-- /.dropdown-user -->
                     </li>
 
@@ -198,17 +197,19 @@
     </body>
     {% block footer %}
     <footer>
-            <div class="col-md-10 col-md-offset-1" align="center" style="color:#808080;font-size:10px;">
-        <br>
+        <div class="col-md-10 col-md-offset-1" align="center" style="color:#808080;font-size:10px;">
+            <br>
+            <a href="http://pressemusicale.oicrm.org/" target="_blank">
+                <img class="img-responsive" src="/static/media/presse_musicale_logo.png" alt="Presse musicale" width="105" height="43" hspace="5">
+            </a>
+            <br>
+            <h5>Mention légale</h5>
 
-        <br>
-        <h5>Mention légale</h5>
-
-        <p>Les articles de presse reproduits dans la banque de données sont libres de droits. Leur diffusion dans la banque de données est non commerciale et respecte les critères d'utilisation équitable aux fins de recherche ainsi qu'établie par la Loi sur le droit d'auteur du Canada (L.R.C. (1985), ch. C-42: <a href="http://laws-lois.justice.gc.ca/fra/lois/C-42/page-9.html#h-26">http://laws-lois.justice.gc.ca/fra/lois/C-42/page-9.html#h-26</a>).
-        Les PDF des articles des revues suivantes ont été téléchargés (sauf quelques exceptions) de Gallica: Le Ménestrel, La Musique pendant la guerre, La Tribune de Saint-Gervais, Le Mercure de France, La Revue politique et littéraire «Revue bleue».
-        </p>
-        <br>
-    </div>
+            <p>Les articles de presse reproduits dans la banque de données sont libres de droits. Leur diffusion dans la banque de données est non commerciale et respecte les critères d'utilisation équitable aux fins de recherche ainsi qu'établie par la Loi sur le droit d'auteur du Canada (L.R.C. (1985), ch. C-42: <a href="http://laws-lois.justice.gc.ca/fra/lois/C-42/page-9.html#h-26">http://laws-lois.justice.gc.ca/fra/lois/C-42/page-9.html#h-26</a>).
+            Les PDF des articles des revues suivantes ont été téléchargés (sauf quelques exceptions) de Gallica: Le Ménestrel, La Musique pendant la guerre, La Tribune de Saint-Gervais, Le Mercure de France, La Revue politique et littéraire «Revue bleue».
+            </p>
+            <br>
+        </div>
     </footer>
     {% endblock %}
 </html>

@@ -46,15 +46,6 @@ class NoticeDelete(DeleteView):
 
 class MainList(generic.View):
     def get(self, request):
-        #titre = request.GET.get('titre', '')
-        #auteur = request.GET.get('auteur', '')
-        #projet = request.GET.get('projet', '')
-        #type = request.GET.get('type', '')
-        #date = request.GET.get('date', '')
-        #mot_cle = request.GET.get('mot_cle', '')
-        #pdf_text = request.GET.get('pdf_text', '')
-        #source = request.GET.get('source', '')
-        #tousindex_calcul = request.GET['tousIndex_calcul']
 
         sort = request.GET.get('sort', 'date')
 
@@ -98,7 +89,6 @@ class CreateForm(generic.CreateView):
         return super(CreateForm, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
-        #return self.object.get_absolute_url()
         return '/list/'
 
 

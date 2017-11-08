@@ -4,6 +4,8 @@ from dal import autocomplete
 from django import forms
 from django.db.models.fields import BLANK_CHOICE_DASH
 from models import *
+from models import SOURCES_CHOICES
+from django.utils.safestring import mark_safe
 
 
 class Search(forms.ModelForm):
@@ -14,18 +16,20 @@ class Search(forms.ModelForm):
    # auteur__nom = forms.ModelChoiceField(label="Auteur", queryset= Auteur.objects.all(), widget = autocomplete.ModelSelect2('auteur-autocomplete'))
 
     PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
-    # SOURCE_CHOICES = Source.objects.all().values_list("nom", "nom")
 
-    projet__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), required=False, label="Projet")
-    # source__nom = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + SOURCES_CHOICES, required=False, label="Source")
-
-    # source = forms.ChoiceField(widget=forms.Select, choices=BLANK_CHOICE_DASH + SOURCES_CHOICES, label='Source')
-    mot_cle__nom = forms.CharField(label="Mot-clé", help_text = 'Pour le projet "Esthétique musicale en France (1900-1950)", on peut se référer à la liste de mots clés regroupés par catégories accessible via le lien en haut de la page.')
+    projet__nom = forms.ChoiceField(widget=forms.Select,
+                                    choices=BLANK_CHOICE_DASH + list(PROJECT_CHOICES), label="Projet")
+    source_liste = forms.ChoiceField(widget=forms.Select,
+                                     choices=BLANK_CHOICE_DASH + list(SOURCES_CHOICES), label='Source (choisir)')
+    source_texte = forms.CharField(label="Source (écrire)")
+    mot_cle__nom = forms.CharField(label="Mot-clé",
+                                   help_text = mark_safe('Pour le projet "Esthétique musicale en France (1900-1950)", on peut se référer à cette<a href="https://docs.google.com/document/d/1g53UmT3EvQzWZBjj8L3y0jiUERFHTlp1RQq7hlDsoTA/edit?ts=59945456" target="_blank"> liste de mots clés</a> regroupés par catégories.'))
     cote_calcul = forms.CharField(label="Cote", help_text='Ex. ART BARa 1928 01')
 
     class Meta:
         model = Main
-        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source', 'tousIndex_calcul', 'projet__nom', 'type', 'cote_calcul']
+        fields = ['auteur__nom', 'titre', 'date', 'mot_cle__nom', 'pdf_text', 'source_liste','source_texte', 'tousIndex_calcul', 'projet__nom', 'type', 'cote_calcul']
+
 
 class Create(forms.ModelForm):
 
@@ -60,5 +64,3 @@ class Create(forms.ModelForm):
             'support': autocomplete.ModelSelect2Multiple('support-autocomplete'),
             'traducteur': autocomplete.ModelSelect2Multiple('traducteur-autocomplete'),
         }
-
-
