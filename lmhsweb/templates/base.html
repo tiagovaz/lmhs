@@ -107,9 +107,8 @@
                 <!-- /.navbar-top-links -->
 
 
-
             </nav>
-
+        </div>
             <div id="page-wrapper" style="padding-top:1px;">
                 {% if messages %}
                     {% for message in messages %}
@@ -192,16 +191,15 @@
             }
 
         </script>
-                                
-        {% block extrascript %}{% endblock %}
+
     </body>
+        {% block extrascript %}{% endblock %}
+
     {% block footer %}
     <footer>
+        <br>
         <div class="col-md-10 col-md-offset-1" align="center" style="color:#808080;font-size:10px;">
-            <br>
-            <a href="http://pressemusicale.oicrm.org/" target="_blank">
-                <img class="img-responsive" src="/static/media/presse_musicale_logo.png" alt="Presse musicale" width="105" height="43" hspace="5">
-            </a>
+            <a href="http://emf.oicrm.org" target="_blank"><img src="/static/media/emf_logo.png" alt="EMF" style="float: center; width: 9%; margin-right: 1%; margin-bottom: 0.5em;"></a><a href="http://pressemusicale.oicrm.org" target="_blank"><img src="/static/media/presse_musicale_logox.png" alt="Presse musicale" style="float: center; width: 12%; margin-right: 1%; margin-bottom: 0.5em;"></a><a href="http://lmhs.oicrm.org" target="_blank"><img src="/static/media/lmhs_logo.png" alt="lmhs" style="float: center; width: 6%; margin-right: 1%; margin-bottom: 0.5em;"></a>
             <br>
             <h5>Mention légale</h5>
 
