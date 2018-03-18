@@ -77,7 +77,7 @@ TYPE_CHOICES = (
     ),
 )
 
-# cette liste sert uniquement à la recherche à la recherche (filters)
+# cette liste sert uniquement à la recherche (filters)
 SOURCES_CHOICES = (
     (
         "L'Action française",

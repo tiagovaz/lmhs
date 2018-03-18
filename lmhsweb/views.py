@@ -48,10 +48,12 @@ class MainList(generic.View):
     def get(self, request):
 
         sort = request.GET.get('sort', 'date')
+        orders = [sort, 'no_page']
 
-        data = MainFilter(self.request.GET, queryset=Main.objects.all().order_by(sort))
+        data = MainFilter(self.request.GET, queryset=Main.objects.all().order_by(*orders))
         data_total = data.qs.count()
         all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all().order_by('date'))
+        #all_main_registers = MainFilter(self.request.GET, queryset=Main.objects.all().order_by(*orders))
 
         paginator = Paginator(data.qs, 25)
         page = request.GET.get('page')

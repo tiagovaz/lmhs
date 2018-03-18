@@ -11,8 +11,8 @@ from django.utils.safestring import mark_safe
 class Search(forms.ModelForm):
     pdf_text = forms.CharField(label="Recherche plein texte")
     tousIndex_calcul = forms.CharField(label="Tous")
-    auteur__nom = forms.CharField(label="Auteur", help_text = 'Chercher par nom de famille uniquement')
-    titre = forms.CharField(label="Titre", help_text="Séparer les termes recherchés par des virgules")
+    auteur__nom = forms.CharField(label="Auteur")
+    titre = forms.CharField(label="Titre")
    # auteur__nom = forms.ModelChoiceField(label="Auteur", queryset= Auteur.objects.all(), widget = autocomplete.ModelSelect2('auteur-autocomplete'))
 
     PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
