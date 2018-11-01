@@ -91,7 +91,7 @@ class customCSVFilter(Filter):
     base_field_class = customCSVField
 
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('help_text', _('Multiple values may be separated by commas.'))
+        kwargs.setdefault('help_text', _('Multiple values may be separated by spaces.'))
         super(customCSVFilter,self).__init__(*args, **kwargs)
 
         class ConcreteCSVField(self.base_field_class, self.field_class):
@@ -143,27 +143,30 @@ class MainFilter(django_filters.FilterSet):
     TYPE_CHOICES_FILTER = BLANK_CHOICE_DASH + list(TYPE_CHOICES)
     SOURCES_CHOICES_FILTER = BLANK_CHOICE_DASH + list(SOURCES_CHOICES)
 
+    auteur__nom = MultiValueCharFilter(name="auteur__nom", label='Auteur', lookup_expr='icontains')
     titre = MultiValueCharFilter(name="titre", label='Titre', lookup_expr='icontains')
-    auteur__nom = MultiValueCharFilter(name="auteur__nom",label='Auteur', lookup_expr='icontains')
-    #auteur__nom = django_filters.CharFilter(label='Auteur', lookup_expr='icontains')
-    mot_cle__nom = django_filters.CharFilter(label="Mot clé", lookup_expr='icontains')
-    pdf_text = django_filters.CharFilter(label="Recherche PDF", lookup_expr='icontains')
+    date = django_filters.CharFilter(label="Date", lookup_expr='icontains')
+    mot_cle__nom = MultiValueCharFilter(name="mot_cle__nom",label="Mot clé", lookup_expr='icontains')
+    pdf_text = django_filters.CharFilter(label="Recherche plein texte", lookup_expr='icontains')
     source_liste = django_filters.ChoiceFilter(name = 'source', label = "Source (choisir)", choices = SOURCES_CHOICES_FILTER, lookup_expr='icontains')
     source_texte = django_filters.CharFilter(name = 'source', label = "Source (écrire)", lookup_expr='icontains')
-    date = django_filters.CharFilter(label="Date", lookup_expr='icontains')
-    type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='icontains')
     projet__nom = django_filters.ChoiceFilter(label="Projet", choices=PROJECT_CHOICES_FILTER, lookup_expr='icontains')
+    type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='icontains')
     cote_calcul = django_filters.CharFilter(label = "Cote", lookup_expr='iexact')
+   # auteur__cote = django_filters.CharFilter(label = "Cote Auteur", lookup_expr='iexact')
 
     class Meta:
         model = Main
         fields = [
-            'titre',
-            'type',
-            'source',
-            'projet__nom',
             'auteur__nom',
-            'mot_cle__nom',
+            'titre',
             'date',
-            'cote_calcul'
+            'mot_cle__nom',
+            'pdf_text',
+            'source_liste',
+            'source_texte',
+            'projet__nom',
+            'type',
+            'cote_calcul',
+          #  'auteur__cote'
         ]

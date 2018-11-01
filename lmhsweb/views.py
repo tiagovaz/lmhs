@@ -37,6 +37,16 @@ class GererMotsCles(generic.ListView):
         return GererMotsCles.liste
 
 
+class GererProjets(generic.ListView):
+    model = Projet
+    template_name = 'gerer_projets.html'
+    context_object_name = 'all_projets'
+    liste = Projet.objects.order_by('nom')
+
+    def get_queryset(self):
+        return GererProjets.liste
+
+
 class NoticeDelete(DeleteView):
     model = Main
     success_url = reverse_lazy('event_list') # This is where this view will
@@ -69,6 +79,12 @@ class MainList(generic.View):
 
 class SearchForm(generic.View):
     def get(self, request):
+        '''
+        if request.user.is_authenticated():
+            search_form = Search_User()
+        else:
+            search_form = Search()
+        '''
         search_form = Search()
         return render(request, 'search.html', {'form': search_form})
 

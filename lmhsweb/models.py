@@ -208,7 +208,7 @@ SOURCES_CHOICES = (
         "Revue Pleyel"
     ),
     (
-        "La Revue politique et littéraire «Revue bleue»",
+        "Revue bleue",
         "La Revue politique et littéraire «Revue bleue»"
     ),
     (
@@ -295,40 +295,8 @@ class LangueOrigine(models.Model):
 
     class Meta:
         verbose_name = "Langue d'origine"
-'''
-    @python_2_unicode_compatible
-    class City(models.Model):
-        name = models.CharField("Nom de la ville", max_length=150, unique=True)
-    
-        def __str__(self):
-            return self.name
-    
-        class Meta:
-            verbose_name = "Ville"
-            verbose_name_plural = "Ville"
-    
-    @python_2_unicode_compatible
-    class State(models.Model):
-        name = models.CharField("Nom de la province", max_length=150, unique=True)
-    
-        def __str__(self):
-            return self.name
-    
-        class Meta:
-            verbose_name = "Province"
-            verbose_name_plural = "Provinces"
-    
-    @python_2_unicode_compatible
-    class Country(models.Model):
-        name = models.CharField("Nom du pays", max_length=150, unique=True)
-    
-        def __str__(self):
-            return self.name
-    
-        class Meta:
-            verbose_name = "Pays"
-            verbose_name_plural = "Pays"
-'''
+
+
 @python_2_unicode_compatible
 class Localisation(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -339,6 +307,7 @@ class Localisation(models.Model):
     class Meta:
         verbose_name = "Localisation"
 
+
 @python_2_unicode_compatible
 class TypeEvenement(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -348,6 +317,7 @@ class TypeEvenement(models.Model):
 
     class Meta:
         verbose_name = "Type d'événement"
+
 
 @python_2_unicode_compatible
 class Projet(models.Model):
@@ -370,6 +340,7 @@ class NomOrg(models.Model):
     class Meta:
         verbose_name = "Nom de l'organisme"
 
+
 @python_2_unicode_compatible
 class MethodeReproduction(models.Model):
     nom = models.CharField(max_length=200, unique=False)
@@ -379,6 +350,7 @@ class MethodeReproduction(models.Model):
 
     class Meta:
         verbose_name = "Méthode de réproduction"
+
 
 @python_2_unicode_compatible
 class MaisonEdition(models.Model):
@@ -390,6 +362,7 @@ class MaisonEdition(models.Model):
     class Meta:
         verbose_name = "Maison d'édition"
 
+
 @python_2_unicode_compatible
 class Medium(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -399,6 +372,7 @@ class Medium(models.Model):
 
     class Meta:
         verbose_name = "Medium"
+
 
 @python_2_unicode_compatible
 class DirecteurCollection(models.Model):
@@ -410,6 +384,7 @@ class DirecteurCollection(models.Model):
     class Meta:
         verbose_name = "Directeur de collection"
 
+
 @python_2_unicode_compatible
 class DirecteurPublication(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -419,6 +394,7 @@ class DirecteurPublication(models.Model):
 
     class Meta:
         verbose_name = "Directeur de publication"
+
 
 @python_2_unicode_compatible
 class Editeur(models.Model):
@@ -430,6 +406,7 @@ class Editeur(models.Model):
     class Meta:
         verbose_name = "Editeur"
 
+
 @python_2_unicode_compatible
 class MotCle(models.Model):
     nom = models.CharField(max_length=200, unique=False)
@@ -440,6 +417,7 @@ class MotCle(models.Model):
     class Meta:
         verbose_name = "Mot clé"
 
+
 @python_2_unicode_compatible
 class Support(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -449,6 +427,7 @@ class Support(models.Model):
 
     class Meta:
         verbose_name = "Support"
+
 
 @python_2_unicode_compatible
 class Traducteur(models.Model):
@@ -466,11 +445,11 @@ class Main(models.Model):
     annee_1re_publication = models.IntegerField(blank=True, null=True)
     annee_enregistrement = models.IntegerField(blank=True, null=True)
     annee_production = models.IntegerField(blank=True, null=True)
-    auteur = models.ManyToManyField('Auteur', null=True, blank=True)
+    auteur = models.ForeignKey('Auteur', null=True)
     collection = models.ForeignKey("Collection", null=True, blank=True)
     commentaire = models.TextField(null=True, blank=True)
     cote_annee = models.CharField(blank=True, null=True, max_length=100)
-    cote_auteur = models.ForeignKey("Auteur", null=True, default=None, blank=True, related_name="Cote_Auteur")
+    cote_auteur = models.ManyToManyField("Auteur", default=None, blank=True, related_name="Cote_Auteur")
     cote_calcul = models.CharField(max_length=100, null=True, blank=True)
     cote_numero = models.CharField(blank=True, null=True, max_length=100)
     cote_prefixe = models.ForeignKey("CotePrefixe", blank=True, null=True, default=None)
@@ -478,10 +457,11 @@ class Main(models.Model):
     protection_droit_auteur = models.NullBooleanField(db_column='Protection_droit_auteur', blank=True, null=True, default=None)  # Field name made lowercase.
     date = models.CharField(blank=True, null=True, max_length=100)
     date_fin = models.CharField(blank=True, null=True, max_length=100)
+    date_ajout = models.DateField(null=True, auto_now=True)
     depouillement = models.TextField(null=True, blank=True)
-    directeur_collection = models.ManyToManyField('DirecteurCollection', null=True, blank=True)
-    directeur_publication = models.ManyToManyField('DirecteurPublication', null=True, blank=True)
-    editeur = models.ManyToManyField('Editeur', null=True, blank=True, verbose_name="Éditeur")
+    directeur_collection = models.ManyToManyField('DirecteurCollection', blank=True)
+    directeur_publication = models.ManyToManyField('DirecteurPublication', blank=True)
+    editeur = models.ManyToManyField('Editeur', blank=True, verbose_name="Éditeur")
     en_collection = models.TextField(blank=True, null=True)
     fonds = models.ForeignKey("Fonds", null=True, blank=True, verbose_name="Fonds")
     genre = models.ForeignKey("Genre", null=True, blank=True, verbose_name="Genre")
@@ -490,28 +470,25 @@ class Main(models.Model):
     langue_origine = models.ForeignKey("LangueOrigine", null=True, blank=True)
     lieu = models.CharField("Lieu", max_length=200, null=True, blank=True)
     lieu_conservation = models.CharField("Lieu de conservation", blank=True, max_length=200)
+    lien = models.URLField("Lien vers l'article", blank = True)
     localisation = models.ForeignKey("Localisation", null=True, blank=True)
     maison_edition = models.ForeignKey("MaisonEdition", null=True, blank=True)
     medium = models.ForeignKey("Medium", null=True, blank=True)
     methode_reproduction = models.ForeignKey("MethodeReproduction", null=True, blank=True)
-    mot_cle = models.ManyToManyField('MotCle', null=True, blank=True)
+    mot_cle = models.ManyToManyField('MotCle', blank=True)
     nb_exemplaire = models.IntegerField(blank=True, null=True)
     nb_page = models.CharField(blank=True, max_length=20)
     nb_volume = models.CharField(blank=True, max_length=20)
     no_page = models.CharField(blank=True, max_length=20)
     no_volume = models.CharField(blank=True, max_length=20)
     notice_id = models.CharField(max_length=100, null=True, blank=True)
-    nom_org = models.ManyToManyField("NomOrg", null=True, blank=True)
-    projet = models.ManyToManyField("Projet", null=True, blank=True)
+    nom_org = models.ManyToManyField("NomOrg", blank=True)
+    projet = models.ManyToManyField("Projet",  blank=True)
     source = models.CharField(blank=True, max_length=200, null=True)
     sujet = models.TextField(null=True, blank=True)
-    support = models.ManyToManyField('Support', null=True, blank=True)
+    support = models.ManyToManyField('Support', blank=True)
     titre = models.CharField(max_length=600)
-    traducteur = models.ManyToManyField('Traducteur', null=True, blank=True)
-
-    # city = models.ForeignKey('City', null=True, blank=True)
-    # state = models.ForeignKey('State', null=True, blank=True)
-    # country = models.ForeignKey('Country', null=True, blank=True)
+    traducteur = models.ManyToManyField('Traducteur', blank=True)
 
     pdf_file = models.FileField(upload_to='.',
                                 blank=True,

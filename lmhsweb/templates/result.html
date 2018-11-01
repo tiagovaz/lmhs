@@ -45,7 +45,7 @@
             </div>
 
             <div class="col-sm-9">
-                <p class="text-center">Classer par : <a href="{{new_sort_url}}&sort=auteur__nom">auteur (a)</a> | <a href="{{new_sort_url}}&sort=-auteur__nom">auteur (d)</a> | <a href="{{new_sort_url}}&sort=date">date (a)</a> | <a href="{{new_sort_url}}&sort=-date">date (d)</a></p>
+                <p class="text-center">Classer par : <a href="{{new_sort_url}}&sort=auteur__nom">auteur (a)</a> | <a href="{{new_sort_url}}&sort=-auteur__nom">auteur (d)</a> | <a href="{{new_sort_url}}&sort=date">date (a)</a> | <a href="{{new_sort_url}}&sort=-date">date (d) | <a href="{{new_sort_url}}&sort=-date_ajout">ajout récent</a></p>
 
                 {% for s in items %}
                         <div class="col-lg-12">
@@ -211,13 +211,29 @@
                                                                                     <td>{{ s.type }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
-
                                                                                 {% for sl in s.support.all %}
-                                                                                    {% if sl.nom == "En ligne" %}
-                                                                                        <tr>
-                                                                                            <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
-                                                                                            <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
-                                                                                        </tr>
+                                                                                    {% if user.is_authenticated %}
+                                                                                        {% if sl.nom == "En ligne" or s.pdf_file.name != None %}
+                                                                                                <tr>
+                                                                                                    <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
+                                                                                                    {% if s.lien != "" %}
+                                                                                                        <td><a href='{{s.lien}}' target="_blank">Lien vers l'article</a></td>
+                                                                                                    {% else %}
+                                                                                                        <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
+                                                                                                    {% endif %}
+                                                                                                </tr>
+                                                                                        {% endif %}
+                                                                                    {% else %}
+                                                                                            {% if sl.nom == "En ligne" %}
+                                                                                                <tr>
+                                                                                                    <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
+                                                                                                    {% if s.lien != "" %}
+                                                                                                        <td><a href='{{s.lien}}' target="_blank">Lien vers l'article</a></td>
+                                                                                                    {% else %}
+                                                                                                        <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
+                                                                                                    {% endif %}
+                                                                                                </tr>
+                                                                                            {% endif %}
                                                                                     {% endif %}
                                                                                 {% endfor %}
 
@@ -390,9 +406,11 @@
                         </div>
                 {% endfor %}
             </div>
+            {% if data_total > 25 %}
                 <center>
                     {% bootstrap_paginate items range=10 show_prev_next="false" show_first_last="true" %}
                 </center>
+            {% endif %}
         </div>
         <!-- /.row -->
 

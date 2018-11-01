@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Gérer les projets
+                {% if user.is_authenticated %}
+                     <a class="related-widget-wrapper-link add-related" id="add_id_projet"
+                        href="JavaScript:newPopup('/admin/lmhsweb/projet/add/?_to_field=id&amp;_popup=1');"
+                        title="Ajouter un autre projet">
+                        <img src="/static/media/icon-addlink.svg" alt="Ajouter"/>
+                    </a>
+                {% endif %}
+            </h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <ul>
+        {% for projet in all_projets %}
+            <li class="list-group-item"> {{ projet.nom }}&nbsp;
+
+                {% if user.is_authenticated %}
+                    <a class="related-widget-wrapper-link add-related" id="change_id_projet"
+                        href="JavaScript:newPopup('/admin/lmhsweb/projet/{{ projet.id }}/change/?_to_field=id&_popup=1');"
+                        title="Modifier le mot clé">
+                        <img src="/static/media/icon-changelink.svg" alt="Modifier"/>
+                    </a>
+                    <a class="related-widget-wrapper-link add-related" id="delete_id_projet"
+                        href="JavaScript:newPopup('/admin/lmhsweb/projet/{{ projet.id }}/delete/?_to_field=id&_popup=1');"
+                        title="Suprimer le mot clé">
+                        <img src="/static/media/icon-deletelink.svg" alt="Suprimer"/>
+                    </a>
+                {% endif %}
+
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
