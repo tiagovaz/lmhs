@@ -211,19 +211,28 @@
                                                                                     <td>{{ s.type }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
-                                                                                {% for sl in s.support.all %}
                                                                                     {% if user.is_authenticated %}
-                                                                                        {% if sl.nom == "En ligne" or s.pdf_file.name != None %}
-                                                                                                <tr>
-                                                                                                    <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
-                                                                                                    {% if s.lien != "" %}
-                                                                                                        <td><a href='{{s.lien}}' target="_blank">Lien vers l'article</a></td>
-                                                                                                    {% else %}
-                                                                                                        <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
-                                                                                                    {% endif %}
-                                                                                                </tr>
+                                                                                        {% if s.pdf_file.name != None %}
+                                                                                            <tr>
+                                                                                                <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
+                                                                                                <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
+                                                                                            </tr>
+                                                                                        {% else %}
+                                                                                            {% for sl in s.support.all %}
+                                                                                                {% if sl.nom == "En ligne" %}
+                                                                                                    <tr>
+                                                                                                        <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
+                                                                                                        {% if s.lien != "" %}
+                                                                                                            <td><a href='{{s.lien}}' target="_blank">Lien vers l'article</a></td>
+                                                                                                        {% else %}
+                                                                                                            <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
+                                                                                                        {% endif %}
+                                                                                                    </tr>
+                                                                                                {% endif %}
+                                                                                            {% endfor %}
                                                                                         {% endif %}
                                                                                     {% else %}
+                                                                                        {% for sl in s.support.all %}
                                                                                             {% if sl.nom == "En ligne" %}
                                                                                                 <tr>
                                                                                                     <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
@@ -234,8 +243,9 @@
                                                                                                     {% endif %}
                                                                                                 </tr>
                                                                                             {% endif %}
+                                                                                        {% endfor %}
                                                                                     {% endif %}
-                                                                                {% endfor %}
+
 
                                                                                 {% if s.projet.all %}
                                                                                     <tr>
@@ -407,7 +417,7 @@
                 {% endfor %}
             </div>
             {% if data_total > 25 %}
-                <center>
+                <center class="col-md-offset-3">
                     {% bootstrap_paginate items range=10 show_prev_next="false" show_first_last="true" %}
                 </center>
             {% endif %}

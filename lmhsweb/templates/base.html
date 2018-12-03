@@ -53,9 +53,9 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Gérer les </li>
                             <li>
-                                <a href="/gerer_auteurs">Auteurs</a>
-                                <a href="/gerer_motcles">Mots-clés</a>
-                                <a href="/gerer_projets">Projets</a>
+                                <a href="/gerer_auteurs/?csrfmiddlewaretoken={{ csrf_token }}&q=a">Auteurs</a>
+                                <a href="/gerer_motcle/?csrfmiddlewaretoken={{ csrf_token }}&q=a">Mots-clés</a>
+                                <a href="/gerer_projet">Projets</a>
                             </li>
                         </ul>
                     </li>

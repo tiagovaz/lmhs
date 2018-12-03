@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Gérer les {{ verbose }}
+                {% if user.is_authenticated %}
+                     <a class="related-widget-wrapper-link add-related" id="add_id_{{ nom }}"
+                        href="JavaScript:newPopup('/admin/lmhsweb/{{ nom }}/add/?_to_field=id&amp;_popup=1');"
+                        title="Ajouter un autre {{ verbose }}">
+                        <img src="/static/media/icon-addlink.svg" alt="Ajouter"/>
+                    </a>
+                {% endif %}
+            </h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+{% if nom == "motcle" %}
+<p align="center">
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=a">A</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=b">B</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=c">C</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=d">D</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=e">E</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=f">F</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=g">G</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=h">H</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=i">I</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=j">J</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=k">K</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=l">L</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=m">M</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=n">N</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=o">O</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=p">P</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=q">Q</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=r">R</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=s">S</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=t">T</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=u">U</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=v">V</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=w">W</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=x">X</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=y">Y</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=z">Z</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=digit">0-9</a> &middot;
+        <a href="/gerer_{{nom}}/?csrfmiddlewaretoken={{ csrf_token }}&q=">Tout</a>
+    </p>
+{% else %}
+    <br>
+{% endif %}
+    <ul>
+        {% for i in object_list %}
+        <li class="list-group-item"> <a href="/list/?csrfmiddlewaretoken={{ csrf_token }}&{{ lien }}__nom={{ i.nom }}" style="color:black;">{{ i.nom }}</a>&nbsp;
+
+                {% if user.is_authenticated %}
+                    <a class="related-widget-wrapper-link add-related" id="change_id_{{ nom }}"
+                        href="JavaScript:newPopup('/admin/lmhsweb/{{ nom }}/{{ i.id }}/change/?_to_field=id&_popup=1');"
+                        title="Modifier le {{ verbose }}">
+                        <img src="/static/media/icon-changelink.svg" alt="Modifier"/>
+                    </a>
+                    <a class="related-widget-wrapper-link add-related" id="delete_id_mot_cle"
+                        href="JavaScript:newPopup('/admin/lmhsweb/{{ nom }}/{{ i.id }}/delete/?_to_field=id&_popup=1');"
+                        title="Suprimer le {{ verbose }}">
+                        <img src="/static/media/icon-deletelink.svg" alt="Suprimer"/>
+                    </a>
+                {% endif %}
+
+            </li>
+        {% endfor %}
+    </ul>
+<br><br>
+{% endblock %}

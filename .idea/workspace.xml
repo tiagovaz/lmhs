@@ -2,22 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e5813a5-e810-4bb4-a28d-8cf4a3ef954c" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/lmhsweb/templates/gerer_auteur.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/lmhs/urls.py" afterPath="$PROJECT_DIR$/lmhs/urls.py" />
       <change beforePath="$PROJECT_DIR$/lmhsweb/filters.py" afterPath="$PROJECT_DIR$/lmhsweb/filters.py" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/forms.py" afterPath="$PROJECT_DIR$/lmhsweb/forms.py" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/migrations/0050_auto_20161026_0029.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/migrations/0051_source.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/migrations/0052_auto_20170801_2332.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/migrations/0053_auto_20170801_2334.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/migrations/0054_auto_20170920_1548.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/migrations/0055_main_sourceu.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/migrations/0056_auto_20171108_1309.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/migrations/0057_auto_20171108_1503.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/models.py" afterPath="$PROJECT_DIR$/lmhsweb/models.py" />
       <change beforePath="$PROJECT_DIR$/lmhsweb/templates/base.html" afterPath="$PROJECT_DIR$/lmhsweb/templates/base.html" />
+      <change beforePath="$PROJECT_DIR$/lmhsweb/templates/gerer_auteurs.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lmhsweb/templates/gerer_motcles.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lmhsweb/templates/gerer_projets.html" afterPath="" />
       <change beforePath="$PROJECT_DIR$/lmhsweb/templates/result.html" afterPath="$PROJECT_DIR$/lmhsweb/templates/result.html" />
-      <change beforePath="$PROJECT_DIR$/lmhsweb/templates/search.html" afterPath="$PROJECT_DIR$/lmhsweb/templates/search.html" />
       <change beforePath="$PROJECT_DIR$/lmhsweb/views.py" afterPath="$PROJECT_DIR$/lmhsweb/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,84 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="filters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lmhsweb/filters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1845">
-              <caret line="136" column="0" lean-forward="false" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-              <folding>
-                <element signature="e#25#46#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lmhsweb/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="result.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="result.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lmhsweb/templates/result.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="221" column="181" lean-forward="true" selection-start-line="221" selection-start-column="181" selection-end-line="221" selection-end-column="181" />
-              <folding>
-                <element signature="e#9663#9669#0" expanded="true" />
-                <element signature="e#10288#10294#0" expanded="true" />
-                <element signature="e#11386#11392#0" expanded="true" />
-                <element signature="e#12463#12469#0" expanded="true" />
-                <element signature="e#13518#13524#0" expanded="true" />
-                <element signature="e#14561#14567#0" expanded="true" />
-                <element signature="e#15172#15178#0" expanded="true" />
-                <element signature="e#16083#16089#0" expanded="true" />
-                <element signature="e#17460#17466#0" expanded="true" />
-                <element signature="e#18879#18885#0" expanded="true" />
-                <element signature="e#19925#19931#0" expanded="true" />
-                <element signature="e#20331#20337#0" expanded="true" />
-                <element signature="e#21437#21443#0" expanded="true" />
-                <element signature="e#22051#22057#0" expanded="true" />
-                <element signature="e#22655#22661#0" expanded="true" />
-                <element signature="e#23258#23264#0" expanded="true" />
-                <element signature="e#23905#23911#0" expanded="true" />
-                <element signature="e#24920#24926#0" expanded="true" />
-                <element signature="e#25512#25518#0" expanded="true" />
-                <element signature="e#26103#26109#0" expanded="true" />
-                <element signature="e#26696#26702#0" expanded="true" />
-                <element signature="e#27944#27950#0" expanded="true" />
-                <element signature="e#28989#28995#0" expanded="true" />
-                <element signature="e#29601#29607#0" expanded="true" />
-                <element signature="e#30200#30206#0" expanded="true" />
-                <element signature="e#30801#30807#0" expanded="true" />
-                <element signature="e#31789#31795#0" expanded="true" />
-                <element signature="e#33053#33059#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lmhsweb/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="47" column="50" lean-forward="true" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="search.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lmhsweb/templates/search.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+            <state relative-caret-position="1065">
+              <caret line="71" column="67" lean-forward="false" selection-start-line="71" selection-start-column="67" selection-end-line="71" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -115,20 +35,102 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lmhsweb/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-537">
-              <caret line="492" column="46" lean-forward="true" selection-start-line="492" selection-start-column="46" selection-end-line="492" selection-end-column="46" />
+            <state relative-caret-position="7830">
+              <caret line="534" column="75" lean-forward="false" selection-start-line="534" selection-start-column="75" selection-end-line="534" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lmhsweb/templates/detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="45" column="36" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lmhsweb/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="840">
+              <caret line="56" column="93" lean-forward="false" selection-start-line="56" selection-start-column="93" selection-end-line="56" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gerer_auteur.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer_auteur.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="41" column="89" lean-forward="false" selection-start-line="41" selection-start-column="89" selection-end-line="41" selection-end-column="89" />
               <folding>
-                <element signature="e#24#63#0" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lmhs/settings.py">
+      <file leaf-file-name="gerer.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="50" column="1" lean-forward="false" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+            <state relative-caret-position="855">
+              <caret line="57" column="138" lean-forward="false" selection-start-line="57" selection-start-column="138" selection-end-line="57" selection-end-column="138" />
+              <folding>
+                <element signature="e#877#885#0" expanded="true" />
+                <element signature="e#967#975#0" expanded="true" />
+                <element signature="e#1057#1065#0" expanded="true" />
+                <element signature="e#1147#1155#0" expanded="true" />
+                <element signature="e#1237#1245#0" expanded="true" />
+                <element signature="e#1327#1335#0" expanded="true" />
+                <element signature="e#1417#1425#0" expanded="true" />
+                <element signature="e#1507#1515#0" expanded="true" />
+                <element signature="e#1597#1605#0" expanded="true" />
+                <element signature="e#1687#1695#0" expanded="true" />
+                <element signature="e#1777#1785#0" expanded="true" />
+                <element signature="e#1867#1875#0" expanded="true" />
+                <element signature="e#1957#1965#0" expanded="true" />
+                <element signature="e#2047#2055#0" expanded="true" />
+                <element signature="e#2137#2145#0" expanded="true" />
+                <element signature="e#2227#2235#0" expanded="true" />
+                <element signature="e#2317#2325#0" expanded="true" />
+                <element signature="e#2407#2415#0" expanded="true" />
+                <element signature="e#2497#2505#0" expanded="true" />
+                <element signature="e#2587#2595#0" expanded="true" />
+                <element signature="e#2677#2685#0" expanded="true" />
+                <element signature="e#2767#2775#0" expanded="true" />
+                <element signature="e#2857#2865#0" expanded="true" />
+                <element signature="e#2947#2955#0" expanded="true" />
+                <element signature="e#3037#3045#0" expanded="true" />
+                <element signature="e#3127#3135#0" expanded="true" />
+                <element signature="e#3223#3231#0" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#!!top" expanded="true" />
+                <element signature="e#3555#3561#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lmhsweb/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="885">
+              <caret line="75" column="51" lean-forward="false" selection-start-line="75" selection-start-column="51" selection-end-line="75" selection-end-column="51" />
+              <folding>
+                <element signature="e#24#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lmhsweb/templates/search.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="39" column="55" lean-forward="false" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -137,31 +139,23 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lmhs/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lmhsweb/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="58" lean-forward="false" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
+            <state relative-caret-position="159">
+              <caret line="27" column="67" lean-forward="false" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#637#669#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lmhsweb/forms.py">
+      <file leaf-file-name="filters.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lmhsweb/filters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="31" column="36" lean-forward="false" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-              <folding />
+            <state relative-caret-position="477">
+              <caret line="170" column="27" lean-forward="false" selection-start-line="170" selection-start-column="27" selection-end-line="170" selection-end-column="27" />
+              <folding>
+                <element signature="e#25#46#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -171,16 +165,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>titre</find>
-      <find>type_list</find>
-      <find>Source</find>
       <find>Projet</find>
       <find>lmhsweb_projet</find>
       <find>lmhsweb</find>
@@ -206,7 +197,20 @@
       <find>projet</find>
       <find>CoteAuteur</find>
       <find>convert_pdf_to_txt</find>
+      <find>mot clé</find>
+      <find>auteurs</find>
+      <find>titre</find>
+      <find>{{csrf_token}}</find>
+      <find>?&amp;q</find>
     </findStrings>
+    <replaceStrings>
+      <replace>{{ nom }}</replace>
+      <replace>{{ verbose }}</replace>
+      <replace>{{nom}}</replace>
+      <replace>nom</replace>
+      <replace>{{ csrf_token }}</replace>
+      <replace>?csrfmiddlewaretoken={{ csrf_token }}&amp;q</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -225,23 +229,24 @@
         <option value="$PROJECT_DIR$/lmhsweb/templates/create.html" />
         <option value="$PROJECT_DIR$/lmhsweb/widget" />
         <option value="$PROJECT_DIR$/lmhsweb/templates/search.html" />
-        <option value="$PROJECT_DIR$/lmhsweb/forms.py" />
-        <option value="$PROJECT_DIR$/lmhs/urls.py" />
         <option value="$PROJECT_DIR$/lmhsweb/templates/gerer_projets.html" />
+        <option value="$PROJECT_DIR$/lmhsweb/admin.py" />
+        <option value="$PROJECT_DIR$/lmhs/settings.py" />
+        <option value="$PROJECT_DIR$/lmhsweb/models.py" />
+        <option value="$PROJECT_DIR$/lmhsweb/forms.py" />
         <option value="$PROJECT_DIR$/lmhsweb/views.py" />
         <option value="$PROJECT_DIR$/lmhsweb/templates/base.html" />
-        <option value="$PROJECT_DIR$/lmhsweb/admin.py" />
-        <option value="$PROJECT_DIR$/lmhsweb/models.py" />
-        <option value="$PROJECT_DIR$/lmhs/settings.py" />
-        <option value="$PROJECT_DIR$/lmhsweb/filters.py" />
+        <option value="$PROJECT_DIR$/lmhsweb/templates/gerer.html" />
+        <option value="$PROJECT_DIR$/lmhsweb/templates/gerer_auteur.html" />
         <option value="$PROJECT_DIR$/lmhsweb/templates/result.html" />
+        <option value="$PROJECT_DIR$/lmhs/urls.py" />
+        <option value="$PROJECT_DIR$/lmhsweb/filters.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="6" />
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1262" />
+    <option name="width" value="1280" />
     <option name="height" value="777" />
   </component>
   <component name="ProjectView">
@@ -259,6 +264,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -287,7 +293,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -423,7 +428,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1810961" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -445,26 +450,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1810961" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287879" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -483,20 +468,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lmhs/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="33" lean-forward="true" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lmhsweb/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5235">
@@ -616,13 +587,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer_motcles.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="63" lean-forward="false" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/infos lmhs/create.html" />
     <entry file="file://$USER_HOME$/infos lmhs/result.html" />
     <entry file="file://$PROJECT_DIR$/lmhsweb/templates/forms/affiche.html">
@@ -685,13 +649,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer_projets.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer_projets.html" />
     <entry file="file://$PROJECT_DIR$/lmhs/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -713,28 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer_auteurs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" column="9" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="36" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmhs/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -746,45 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="58" lean-forward="false" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="31" column="36" lean-forward="false" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/filters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1845">
-          <caret line="136" column="0" lean-forward="false" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -792,61 +689,132 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
           <caret line="50" column="1" lean-forward="false" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="36" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer_auteurs.html" />
+    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer_motcles.html" />
+    <entry file="file://$PROJECT_DIR$/lmhsweb/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="109" column="9" lean-forward="false" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="55" lean-forward="false" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lmhsweb/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="47" column="50" lean-forward="true" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
+        <state relative-caret-position="840">
+          <caret line="56" column="93" lean-forward="false" selection-start-line="56" selection-start-column="93" selection-end-line="56" selection-end-column="93" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="57" column="138" lean-forward="false" selection-start-line="57" selection-start-column="138" selection-end-line="57" selection-end-column="138" />
+          <folding>
+            <element signature="e#877#885#0" expanded="true" />
+            <element signature="e#967#975#0" expanded="true" />
+            <element signature="e#1057#1065#0" expanded="true" />
+            <element signature="e#1147#1155#0" expanded="true" />
+            <element signature="e#1237#1245#0" expanded="true" />
+            <element signature="e#1327#1335#0" expanded="true" />
+            <element signature="e#1417#1425#0" expanded="true" />
+            <element signature="e#1507#1515#0" expanded="true" />
+            <element signature="e#1597#1605#0" expanded="true" />
+            <element signature="e#1687#1695#0" expanded="true" />
+            <element signature="e#1777#1785#0" expanded="true" />
+            <element signature="e#1867#1875#0" expanded="true" />
+            <element signature="e#1957#1965#0" expanded="true" />
+            <element signature="e#2047#2055#0" expanded="true" />
+            <element signature="e#2137#2145#0" expanded="true" />
+            <element signature="e#2227#2235#0" expanded="true" />
+            <element signature="e#2317#2325#0" expanded="true" />
+            <element signature="e#2407#2415#0" expanded="true" />
+            <element signature="e#2497#2505#0" expanded="true" />
+            <element signature="e#2587#2595#0" expanded="true" />
+            <element signature="e#2677#2685#0" expanded="true" />
+            <element signature="e#2767#2775#0" expanded="true" />
+            <element signature="e#2857#2865#0" expanded="true" />
+            <element signature="e#2947#2955#0" expanded="true" />
+            <element signature="e#3037#3045#0" expanded="true" />
+            <element signature="e#3127#3135#0" expanded="true" />
+            <element signature="e#3223#3231#0" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#!!top" expanded="true" />
+            <element signature="e#3555#3561#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhsweb/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="75" column="51" lean-forward="false" selection-start-line="75" selection-start-column="51" selection-end-line="75" selection-end-column="51" />
+          <folding>
+            <element signature="e#24#52#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lmhsweb/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-537">
-          <caret line="492" column="46" lean-forward="true" selection-start-line="492" selection-start-column="46" selection-end-line="492" selection-end-column="46" />
+        <state relative-caret-position="7830">
+          <caret line="534" column="75" lean-forward="false" selection-start-line="534" selection-start-column="75" selection-end-line="534" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhsweb/templates/gerer_auteur.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="89" lean-forward="false" selection-start-line="41" selection-start-column="89" selection-end-line="41" selection-end-column="89" />
           <folding>
-            <element signature="e#24#63#0" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhs/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="27" column="67" lean-forward="false" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
+          <folding>
+            <element signature="e#637#669#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lmhsweb/templates/result.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="221" column="181" lean-forward="true" selection-start-line="221" selection-start-column="181" selection-end-line="221" selection-end-column="181" />
+        <state relative-caret-position="1065">
+          <caret line="71" column="67" lean-forward="false" selection-start-line="71" selection-start-column="67" selection-end-line="71" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lmhsweb/filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="170" column="27" lean-forward="false" selection-start-line="170" selection-start-column="27" selection-end-line="170" selection-end-column="27" />
           <folding>
-            <element signature="e#9663#9669#0" expanded="true" />
-            <element signature="e#10288#10294#0" expanded="true" />
-            <element signature="e#11386#11392#0" expanded="true" />
-            <element signature="e#12463#12469#0" expanded="true" />
-            <element signature="e#13518#13524#0" expanded="true" />
-            <element signature="e#14561#14567#0" expanded="true" />
-            <element signature="e#15172#15178#0" expanded="true" />
-            <element signature="e#16083#16089#0" expanded="true" />
-            <element signature="e#17460#17466#0" expanded="true" />
-            <element signature="e#18879#18885#0" expanded="true" />
-            <element signature="e#19925#19931#0" expanded="true" />
-            <element signature="e#20331#20337#0" expanded="true" />
-            <element signature="e#21437#21443#0" expanded="true" />
-            <element signature="e#22051#22057#0" expanded="true" />
-            <element signature="e#22655#22661#0" expanded="true" />
-            <element signature="e#23258#23264#0" expanded="true" />
-            <element signature="e#23905#23911#0" expanded="true" />
-            <element signature="e#24920#24926#0" expanded="true" />
-            <element signature="e#25512#25518#0" expanded="true" />
-            <element signature="e#26103#26109#0" expanded="true" />
-            <element signature="e#26696#26702#0" expanded="true" />
-            <element signature="e#27944#27950#0" expanded="true" />
-            <element signature="e#28989#28995#0" expanded="true" />
-            <element signature="e#29601#29607#0" expanded="true" />
-            <element signature="e#30200#30206#0" expanded="true" />
-            <element signature="e#30801#30807#0" expanded="true" />
-            <element signature="e#31789#31795#0" expanded="true" />
-            <element signature="e#33053#33059#0" expanded="true" />
+            <element signature="e#25#46#0" expanded="true" />
           </folding>
         </state>
       </provider>

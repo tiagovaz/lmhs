@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -17,34 +18,64 @@ from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy, resolve
 
 
+
 class GererAuteurs(generic.ListView):
     model = Auteur
-    template_name = 'gerer_auteurs.html'
-    context_object_name = 'all_auteurs'
-    liste = Auteur.objects.order_by('nom')
+    template_name = 'gerer_auteur.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GererAuteurs, self).get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('q')
+        context['nom'] = 'auteur'
+        context['verbose'] = 'auteurs'
+        return context
 
     def get_queryset(self):
-        return GererAuteurs.liste
+        query = self.request.GET.get('q', None)
+        liste = Auteur.objects.filter(nom__istartswith=query).order_by('nom')
+        return liste
 
 
 class GererMotsCles(generic.ListView):
     model = MotCle
-    template_name = 'gerer_motcles.html'
-    context_object_name = 'all_motcles'
-    liste = MotCle.objects.order_by('nom')
+    template_name = 'gerer.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GererMotsCles, self).get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('q')
+        context['nom'] = 'motcle'
+        context['lien'] = 'mot_cle'
+        context['verbose'] = 'mots-clés'
+        return context
 
     def get_queryset(self):
-        return GererMotsCles.liste
+        query = self.request.GET.get('q', None)
+        if query == "digit":
+            liste = MotCle.objects.filter((Q(nom__istartswith='0') |
+                                           Q(nom__istartswith='1') |
+                                           Q(nom__istartswith='2') |
+                                           Q(nom__istartswith='3') |
+                                           Q(nom__istartswith='4') |
+                                           Q(nom__istartswith='5') |
+                                           Q(nom__istartswith='6') |
+                                           Q(nom__istartswith='7') |
+                                           Q(nom__istartswith='8') |
+                                           Q(nom__istartswith='9'))).order_by('nom')
+        else:
+            liste = MotCle.objects.filter(nom__istartswith=query).order_by('nom')
+        return liste
 
 
 class GererProjets(generic.ListView):
     model = Projet
-    template_name = 'gerer_projets.html'
-    context_object_name = 'all_projets'
-    liste = Projet.objects.order_by('nom')
+    template_name = 'gerer.html'
 
-    def get_queryset(self):
-        return GererProjets.liste
+    def get_context_data(self, **kwargs):
+        context = super(GererProjets, self).get_context_data(**kwargs)
+        context['liste'] = Projet.objects.order_by('nom')
+        context['nom'] = context['lien'] = 'projet'
+        context['verbose'] = 'projets'
+        return context
 
 
 class NoticeDelete(DeleteView):

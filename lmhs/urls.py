@@ -50,7 +50,7 @@ urlpatterns = [
     url(r'^nom_org-autocomplete/$', NomOrgAutocomplete.as_view(), name='nom_org-autocomplete', ),
     url(r'^projet-autocomplete/$', ProjetAutocomplete.as_view(), name='projet-autocomplete', ),
     url(r'^gerer_auteurs/$', GererAuteurs.as_view(), name='gerer_auteurs'),
-    url(r'^gerer_motcles/$', GererMotsCles.as_view(), name='gerer_motcles'),
-    url(r'^gerer_projets/$', GererProjets.as_view(), name='gerer_projets'),
+    url(r'^gerer_motcle/$', GererMotsCles.as_view(), name='gerer_motcle'),
+    url(r'^gerer_projet/$', GererProjets.as_view(), name='gerer_projet'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
