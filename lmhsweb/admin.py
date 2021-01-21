@@ -6,10 +6,14 @@ MainForm = select2_modelform(Main, attrs={'width': '480px'})
 class MainAdmin(admin.ModelAdmin):
     form = MainForm
 
+#from lmhsweb.forms import Create
+#from models import *
+
 admin.site.register(Main, MainAdmin)
 admin.site.register(Auteur)
 admin.site.register(CoteAuteur)
 admin.site.register(Collection)
+admin.site.register(Corpus)
 admin.site.register(Fonds)
 admin.site.register(Genre)
 admin.site.register(LangueOrigine)
@@ -25,8 +29,9 @@ admin.site.register(DirecteurPublication)
 admin.site.register(Editeur)
 admin.site.register(Support)
 admin.site.register(Traducteur)
-# admin.site.register(City)
-# admin.site.register(State)
-# admin.site.register(Country)
+admin.site.register(Utilisateur)
+#admin.site.register(City)
+#admin.site.register(State)
+#admin.site.register(Country)
 admin.site.register(MotCle)
 

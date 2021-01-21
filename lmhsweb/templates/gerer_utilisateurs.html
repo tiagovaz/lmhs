@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap_tags %}
+
+{% block content %}
+{% if user.is_staff %}
+<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Gérer les utilisateurs
+            </h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+   <p class="help-block">
+       Si l'utilisateur est en attente, cliquez sur "En attente" pour prendre une décision.
+   </p>
+<table class="table table-hover table-bordered">
+    <thead>
+        <td><strong>Nom</strong></td>
+        <td><strong>Institution</strong></td>
+        <td><strong>Statut</strong></td>
+        <td><strong>Adresse Courriel</strong></td>
+        <td><strong># de téléphone</strong></td>
+        <td><strong>Raison de la demande</strong></td>
+        <td><strong>Date de la demande</strong></td>
+        <td><strong>État de la demande</strong></td>
+    </thead>
+        {% for i in object_list %}
+        <tr>
+            <td>{{ i.nom }}</td>
+            <td>{{ i.institution }}</td>
+            <td>{{ i.statut }}</td>
+            <td>{{ i.courriel }}</td>
+            {% if i.telephone %}
+                <td>{{i.telephone}}</td>
+            {% else %}
+                <td>Non disponible</td>
+            {% endif %}
+            <td>{{ i.raison }}</td>
+            <td>{{ i.date }}</td>
+            {% if i.etat == "En attente" %}
+                <td><a href="/utilisateur/{{i.user_pk}}">{{ i.etat }}</a></td>
+            {% else %}
+                <td>{{ i.etat }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+</table>
+{% else %}
+<br><br><br><br>
+    <center class="text-danger">
+        <h1><i class="fa fa-exclamation-circle"></i></h1>
+        <h3>Vous n'avez pas l'autorisation de gérer les utilisateurs</h3>
+    </center>
+{% endif %}
+
+{% endblock %}

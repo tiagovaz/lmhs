@@ -1,0 +1,9 @@
+Veillez s'il vous plaît ne pas répondre à ce courriel.
+
+Félicitation {{ nom }} votre demande d'inscription à la base de donnée du LMHS a été acceptée.
+Votre nom d'utilisateur est votre adresse courriel ({{ username }}). Vous pouvez maintenant vous rendre à l'adresse ci-dessous pour créer votre mot de passe
+
+http://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+Cordialement,
+L'équipe du LMHS

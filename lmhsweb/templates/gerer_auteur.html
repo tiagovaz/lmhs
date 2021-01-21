@@ -3,18 +3,16 @@
 {% load bootstrap_tags %}
 
 {% block content %}
-
+{% if user.is_staff %}
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
                 Gérer les {{ verbose }}
-                {% if user.is_authenticated %}
                      <a class="related-widget-wrapper-link add-related" id="add_id_{{ nom }}"
-                        href="JavaScript:newPopup('/admin/lmhsweb/{{ nom }}/add/?_to_field=id&amp;_popup=1');"
+                        href="JavaScript:smallPopup('/admin/lmhsweb/{{ nom }}/add/?_to_field=id&amp;_popup=1');"
                         title="Ajouter un autre {{ verbose }}">
                         <img src="/static/media/icon-addlink.svg" alt="Ajouter"/>
                     </a>
-                {% endif %}
             </h1>
         </div>
         <!-- /.col-lg-12 -->
@@ -48,27 +46,53 @@
         <a href="/gerer_auteurs/?csrfmiddlewaretoken={{ csrf_token }}&q=z">Z</a> &middot;
         <a href="/gerer_auteurs/?csrfmiddlewaretoken={{ csrf_token }}&q=">Tout</a>
     </p>
+    <ul>
+        <p class="help-block">
+            Cliquez sur le nom de l'auteur pour afficher les notices le concernant.
+        </p>
+    </ul>
 
     <ul>
         {% for i in object_list %}
             <li class="list-group-item"> <a href="/list/?csrfmiddlewaretoken={{ csrf_token }}&auteur__nom={{ i.nom }}" style="color:black;"> {{ i.nom }}&nbsp;; {{ i.cote }}</a>
 
-                {% if user.is_authenticated %}
+                <div class="modal fade" id="DeleteRequestModal-{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="requestLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn btn-xs btn-danger pull-right" data-dismiss="modal">x</button>
+                                <h4 class="modal-title" id="requestLabel">Êtes-vous sûr(e) de vouloir supprimer  <i>{{ i.nom }}</i> ?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{% url 'delete_auteur' i.id %}">
+                                  {% csrf_token %}
+                                  <button type="submit" class="btn btn-danger">Oui, je veux suprimer cet auteur</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                     <a class="related-widget-wrapper-link add-related" id="change_id_{{ nom }}"
-                        href="JavaScript:newPopup('/admin/lmhsweb/{{ nom }}/{{ i.id }}/change/?_to_field=id&_popup=1');"
-                        title="Modifier le {{ verbose }}">
+                        href="JavaScript:smallPopup('/admin/lmhsweb/{{ nom }}/{{ i.id }}/change/?_to_field=id&_popup=1');"
+                        title="Modifier l'auteur">
                         <img src="/static/media/icon-changelink.svg" alt="Modifier"/>
                     </a>
-                    <a class="related-widget-wrapper-link add-related" id="delete_id_mot_cle"
-                        href="JavaScript:newPopup('/admin/lmhsweb/{{ nom }}/{{ i.id }}/delete/?_to_field=id&_popup=1');"
-                        title="Suprimer le {{ verbose }}">
+                    <a data-toggle="modal" data-target="#DeleteRequestModal-{{ i.id }}" title="Suprimer le {{ verbose }}" href="#">
                         <img src="/static/media/icon-deletelink.svg" alt="Suprimer"/>
                     </a>
-                {% endif %}
 
             </li>
         {% endfor %}
     </ul>
 <br><br>
+{% else %}
+<br><br><br><br>
+    <center class="text-danger">
+        <h1><i class="fa fa-exclamation-circle"></i></h1>
+        <h3>Vous n'avez pas l'autorisation de gérer les {{ verbose }}</h3>
+    </center>
+{% endif %}
 
 {% endblock %}

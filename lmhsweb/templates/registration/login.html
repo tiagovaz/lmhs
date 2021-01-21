@@ -54,7 +54,7 @@
                         <form role="form" method="post" action='{% url "login" %}'>{% csrf_token%}
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" id="id_username" maxlength="254" name="username" placeholder="Utilisateur" required="required" title="" type="text" >
+                                    <input class="form-control" id="id_username" maxlength="254" name="username" placeholder="Utilisateur (adresse courriel)" required="required" title="" type="text" >
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" id="id_password" name="password" placeholder="********" required="required" title="" type="password">
@@ -65,6 +65,7 @@
                         </form>
                     </div>
                 </div>
+                <center><a href="/password_reset/">Mot de passe oublié?</a></center>
             </div>
         </div>
     </div>

@@ -3,7 +3,11 @@
 {% load bootstrap_pagination %}
 {% load bootstrap3 %}
 {% load bootstrap_tags %}
-
+{% block extrahead %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="{% static 'search_autocomplete/autocomplete.css' %}">
+{% endblock %}
 
 {% block content %}
                 <center>
@@ -21,7 +25,6 @@
                 </center>
                 <p class="text-left"><a href="/search">Nouvelle recherche</a></p>
 
-
         <!-- Page Header -->
         <div class="row">
             <div class="col-sm-3">
@@ -36,23 +39,26 @@
                                 {{ form|as_bootstrap }}
                                 {% buttons %}
                                     <button type="submit" class="btn btn-primary pull-right">Filtrer</button>
-                                    <a class="btn btn-danger" href="/list/">Réinitialiser</a>
+                                    <a class="btn btn-danger" href="/list/?csrfmiddlewaretoken={{ csrf_token }}&auteur__nom=&titre=&date=&mot_cle__nom=&pdf_text=&source_liste=&source_texte=&projet__nom=&type=&cote_calcul=">Réinitialiser</a>
                                 {% endbuttons %}
                             </form>
                         </form>
                     </div>
+                   <!-- /.panel-body -->
                 </div>
+                <!-- /.panel panel-default -->
             </div>
+            <!-- /.col-sm-3 -->
 
             <div class="col-sm-9">
-                <p class="text-center">Classer par : <a href="{{new_sort_url}}&sort=auteur__nom">auteur (a)</a> | <a href="{{new_sort_url}}&sort=-auteur__nom">auteur (d)</a> | <a href="{{new_sort_url}}&sort=date">date (a)</a> | <a href="{{new_sort_url}}&sort=-date">date (d) | <a href="{{new_sort_url}}&sort=-date_ajout">ajout récent</a></p>
+                <p class="text-center">Classer par : <a href="{{ request.get_full_path }}&sort=auteur__nom">auteur (a)</a> | <a href="{{ request.get_full_path }}&sort=-auteur__nom">auteur (d)</a> | <a href="{{ request.get_full_path }}&sort=date">date (a)</a> | <a href="{{ request.get_full_path }}&sort=-date">date (d) | <a href="{{ request.get_full_path }}&sort=-date_ajout">ajout récent</a></p>
 
                 {% for s in items %}
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                 <b>{{ s.titre }}</b>
-                                {% if user.is_authenticated %}
+                                {% if user.is_staff %}
                                     <span class="pull-right">
                                         <a class="btn btn-xs btn-warning" href=JavaScript:newPopup('/admin/lmhsweb/main/{{s.id}}/change/?_popup=1')>
                                             <i class="fa fa-pencil"></i>
@@ -163,7 +169,16 @@
                                                                                             </td>
                                                                                         </tr>
                                                                                 {% endif %}
-
+                                                                                {% if s.corpus.all %}
+                                                                                    <tr>
+                                                                                        <td><strong>Corpus&nbsp;:</strong></td>
+                                                                                        <td>
+                                                                                            {% for c in s.corpus.all %}
+                                                                                                {{ c.nom }}{% if not forloop.last %}, {% else %}{% endif %} <br>
+                                                                                            {% endfor %}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                {% endif %}
                                                                                 {% if s.directeur_publication.all %}
                                                                                         <tr>
                                                                                             <td><strong>Directeur(s) de la publication&nbsp;:</strong></td>
@@ -211,41 +226,27 @@
                                                                                     <td>{{ s.type }}</td>
                                                                                 </tr>
                                                                                 {% endif %}
-                                                                                    {% if user.is_authenticated %}
-                                                                                        {% if s.pdf_file.name != None %}
-                                                                                            <tr>
-                                                                                                <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
-                                                                                                <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
-                                                                                            </tr>
-                                                                                        {% else %}
-                                                                                            {% for sl in s.support.all %}
-                                                                                                {% if sl.nom == "En ligne" %}
-                                                                                                    <tr>
-                                                                                                        <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
-                                                                                                        {% if s.lien != "" %}
-                                                                                                            <td><a href='{{s.lien}}' target="_blank">Lien vers l'article</a></td>
-                                                                                                        {% else %}
-                                                                                                            <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
-                                                                                                        {% endif %}
-                                                                                                    </tr>
-                                                                                                {% endif %}
-                                                                                            {% endfor %}
-                                                                                        {% endif %}
-                                                                                    {% else %}
-                                                                                        {% for sl in s.support.all %}
-                                                                                            {% if sl.nom == "En ligne" %}
-                                                                                                <tr>
-                                                                                                    <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
-                                                                                                    {% if s.lien != "" %}
-                                                                                                        <td><a href='{{s.lien}}' target="_blank">Lien vers l'article</a></td>
-                                                                                                    {% else %}
-                                                                                                        <td><a href='/media/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
-                                                                                                    {% endif %}
-                                                                                                </tr>
-                                                                                            {% endif %}
-                                                                                        {% endfor %}
-                                                                                    {% endif %}
 
+                                                                                {% for sl in s.support.all %}
+                                                                                    {% if sl.nom == "En ligne" %}
+                                                                                        <tr>
+                                                                                            <td><strong>Support(s) en ligne(s)&nbsp;:</strong></td>
+                                                                                            {% if s.pdf_prive == False %}
+                                                                                                {% if s.lien != "" %}
+                                                                                                    <td><a href='{{s.lien}}' target="_blank">Lien vers l'article</a></td>
+                                                                                                {% else %}
+                                                                                                    <td><a href='/media/public/documents/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
+                                                                                                {% endif %}
+                                                                                            {% else %}
+                                                                                                {% if user.is_authenticated %}
+                                                                                                    <td><a href='/media/prive/documents/{{ s.cote_calcul_url }}.pdf' target="_blank">PDF</a></td>
+                                                                                                {% else %}
+                                                                                                    <td class="text-danger">Vous devez être inscrit(e) et connecté(e) pour avoir accès à ce PDF</td>
+                                                                                                {% endif %}
+                                                                                            {% endif %}
+                                                                                        </tr>
+                                                                                    {% endif %}
+                                                                                {% endfor %}
 
                                                                                 {% if s.projet.all %}
                                                                                     <tr>
@@ -254,7 +255,6 @@
                                                                                                 {% for pr in s.projet.all %}
                                                                                                     {{ pr }} <br>
                                                                                                 {% endfor %}
-
                                                                                         </td>
                                                                                     </tr>
                                                                                 {% endif %}
@@ -423,5 +423,69 @@
             {% endif %}
         </div>
         <!-- /.row -->
+<script type="text/javascript">
+    $("#id_auteur__nom").autocomplete({
+        source: "/auteur_autocomplete/",
+        minLength: 0,
+    });
 
+    function AuteurFocus() {
+        $("#id_auteur__nom").autocomplete('search');
+    }
+    $("#id_auteur__nom").focus(AuteurFocus)
+
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+
+    $(function() {
+        $("#id_mot_cle__nom")
+            // don't navigate away from the field on tab when selecting an item
+            .on("keydown", function(event) {
+                if (event.keyCode === $.ui.keyCode.TAB &&
+                    $(this).autocomplete("instance").menu.active) {
+                    event.preventDefault();
+                }
+            })
+            .autocomplete({
+                minLength: 0,
+                source: "/motcle_autocomplete/",
+                focus: function() {
+                    return false;
+                },
+                select: function(event, ui) {
+                    var terms = split(this.value);
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", ");
+                    return false;
+                }
+            });
+    });
+    $('form[method="get"]').on("submit", function(){
+        str = $("#id_mot_cle__nom").val();
+        if (str.endsWith(", ")) {
+            $("#id_mot_cle__nom").val(str.substring(0, str.length - 2));
+        }
+    });
+</script>
+
+{% endblock %}
+{% block extrascript %}
+<!-- Pour que le 'form' s'affiche correctement après une recherche -->
+<script>
+    document.addEventListener('readystatechange', event => {
+        if($('#id_titre').attr('class') != " form-control"){
+            $('#id_titre').addClass(" form-control")
+        }
+        if($('#id_auteur__nom').attr('class') != " form-control"){
+            $('#id_auteur__nom').addClass(" form-control")
+        }
+        $("option:selected").next().hide(0)
+    });
+</script>
 {% endblock %}

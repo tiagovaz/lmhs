@@ -1,131 +1,76 @@
-    <div id="div_id_nom_org" class="form-group  ">
+<div id="div_id_nom_org" class="form-group  ">
+	<label for="id_nom_org" class="control-label  ">
+		Organisme(s)
+	</label>
+	<div class="">
+		<select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/nom_org-autocomplete/" id="id_nom_org" name="nom_org">
+		</select>
+	</div>
+</div>
 
 
-            <label for="id_nom_org" class="control-label  ">
-                Organisme(s)
-            </label>
+<div id="div_id_lieu" class="form-group  ">
+	<label for="id_lieu" class="control-label  ">
+		Lieu
+	</label>
+	<div class="">
+		<input class=" form-control" id="id_lieu" maxlength="200" name="lieu" type="text" />
+	</div>
+</div>
+
+<div id="div_id_date" class="form-group  ">
+	<label for="id_date" class="control-label  ">
+        Date de début
+    </label>
+	<div class="">
+		<input class=" form-control" id="id_date" maxlength="100" name="date" type="text" />
+	</div>
+</div>
+
+<div id="div_id_date_fin" class="form-group  ">
+	<label for="id_date_fin" class="control-label  ">
+        Date de fin
+    </label>
+	<div class="">
+		<input class=" form-control" id="id_date_fin" maxlength="100" name="date_fin" type="text" />
+	</div>
+</div>
 
 
+<div id="div_id_commentaire" class="form-group  ">
+	<label for="id_commentaire" class="control-label  ">
+        Commentaire
+    </label>
+	<div class="">
+		<textarea class=" form-control" cols="40" id="id_commentaire" name="commentaire" rows="10"></textarea>
+	</div>
+</div>
 
+<div id="div_id_mot_cle" class="form-group  ">
+	<label for="id_mot_cle" class="control-label  ">
+        Mot(s) clé(s)
+    </label>
+	<div class="">
+		<select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/mot_cle-autocomplete/" id="id_mot_cle" name="mot_cle"></select>
+	</div>
+</div>
 
+<div id="div_id_fonds" class="form-group  ">
+	<label for="id_fonds" class="control-label  ">
+        Fonds
+    </label>
+	<div class="">
+		<select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/fonds-autocomplete/" id="id_fonds" name="fonds">
+            <option value="" selected="selected">---------</option>
+        </select>
+	</div>
+</div>
 
-
-                <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/nom_org-autocomplete/" id="id_nom_org" name="nom_org">
-</select>
-
-
-                </div>
-
-
-    </div>
-
-
-    <div id="div_id_lieu" class="form-group  ">
-
-
-            <label for="id_lieu" class="control-label  ">
-                Lieu
-            </label>
-
-
-
-
-
-
-                <div class="">
-                    <input class=" form-control" id="id_lieu" maxlength="200" name="lieu" type="text" />
-
-
-                </div>
-
-
-    </div>
-
-    <div id="div_id_date" class="form-group  ">
-            <label for="id_date" class="control-label  ">
-                Date de début
-            </label>
-                <div class="">
-                    <input class=" form-control" id="id_date" maxlength="100" name="date" type="text" />
-                </div>
-    </div>
-
-    <div id="div_id_date_fin" class="form-group  ">
-
-
-            <label for="id_date_fin" class="control-label  ">
-                Date de fin
-            </label>
-                <div class="">
-                    <input class=" form-control" id="id_date_fin" maxlength="100" name="date_fin" type="text" />
-
-
-                </div>
-
-
-    </div>
-
-
-
-    <div id="div_id_commentaire" class="form-group  ">
-
-
-            <label for="id_commentaire" class="control-label  ">
-                Commentaire
-            </label>
-
-                <div class="">
-                    <textarea class=" form-control" cols="40" id="id_commentaire" name="commentaire" rows="10">
-</textarea>
-
-
-                </div>
-
-
-    </div>
-
-    <div id="div_id_mot_cle" class="form-group  ">
-
-
-            <label for="id_mot_cle" class="control-label  ">
-                Mot(s) clé(s)
-            </label>
-
-                <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/mot_cle-autocomplete/" id="id_mot_cle" name="mot_cle">
-</select>
-
-
-                </div>
-
-
-
-    </div>
-
-    <div id="div_id_fonds" class="form-group  ">
-
-
-            <label for="id_fonds" class="control-label  ">
-                Fonds
-            </label>
-
-                <div class="">
-                    <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/fonds-autocomplete/" id="id_fonds" name="fonds">
-<option value="" selected="selected">---------</option>
-</select>
-
-
-                </div>
-
-
-    </div>
-
-    <div id="div_id_nb_exemplaire" class="form-group  ">
-            <label for="id_nb_exemplaire" class="control-label  ">
-                Nombre d'exemplaire
-            </label>
-                <div class="">
-                    <input class=" form-control" id="id_nb_exemplaire" name="nb_exemplaire" type="number" />
-                </div>
-    </div>
+<div id="div_id_nb_exemplaire" class="form-group  ">
+	<label for="id_nb_exemplaire" class="control-label  ">
+        Nombre d'exemplaire
+    </label>
+	<div class="">
+		<input class=" form-control" id="id_nb_exemplaire" name="nb_exemplaire" type="number" />
+	</div>
+</div>

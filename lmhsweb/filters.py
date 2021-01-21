@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import django_filters
-from lmhsweb.models import Main, TYPE_CHOICES, SOURCES_CHOICES, Projet, Auteur
+from lmhsweb.models import Main, TYPE_CHOICES, SOURCES_CHOICES, Projet, Corpus
 from django.db.models.fields import BLANK_CHOICE_DASH
+from django.db.models import Q
 from collections import Iterable
-from itertools import chain
-from re import search, sub
 from django_filters.widgets import BaseCSVWidget, CSVWidget
-from django_filters.fields import BaseCSVField
 from django_filters.filters import Filter
-from dal import autocomplete
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.constants import LOOKUP_SEP
@@ -26,7 +23,7 @@ class customCSVWidget(forms.Widget):
         if value is not None:
             if value == '':  # empty value should parse as an empty list
                 return []
-            return value.split(' ')
+            return value.split()
         return None
 
     def render(self, name, value, attrs=None):
@@ -49,7 +46,7 @@ class customCSVWidget(forms.Widget):
 
 class customCSVField(forms.Field):
     """
-    Base field for validating CSV types. Value validation is performed by
+    Custom field for validating CSV types. Value validation is performed by
     secondary base classes.
     ex::
         class IntegerCSVField(BaseCSVField, filters.IntegerField):
@@ -136,37 +133,55 @@ class MultiValueCharFilter(customCSVFilter, django_filters.CharFilter):
         return qs
 
 
+
+
 class MainFilter(django_filters.FilterSet):
 
     PROJECT_CHOICES = Projet.objects.all().values_list("nom", "nom")
     PROJECT_CHOICES_FILTER = BLANK_CHOICE_DASH + list(PROJECT_CHOICES)
     TYPE_CHOICES_FILTER = BLANK_CHOICE_DASH + list(TYPE_CHOICES)
     SOURCES_CHOICES_FILTER = BLANK_CHOICE_DASH + list(SOURCES_CHOICES)
+    CORPUS_CHOICES = Corpus.objects.values_list('nom','nom')
+    CORPUS_CHOICES_FILTER = BLANK_CHOICE_DASH + list(CORPUS_CHOICES)
 
     auteur__nom = MultiValueCharFilter(name="auteur__nom", label='Auteur', lookup_expr='icontains')
+    # cote_auteur__nom = MultiValueCharFilter(name="auteur__nom", label='Auteur', lookup_expr='icontains')
     titre = MultiValueCharFilter(name="titre", label='Titre', lookup_expr='icontains')
     date = django_filters.CharFilter(label="Date", lookup_expr='icontains')
-    mot_cle__nom = MultiValueCharFilter(name="mot_cle__nom",label="Mot clé", lookup_expr='icontains')
+    #mot_cle__nom = MultiValueCharFilter(name="mot_cle__nom",label="Mot clé", lookup_expr='icontains', distinct=True)
+    mot_cle__nom = django_filters.CharFilter(name="mot_cle__nom",label="Mot clé", method='filtre_perso')
+    corpus__nom = django_filters.ChoiceFilter(label="Corpus", choices=CORPUS_CHOICES_FILTER, lookup_expr="icontains")
     pdf_text = django_filters.CharFilter(label="Recherche plein texte", lookup_expr='icontains')
     source_liste = django_filters.ChoiceFilter(name = 'source', label = "Source (choisir)", choices = SOURCES_CHOICES_FILTER, lookup_expr='icontains')
     source_texte = django_filters.CharFilter(name = 'source', label = "Source (écrire)", lookup_expr='icontains')
     projet__nom = django_filters.ChoiceFilter(label="Projet", choices=PROJECT_CHOICES_FILTER, lookup_expr='icontains')
-    type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='icontains')
-    cote_calcul = django_filters.CharFilter(label = "Cote", lookup_expr='iexact')
-   # auteur__cote = django_filters.CharFilter(label = "Cote Auteur", lookup_expr='iexact')
+    type = django_filters.ChoiceFilter(label="Type", choices=TYPE_CHOICES_FILTER, lookup_expr='iexact')
+    cote_calcul = django_filters.CharFilter(label = "Cote", lookup_expr='icontains')
 
     class Meta:
         model = Main
         fields = [
             'auteur__nom',
+            #'cote_auteur__nom',
             'titre',
             'date',
             'mot_cle__nom',
+            'corpus__nom',
             'pdf_text',
             'source_liste',
             'source_texte',
             'projet__nom',
             'type',
             'cote_calcul',
-          #  'auteur__cote'
         ]
+
+    def filtre_perso(self, queryset, name, value):
+        values = value.split(', ')
+        results = queryset.filter(
+            Q(mot_cle__nom__icontains=values[0])|Q(titre__icontains=values[0])
+        ).distinct()
+
+        for i in values:
+            if i != values[0]: #and i != ""
+                results = (results & queryset.filter(Q(mot_cle__nom__icontains=i) | Q(titre__icontains=i)).distinct()).distinct()
+        return results

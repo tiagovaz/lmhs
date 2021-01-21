@@ -1,0 +1,22 @@
+Une nouvelle demande d'accès à la banque de donnnée du LMHS a été transmise via le site web.
+Veuillez prendre en considération les informations ci-dessous prendre une décision.
+
+Nom: {{ nom }}
+
+Prénom: {{ prenom }}
+
+Institution d'attache (institution et département): {{ institution }}
+{% if statut == 'Autre' %}
+Statut: {{ statut_autre }}
+{% else %}
+Statut: {{ statut }}
+{% endif %}
+Adresse courriel: {{ courriel }}
+
+Numéro de téléphone (optionnel): {{ telephone }}
+
+Raison de la demande: {{ raison|safe|striptags }}
+
+allez à cette adresse pour confirmer votre décision quant à cette demande : http://{{ domain }}/utilisateur/{{ pk }}
+
+

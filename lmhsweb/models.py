@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -10,8 +9,27 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from cStringIO import StringIO
-import os, sys
+import os
 from django.conf import settings
+
+
+COTE_PREFIXE_LISTE = [
+    ["Affiche","A"],
+    ["Annonce de concours","CONC"],
+    ["Article de périodique","ART"],
+    ["Catalogue","CAT"],
+    ["Conférence","CONF"],
+    ["Document non publié","DNP"],
+    ["Extrait de livre","EXT"],
+    ["Iconographie","ICO"],
+    ["Livre","L"],
+    ["Matériel audiovisuel","MA"],
+    ["Partition","MUS"],
+    ["Périodique","PER"],
+    ["Photographie","ICO"],
+    ["Programme","PROG"],
+    ["Référence","REF"]
+]
 
 
 TYPE_CHOICES = (
@@ -120,6 +138,10 @@ SOURCES_CHOICES = (
         "Europe"
     ),
     (
+        "Jazz Hot",
+        "Jazz Hot"
+    ),
+    (
         "Le Figaro",
         "Le Figaro"
     ),
@@ -145,7 +167,7 @@ SOURCES_CHOICES = (
     ),
     (
         "Le Ménestrel",
-        "Le Ménéstrel"
+        "Le Ménestrel"
     ),
     (
         "Mercure de France",
@@ -221,6 +243,7 @@ SOURCES_CHOICES = (
     ),
 )
 
+
 @python_2_unicode_compatible
 class Auteur(models.Model):
     nom = models.CharField(max_length=200, unique=False)
@@ -235,6 +258,7 @@ class Auteur(models.Model):
     class Meta:
         verbose_name = "Auteur"
 
+
 @python_2_unicode_compatible
 class CoteAuteur(models.Model):
     cote = models.CharField(max_length=200, unique=False, null=True, default=None, blank=True)
@@ -245,6 +269,8 @@ class CoteAuteur(models.Model):
 
     class Meta:
         verbose_name = "Cote auteur"
+        verbose_name_plural = "Cotes auteurs"
+
 
 @python_2_unicode_compatible
 class CotePrefixe(models.Model):
@@ -254,7 +280,9 @@ class CotePrefixe(models.Model):
        return self.cote
 
     class Meta:
-        verbose_name = "Cote prefixe"
+        verbose_name = "Cote préfixe"
+        verbose_name_plural = "Cotes préfixes"
+
 
 @python_2_unicode_compatible
 class Collection(models.Model):
@@ -266,6 +294,19 @@ class Collection(models.Model):
     class Meta:
         verbose_name = "Collection"
 
+
+@python_2_unicode_compatible
+class Corpus(models.Model):
+    nom = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.nom
+
+    class Meta:
+        verbose_name = "Corpus"
+        verbose_name_plural = "Corpus"
+
+
 @python_2_unicode_compatible
 class Fonds(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -274,7 +315,8 @@ class Fonds(models.Model):
        return self.nom
 
     class Meta:
-        verbose_name = "Fonds"
+        verbose_name = "Fond"
+
 
 @python_2_unicode_compatible
 class Genre(models.Model):
@@ -286,6 +328,7 @@ class Genre(models.Model):
     class Meta:
         verbose_name = "Genre"
 
+
 @python_2_unicode_compatible
 class LangueOrigine(models.Model):
     nom = models.CharField(max_length=200, unique=True)
@@ -295,6 +338,7 @@ class LangueOrigine(models.Model):
 
     class Meta:
         verbose_name = "Langue d'origine"
+        verbose_name_plural = "Langues d'origines"
 
 
 @python_2_unicode_compatible
@@ -317,6 +361,7 @@ class TypeEvenement(models.Model):
 
     class Meta:
         verbose_name = "Type d'événement"
+        verbose_name_plural = "Types d'événements"
 
 
 @python_2_unicode_compatible
@@ -339,6 +384,7 @@ class NomOrg(models.Model):
 
     class Meta:
         verbose_name = "Nom de l'organisme"
+        verbose_name_plural = "Noms d'organismes"
 
 
 @python_2_unicode_compatible
@@ -349,7 +395,8 @@ class MethodeReproduction(models.Model):
        return self.nom
 
     class Meta:
-        verbose_name = "Méthode de réproduction"
+        verbose_name = "Méthode de reproduction"
+        verbose_name_plural = "Méthodes de reproductions"
 
 
 @python_2_unicode_compatible
@@ -361,6 +408,7 @@ class MaisonEdition(models.Model):
 
     class Meta:
         verbose_name = "Maison d'édition"
+        verbose_name_plural = "Maisons d'éditions"
 
 
 @python_2_unicode_compatible
@@ -383,6 +431,7 @@ class DirecteurCollection(models.Model):
 
     class Meta:
         verbose_name = "Directeur de collection"
+        verbose_name_plural = "Directeurs de collections"
 
 
 @python_2_unicode_compatible
@@ -394,6 +443,7 @@ class DirecteurPublication(models.Model):
 
     class Meta:
         verbose_name = "Directeur de publication"
+        verbose_name_plural = "Directeurs de publications"
 
 
 @python_2_unicode_compatible
@@ -416,6 +466,7 @@ class MotCle(models.Model):
 
     class Meta:
         verbose_name = "Mot clé"
+        verbose_name_plural = "Mots clés"
 
 
 @python_2_unicode_compatible
@@ -441,23 +492,40 @@ class Traducteur(models.Model):
 
 
 @python_2_unicode_compatible
+class Utilisateur(models.Model):
+    user_pk = models.PositiveIntegerField()
+    nom = models.CharField(max_length=100)
+    institution = models.CharField(max_length=400)
+    statut = models.CharField(max_length=400)
+    courriel = models.EmailField(max_length=254)
+    telephone = models.CharField(max_length=50, null=True, blank=True)
+    raison = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    etat = models.CharField(max_length = 20, default="En attente", verbose_name="État de la demande")
+
+    def __str__(self):
+        return self.nom + " (" + str(self.user_pk) + ")"
+
+
+@python_2_unicode_compatible
 class Main(models.Model):
     annee_1re_publication = models.IntegerField(blank=True, null=True)
     annee_enregistrement = models.IntegerField(blank=True, null=True)
     annee_production = models.IntegerField(blank=True, null=True)
-    auteur = models.ForeignKey('Auteur', null=True)
+    auteur = models.ManyToManyField('Auteur', blank=True, verbose_name="Auteur(s)")
+    cote_auteur = models.ForeignKey("Auteur", null=True, default=None, blank=True, related_name="Cote_Auteur")
     collection = models.ForeignKey("Collection", null=True, blank=True)
+    corpus = models.ManyToManyField('Corpus', blank=True)
     commentaire = models.TextField(null=True, blank=True)
     cote_annee = models.CharField(blank=True, null=True, max_length=100)
-    cote_auteur = models.ManyToManyField("Auteur", default=None, blank=True, related_name="Cote_Auteur")
     cote_calcul = models.CharField(max_length=100, null=True, blank=True)
     cote_numero = models.CharField(blank=True, null=True, max_length=100)
-    cote_prefixe = models.ForeignKey("CotePrefixe", blank=True, null=True, default=None)
-    cote_calcul_url = models.CharField(max_length=50, null=True, blank=True)
+    cote_prefixe = models.ForeignKey("CotePrefixe", blank=True, null=True, default=None, editable = False)
+    cote_calcul_url = models.CharField(max_length=50, null=True, blank=True, editable = False)
     protection_droit_auteur = models.NullBooleanField(db_column='Protection_droit_auteur', blank=True, null=True, default=None)  # Field name made lowercase.
     date = models.CharField(blank=True, null=True, max_length=100)
+    date_ajout = models.DateTimeField(null=True, editable = False, auto_now_add = True)
     date_fin = models.CharField(blank=True, null=True, max_length=100)
-    date_ajout = models.DateField(null=True, auto_now=True)
     depouillement = models.TextField(null=True, blank=True)
     directeur_collection = models.ManyToManyField('DirecteurCollection', blank=True)
     directeur_publication = models.ManyToManyField('DirecteurPublication', blank=True)
@@ -468,9 +536,9 @@ class Main(models.Model):
     instrumentation = models.TextField(null=True, blank=True)
     interprete = models.CharField(null=True, blank=True, max_length=200)
     langue_origine = models.ForeignKey("LangueOrigine", null=True, blank=True)
+    lien = models.URLField("Lien vers l'article", blank = True)
     lieu = models.CharField("Lieu", max_length=200, null=True, blank=True)
     lieu_conservation = models.CharField("Lieu de conservation", blank=True, max_length=200)
-    lien = models.URLField("Lien vers l'article", blank = True)
     localisation = models.ForeignKey("Localisation", null=True, blank=True)
     maison_edition = models.ForeignKey("MaisonEdition", null=True, blank=True)
     medium = models.ForeignKey("Medium", null=True, blank=True)
@@ -481,7 +549,7 @@ class Main(models.Model):
     nb_volume = models.CharField(blank=True, max_length=20)
     no_page = models.CharField(blank=True, max_length=20)
     no_volume = models.CharField(blank=True, max_length=20)
-    notice_id = models.CharField(max_length=100, null=True, blank=True)
+    notice_id = models.CharField(max_length=100, null=True, blank=True, editable = False)
     nom_org = models.ManyToManyField("NomOrg", blank=True)
     projet = models.ManyToManyField("Projet",  blank=True)
     source = models.CharField(blank=True, max_length=200, null=True)
@@ -490,11 +558,23 @@ class Main(models.Model):
     titre = models.CharField(max_length=600)
     traducteur = models.ManyToManyField('Traducteur', blank=True)
 
-    pdf_file = models.FileField(upload_to='.',
+    pdf_file = models.FileField(upload_to='public/documents',
                                 blank=True,
                                 null=True
                                 )
+    pdf_prive = models.BooleanField(default = False, verbose_name="PDF seulement accessible aux utilisateurs connectés")
     pdf_text = models.TextField(blank=True, null=True)
+
+
+
+    type = models.CharField(
+        choices=TYPE_CHOICES,
+        max_length=100,
+        null=False,
+        verbose_name="Type"
+    )
+
+    type_evenement = models.ForeignKey("TypeEvenement", null=True, blank=True)
 
     def convert_pdf_to_txt(self, path):
         rsrcmgr = PDFResourceManager()
@@ -516,22 +596,23 @@ class Main(models.Model):
         retstr.close()
         return str
 
-    type = models.CharField(
-        choices=TYPE_CHOICES,
-        max_length=100,
-        null=False,
-        verbose_name="Type"
-    )
+    __original_pdf_file_name = None
 
-    type_evenement = models.ForeignKey("TypeEvenement", null=True, blank=True)
-
-#    def get_absolute_url(self):
-#        return reverse_lazy('notice', args=[self.id])
+    def __init__(self, *args, **kwargs):
+        super(Main, self).__init__(*args, **kwargs)
+        self.__original_pdf_file_name = self.pdf_file.name
 
     def save(self):
+        resave_pdf = False
+        if self.pdf_file.name != self.__original_pdf_file_name:
+            resave_pdf = True
 
         # build cotes
-        if self.cote_auteur:
+        for cote in COTE_PREFIXE_LISTE:
+            if cote[0] == self.type:
+                self.cote_prefixe = CotePrefixe.objects.get(cote=cote[1])
+    
+        if self.cote_auteur.cote != None:
             notice_id = self.cote_prefixe.cote + str(self.cote_auteur.cote)
             cote_calcul = self.cote_prefixe.cote + " " + str(self.cote_auteur.cote)
             cote_calcul_url = self.cote_prefixe.cote + "-" + str(self.cote_auteur.cote)
@@ -552,13 +633,21 @@ class Main(models.Model):
         super(Main, self).save()
 
         if self.pdf_file:
-            os.rename(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name), os.path.join(settings.MEDIA_ROOT, self.cote_calcul_url+".pdf"))
-            self.pdf_file.name = self.cote_calcul_url + ".pdf"
+            # si pas privé, enregistrer le pdf dans le dossier public (et renommer)
+            if not self.pdf_prive:
+                os.rename(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name), os.path.join(settings.MEDIA_ROOT, "public/documents", self.cote_calcul_url+".pdf"))
+                self.pdf_file.name = "public/documents/" + self.cote_calcul_url + ".pdf"
 
-        # extract pdf text. IT'S NOW DONE VIA CRON
-	# self.pdf_text = self.convert_pdf_to_txt(str(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name)))
+            # sinon (si privé) enregistrer le pdf dans le dossier privé (et renommer)
+            else:
+                os.rename(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name),
+                          os.path.join(settings.MEDIA_ROOT, "prive/documents", self.cote_calcul_url + ".pdf"))
+                self.pdf_file.name = "prive/documents/" + self.cote_calcul_url + ".pdf"
 
-        super(Main, self).save()
+            # extract pdf text.
+            if self.pdf_text == "" or resave_pdf == True:
+                if self.pdf_file:
+                    self.pdf_text = self.convert_pdf_to_txt(str(os.path.join(settings.MEDIA_ROOT, self.pdf_file.name)))
 
         # save 'mots-clés'
 #        if self.mot_cle:

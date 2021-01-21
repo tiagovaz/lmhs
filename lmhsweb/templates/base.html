@@ -11,15 +11,24 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
+        <!-- Google analytics 
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-143354282-1', 'auto');
+            ga('send', 'pageview');
+        </script> -->
+
         <title>
             {% block title %}
                 {% trans "Banque de données du LMHS" %}
             {% endblock %}
         </title>
-        <link rel="icon"
-        type="image/png"
-        href="/static/media/lmhs_icone.png" />
-
+        <!-- Load icon -->
+        <link rel="icon" type="image/png" href="/static/media/lmhs_icone.png"/>
 
         <!-- Bootstrap Core CSS -->
         <link href="{% static 'sbadmin2/bower_components/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -28,7 +37,11 @@
         <link href="{% static 'sbadmin2/dist/css/sb-admin-2.css' %}" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- jQuery -->
+        <script src="{% static 'sbadmin2/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<!--        <script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
 
         {% block extrahead %}
         {% endblock %}
@@ -39,34 +52,47 @@
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#barreNav">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href='/'>Banque de données du LMHS</a>
                 </div>
                 <!-- /.navbar-header -->
 
+                <div class="collapse navbar-collapse" id="barreNav">
+
                 <ul class="nav navbar-top-links navbar-right">
 
-                    {% if user.is_authenticated %}
+                    {% if user.is_staff %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-add fa-fw"></i>Gérer <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-pencil fa-fw"></i> Gérer <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Gérer les </li>
                             <li>
                                 <a href="/gerer_auteurs/?csrfmiddlewaretoken={{ csrf_token }}&q=a">Auteurs</a>
+                                <a href="{% url 'gerer_corpus' %}">Corpus</a>
                                 <a href="/gerer_motcle/?csrfmiddlewaretoken={{ csrf_token }}&q=a">Mots-clés</a>
-                                <a href="/gerer_projet">Projets</a>
+                                <a href="{% url 'gerer_projet' %}">Projets</a>
+                                <a href="{% url 'gerer_utilisateurs' %}">Utilisateurs</a>
                             </li>
                         </ul>
                     </li>
+                    <!-- dropdown Gérer -->
 
-                    <ul class="nav navbar-top-links navbar-right">
+                    <!--<li>
+                        <a href="JavaScript:newPopup('/admin/lmhsweb/main/add/?_to_field=id&amp;_popup=1');">
+                            <i class="fa fa-plus fa-fw"></i>
+                            Nouvelle Notice
+                        </a>
+                    </li>-->
 
-                    <a href="JavaScript:newPopup('/admin/lmhsweb/main/add/?_to_field=id&amp;_popup=1');">Nouvelle Notice</a>
-                <!--
                      <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-add fa-fw"></i>Nouvelle notice <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-plus fa-fw"></i> Nouvelle notice <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Sélectionnez le type</li>
@@ -75,13 +101,14 @@
                                 <li><a href='/create/?type={{ t }}'>{{ t }}</a></li>
                             {% endfor %}
                         </ul>
--->
-                        <!-- /.dropdown-user -->
                     </li>
 
+
+                        {% endif %}
+                    {% if user.is_authenticated %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>{{ user }} <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-user fa-fw"></i> {{ user }} <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">{% trans "Compte" %}</li>
@@ -91,18 +118,26 @@
                                     {% trans "Se déconnecter" %}
                                 </a>
                             </li>
+                            {% if user.is_staff %}
                             <li>
                                 <a href="JavaScript:newPopup('/admin/password_change/?_to_field=id&amp;_popup=1')">
                                     <i class="fa fa-key"></i>
                                     Modifier le mot de passe
                                 </a>
                             </li>
+                            {% endif %}
                         </ul>
-                        <!-- /.dropdown-user -->
                     </li>
+                    <!-- /.dropdown-user -->
 
                     {% else %}
                     <li>
+                        <a href="/inscription">
+                            <i class="fa fa-id-card-o"></i>
+                                {% trans "S'inscrire" %}
+                        </a>
+                    </li>
+                        <li>
                         <a href='/login/?next={{request.get_full_path}}'>
                             <i class="fa fa-sign-in fa-fw"></i>
                             {% trans "Se connecter" %}
@@ -110,12 +145,12 @@
                     </li>
                     {% endif %}
                     <!-- /.dropdown -->
-                </ul></ul>
+                </ul>
                 <!-- /.navbar-top-links -->
-
-
+                </div>
             </nav>
         </div>
+        <!-- /.wrapper -->
             <div id="page-wrapper" style="padding-top:1px;">
                 {% if messages %}
                     {% for message in messages %}
@@ -160,9 +195,6 @@
         </div>
         <!-- /#wrapper -->
 
-        <!-- jQuery -->
-        <script src="{% static 'sbadmin2/bower_components/jquery/dist/jquery.min.js' %}"></script>
-
         <!-- Bootstrap Core JavaScript -->
         <script src="{% static 'sbadmin2/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 
@@ -196,11 +228,14 @@
                 popupWindow = window.open(
                     url,'popUpWindow','height=800,width=1000,left=500,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
             }
-
+            function smallPopup(url) {
+                popupWindow = window.open(
+                    url, 'popUpWindow', 'height=200,width=700,left=300,top=200,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+            }
         </script>
-
-    </body>
         {% block extrascript %}{% endblock %}
+    </body>
+
 
     {% block footer %}
     <footer>
@@ -209,7 +244,6 @@
             <a href="http://emf.oicrm.org" target="_blank"><img src="/static/media/emf_logo.png" alt="EMF" style="float: center; width: 9%; margin-right: 1%; margin-bottom: 0.5em;"></a><a href="http://pressemusicale.oicrm.org" target="_blank"><img src="/static/media/presse_musicale_logox.png" alt="Presse musicale" style="float: center; width: 12%; margin-right: 1%; margin-bottom: 0.5em;"></a><a href="http://lmhs.oicrm.org" target="_blank"><img src="/static/media/lmhs_logo.png" alt="lmhs" style="float: center; width: 6%; margin-right: 1%; margin-bottom: 0.5em;"></a>
             <br>
             <h5>Mention légale</h5>
-
             <p>Les articles de presse reproduits dans la banque de données sont libres de droits. Leur diffusion dans la banque de données est non commerciale et respecte les critères d'utilisation équitable aux fins de recherche ainsi qu'établie par la Loi sur le droit d'auteur du Canada (L.R.C. (1985), ch. C-42: <a href="http://laws-lois.justice.gc.ca/fra/lois/C-42/page-9.html#h-26">http://laws-lois.justice.gc.ca/fra/lois/C-42/page-9.html#h-26</a>).
             Les PDF des articles des revues suivantes ont été téléchargés (sauf quelques exceptions) de Gallica: Le Ménestrel, La Musique pendant la guerre, La Tribune de Saint-Gervais, Le Mercure de France, La Revue politique et littéraire «Revue bleue».
             </p>

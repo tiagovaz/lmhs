@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block content %}
+        <br><br><br>
+    {% if user.is_authenticated and user.is_staff and demandeur.is_active %}
+        <center class="text-success">
+            <h3>L'utilisateur a été accepté</h3>
+        </center>
+    {% elif user.is_authenticated and user.is_staff %}
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><center>Demande d'inscription</center></h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover table-condensed">
+                        <tr>
+                            <td><strong>Nom : </strong></td>
+                            <td>{{ info.nom }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Institution : </strong></td>
+                            <td> {{ info.institution }}</td>
+                        </tr>
+                        <tr><td><strong>Statut :</strong></td>
+                            <td>{{ info.statut }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adresse courriel :</strong></td>
+                            <td>{{ info.courriel }}</td></tr>
+                        {% if info.telephone %}
+                        <tr>
+                            <td><strong>Numéro de téléphone :</strong></td><td>{{ info.telephone }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td><strong>Raison de la demande :</strong></td>
+                            <td>{{ info.raison }}</td>
+                        </tr>
+                        <tr><td><strong>Date de la demande :</strong></td><td>{{ info.date }}</td></tr>
+                    </table>
+                    <center>
+                        <p>
+                            Désirez-vous accepter ou refuser la demande d'inscription
+                            {% if demandeur.first_name|first == 'A' or demandeur.first_name|first == 'E' or demandeur.first_name|first == 'I' or demandeur.first_name|first == 'O' or demandeur.first_name|first == 'U' or demandeur.first_name|first == 'Y' %}
+                                d'{{ demandeur.first_name }} {{ demandeur.last_name }}
+                            {% else %}
+                                de {{ demandeur.first_name }} {{ demandeur.last_name }}
+                            {% endif %}({{demandeur.username}})?
+                        </p>
+                        <br>
+                    </center>
+                    <div class="modal fade" id="AcceptRequestModal-{{demandeur.id}}" tabindex="-1" role="dialog" aria-labelledby="requestLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn btn-xs btn-danger pull-right" data-dismiss="modal">x</button>
+                                    <h4 class="modal-title" id="requestLabel">Êtes-vous sûr(e) de vouloir accepter la demande d'inscription
+                                        {% if demandeur.first_name|first == 'A' or demandeur.first_name|first == 'E' or demandeur.first_name|first == 'I' or demandeur.first_name|first == 'O' or demandeur.first_name|first == 'U' or demandeur.first_name|first == 'Y' %}
+                                            d'<i>{{ demandeur.first_name }} {{ demandeur.last_name }}</i> ?
+                                        {% else %}
+                                            de <i>{{ demandeur.first_name }} {{ demandeur.last_name }}</i> ?
+                                        {% endif %}
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{% url 'acceptation_utilisateur' demandeur.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <input class="btn btn-success" type="submit" value="Accepter">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a data-toggle="modal" data-target="#AcceptRequestModal-{{ demandeur.id }}" >
+                        <button class="btn btn-success" style ='float: left;'>Accepter</button>
+                    </a>
+
+                    <div class="modal fade" id="DeleteRequestModal-{{demandeur.id}}" tabindex="-1" role="dialog" aria-labelledby="requestLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn btn-xs btn-danger pull-right" data-dismiss="modal">x</button>
+                                    <h4 class="modal-title" id="requestLabel">Êtes-vous sûr(e) de vouloir refuser la demande d'inscription
+                                        {% if demandeur.first_name|first == 'A' or demandeur.first_name|first == 'E' or demandeur.first_name|first == 'I' or demandeur.first_name|first == 'O' or demandeur.first_name|first == 'U' or demandeur.first_name|first == 'Y' %}
+                                            d'<i>{{ demandeur.first_name }} {{ demandeur.last_name }}</i> ?
+                                        {% else %}
+                                            de <i>{{ demandeur.first_name }} {{ demandeur.last_name }}</i> ?
+                                        {% endif %}
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{% url 'refus_utilisateur' demandeur.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <input class="btn btn-danger" type="submit" value="Refuser">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a data-toggle="modal" data-target="#DeleteRequestModal-{{ demandeur.id }}" >
+                        <button class="btn btn-danger" style ='float: right;'>Refuser</button>
+                    </a>
+
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel panel-default -->
+        </div>
+        <!-- /.col-md-4 col-md-offset-4 -->
+    {% elif user.is_authenticated %}
+        <center class="text-danger">
+            <h1><i class="fa fa-exclamation-circle"></i></h1>
+            <h4>Vous n'avez pas l'autorisation d'accepter ou non un nouvel utilisateur</h4>
+        </center>
+    {% else %}
+        <center class="text-danger">
+            <h1><i class="fa fa-exclamation-circle"></i></h1>
+            <h4>Vous devez être connecté pour accepter un nouvel utilisateur</h4>
+        </center>
+    {% endif %}
+{% endblock %}

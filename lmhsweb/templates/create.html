@@ -3,76 +3,64 @@
 {% load bootstrap_tags %}
 
 {% block extrascript %}
-    <!-- DatePicker JavaScript -->
-    <script type="text/javascript" src="{% static 'sbadmin2/bower_components/jquery/dist/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'datetimepicker/js/moment.js' %}"></script>
-    <script type="text/javascript" src="{% static 'sbadmin2/bower_components/bootstrap/js/transition.js' %}"></script>
-    <script type="text/javascript" src="{% static 'sbadmin2/bower_components/bootstrap/js/collapse.js' %}"></script>
-    <script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+<!-- DatePicker JavaScript -->
+<script type="text/javascript" src="{% static 'sbadmin2/bower_components/jquery/dist/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'datetimepicker/js/moment.js' %}"></script>
+<script type="text/javascript" src="{% static 'sbadmin2/bower_components/bootstrap/js/transition.js' %}"></script>
+<script type="text/javascript" src="{% static 'sbadmin2/bower_components/bootstrap/js/collapse.js' %}"></script>
+<script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
         $(function () {
             $('#id_start_date').datetimepicker({sideBySide: true, format: 'YYYY-MM-DD HH:mm'});
         });
-
         $(function () {
             $('#id_end_date').datetimepicker({sideBySide: true, format: 'YYYY-MM-DD HH:mm'});
         });
-    </script>
-
-    {{ form.media }}
+</script>
+{{ form.media }}
 {% endblock %}
 
-
 {% block content %}
-
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Nouvelle notice
-            </h1>
-        </div>
-        <!-- /.col-lg-12 -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Nouvelle notice
+        </h1>
     </div>
-    <!-- /.row -->
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Inserez les données pour la nouvelle notice
-                </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Inserez les données pour la nouvelle notice
+            </div>
 
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                		<form method="post" enctype="multixpart/form-data">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
-                                <div class="col-lg-3">
-                                    <div id="div_id_cote_prefixe" class="form-group">
-                                        <label for="id_cote_prefixe" class="control-label  ">
-                                        Cote prefixe
-                                        </label>
-                                          <div class="">
-                                            <select class="form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/cote_prefixe-autocomplete/" id="id_cote_prefixe" name="cote_prefixe" required="required">
-                                                <option value="" selected="selected">--------</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="col-lg-3">
                                     <div id="div_id_cote_auteur" class="form-group">
                                         <label for="id_cote_auteur" class="control-label  ">
-                                        Cote auteur
+                                            Cote auteur
                                         </label>
-                                            <a class="related-widget-wrapper-link add-related" id="add_id_cote_auteur"
-                                                href="JavaScript:newPopup('/admin/lmhsweb/auteur/add/?_to_field=id&amp;_popup=1');"
-                                                title="Ajouter un autre objet Cote auteur">
-                                                <img src="/static/media/icon-addlink.svg" alt="Ajouter"/>
-                                            </a>
+                                        <a class="related-widget-wrapper-link add-related" id="add_id_cote_auteur"
+                                           href="JavaScript:smallPopup('/admin/lmhsweb/auteur/add/?_to_field=id&amp;_popup=1');"
+                                           title="Ajouter un autre objet Cote auteur">
+                                            <img src="/static/media/icon-addlink.svg" alt="Ajouter"/>
+                                        </a>
                                         <div class="">
-                                            <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/auteur-autocomplete/" id="id_cote_auteur" name="cote_auteur" required="required">
+                                            <select class=" form-control" data-autocomplete-light-function="select2"
+                                                    data-autocomplete-light-url="/auteur-autocomplete/"
+                                                    id="id_cote_auteur" name="cote_auteur" required="required">
                                                 <option value="" selected="selected">---------</option>
                                             </select>
                                         </div>
@@ -81,20 +69,44 @@
                                 <div class="col-lg-3">
                                     <div id="div_id_cote_annee" class="form-group  ">
                                         <label for="id_cote_annee" class="control-label  ">
-                                        Cote année
+                                            Cote année
                                         </label>
                                         <div class="">
-                                            <input class=" form-control" id="id_cote_annee" maxlength="100" name="cote_annee" type="text" />
+                                            <input class=" form-control" id="id_cote_annee" maxlength="100"
+                                                   name="cote_annee" type="text"/>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-3">
                                     <div id="div_id_cote_numero" class="form-group  ">
                                         <label for="id_cote_numero" class="control-label  ">
-                                        Cote numéro
+                                            Cote numéro
                                         </label>
                                         <div class="">
-                                            <input class=" form-control" id="id_cote_numero" maxlength="100" name="cote_numero" type="text" />
+                                            <input class=" form-control" id="id_cote_numero" maxlength="100"
+                                                   name="cote_numero" type="text"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group  ">
+                                    <div class="col-lg-3">
+                                        <label class="control-label">
+                                            Corpus
+                                        </label>
+                                        <a class="related-widget-wrapper-link add-related" id="add_id_auteur"
+                                           href="JavaScript:smallPopup('/admin/lmhsweb/corpus/add/?_to_field=id&amp;_popup=1');"
+                                           title="Ajouter un autre objet Corpus">
+                                            <img src="/static/media/icon-addlink.svg" alt="Ajouter"/>
+                                        </a>
+                                        <div class="">
+                                            <select multiple="multiple" class=" form-control"
+                                                    data-autocomplete-light-function="select2"
+                                                    data-autocomplete-light-url="/corpus-autocomplete/" id="id_corpus"
+                                                    name="corpus">
+                                                <option value="" selected="selected">---------</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -106,92 +118,106 @@
                                             Titre
                                         </label>
                                         <div class="">
-                                            <input class=" form-control" id="id_titre" maxlength="200" name="titre" type="text" required="required"/>
+                                            <input class=" form-control" id="id_titre" maxlength="200" name="titre"
+                                                   type="text" required="required"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div id="div_id_protection_droit_auteur" class="form-group  ">
-                                            <label for="id_protection_droit_auteur" class="control-label required-field ">
-                                                Droit d'auteur
-                                            </label>
-                                            <div class="">
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio"  name="protection_droit_auteur" id="id_protection_droit_auteur_1" value="0"> Non
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio"  name="protection_droit_auteur" id="id_protection_droit_auteur_2" value="1"> Oui
-                                                        </label>
-                                                    </div>
+                                        <label for="id_protection_droit_auteur" class="control-label required-field ">
+                                            Droit d'auteur
+                                        </label>
+                                        <div class="">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="protection_droit_auteur"
+                                                           id="id_protection_droit_auteur_1" value="0"> Non
+                                                </label>
                                             </div>
+
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="protection_droit_auteur"
+                                                           id="id_protection_droit_auteur_2" value="1"> Oui
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <hr>
                             {% for field in form %}
-                                {% if field.name == "type" %}
-                                    <input class=" form-control" id="id_type" name="type" type="hidden" value="{{ field.value }}" />
-                                    {% if field.value == "Affiche" %}
-                                        {% include "forms/affiche.html" %}
-                                    {% elif field.value == "Annonce de concours" %}
-                                        {% include "forms/concours.html" %}
-                                    {% elif field.value == "Article de périodique" %}
-                                        {% include "forms/article_de_periodique.html" %}
-                                    {% elif field.value == "Catalogue" %}
-                                        {% include "forms/catalogue.html" %}
-                                    {% elif field.value == "Conférence" %}
-                                        {% include "forms/conference.html" %}
-                                    {% elif field.value == "Document non publié" %}
-                                        {% include "forms/doc_non_publie.html" %}
-                                    {% elif field.value == "Extrait de livre" %}
-                                        {% include "forms/extrait.html" %}
-                                    {% elif field.value == "Iconographie" %}
-                                        {% include "forms/iconographie.html" %}
-                                    {% elif field.value == "Livre" %}
-                                        {% include "forms/livre.html" %}
-                                    {% elif field.value == "Matériel audiovisuel" %}
-                                        {% include "forms/audiovisuel.html" %}
-                                    {% elif field.value == "Partition" %}
-                                        {% include "forms/partition.html" %}
-                                    {% elif field.value == "Périodique" %}
-                                        {% include "forms/periodique.html" %}
-                                    {% elif field.value == "Photographie" %}
-                                        {% include "forms/livre.html" %}
-                                    {% elif field.value == "Programme" %}
-                                        {% include "forms/programme.html" %}
-                                    {% elif field.value == "Référence" %}
-                                        {% include "forms/livre.html" %}
-                                    {% endif %}
-                                {% endif %}
+                            {% if field.name == "type" %}
+                            <input class=" form-control" id="id_type" name="type" type="hidden"
+                                   value="{{ field.value }}"/>
+                            {% if field.value == "Affiche" %}
+                            {% include "forms/affiche.html" %}
+                            {% elif field.value == "Annonce de concours" %}
+                            {% include "forms/concours.html" %}
+                            {% elif field.value == "Article de périodique" %}
+                            {% include "forms/article_de_periodique.html" %}
+                            {% elif field.value == "Catalogue" %}
+                            {% include "forms/catalogue.html" %}
+                            {% elif field.value == "Conférence" %}
+                            {% include "forms/conference.html" %}
+                            {% elif field.value == "Document non publié" %}
+                            {% include "forms/doc_non_publie.html" %}
+                            {% elif field.value == "Extrait de livre" %}
+                            {% include "forms/extrait.html" %}
+                            {% elif field.value == "Iconographie" %}
+                            {% include "forms/iconographie.html" %}
+                            {% elif field.value == "Livre" %}
+                            {% include "forms/livre.html" %}
+                            {% elif field.value == "Matériel audiovisuel" %}
+                            {% include "forms/audiovisuel.html" %}
+                            {% elif field.value == "Partition" %}
+                            {% include "forms/partition.html" %}
+                            {% elif field.value == "Périodique" %}
+                            {% include "forms/periodique.html" %}
+                            {% elif field.value == "Photographie" %}
+                            {% include "forms/livre.html" %}
+                            {% elif field.value == "Programme" %}
+                            {% include "forms/programme.html" %}
+                            {% elif field.value == "Référence" %}
+                            {% include "forms/livre.html" %}
+                            {% endif %}
+                            {% endif %}
                             {% endfor %}
 
                             <div id="div_id_pdf_file" class="form-group  ">
-                                    <label for="id_pdf_file" class="control-label  ">Fichier PDF</label>
-                                    <div class="">
-                                        <input class=" form-control" id="id_pdf_file" name="pdf_file" type="file" />
+                                <label for="id_pdf_file" class="control-label  ">Fichier PDF</label>
+                                <div class="">
+                                    <input class=" form-control" id="id_pdf_file" name="pdf_file" type="file"/>
+                                </div>
+                            </div>
+                            <div id="div_id_pdf_prive" class="form-group  ">
+                                <div class="">
+                                    <div class="checkbox">
+                                        <label for="id_pdf_prive" class="">
+                                            <input id="id_pdf_prive" name="pdf_prive" type="checkbox"/>
+                                            PDF seulement accessible aux utilisateurs connectés
+                                        </label>
                                     </div>
+                                </div>
                             </div>
 
                             <div class="form-actions">
-                		      <button type="submit" class="btn btn-primary" name="submit">Enregistrer</button>
-                              <button type="reset" class="btn btn-danger">Réinitialiser</button>
-                		    </div>
-                		</form>
-                        </div>
+                                <button type="submit" class="btn btn-primary" name="submit">Enregistrer</button>
+                                <button type="reset" class="btn btn-danger">Réinitialiser</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- /row -->
                 </div>
-            <!-- /.panel-body -->
+                <!-- /row -->
             </div>
-            <!-- /.panel -->
+            <!-- /.panel-body -->
         </div>
-        <!-- /.col-lg-12 -->
+        <!-- /.panel -->
     </div>
-    <!-- /row -->
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /row -->
 
 {% endblock %}

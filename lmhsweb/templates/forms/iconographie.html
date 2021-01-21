@@ -1,254 +1,153 @@
-    <div id="div_id_genre" class="form-group  ">
-
-
-            <label for="id_genre" class="control-label  ">
-                Genre
-            </label>
-
-
-
-
-
-
-                <div class="">
-                    <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/genre-autocomplete/" id="id_genre" name="genre">
-<option value="" selected="selected">---------</option>
-</select>
-
-
-                </div>
-
-
+<div id="div_id_genre" class="form-group  ">
+    <label for="id_genre" class="control-label  ">
+        Genre
+    </label>
+    <div class="">
+        <select class=" form-control" data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/genre-autocomplete/" id="id_genre" name="genre">
+            <option value="" selected="selected">---------</option>
+        </select>
     </div>
+</div>
 
-    <div id="div_id_auteur" class="form-group  ">
-
-
-            <label for="id_auteur" class="control-label  ">
-                Auteur(s)
-            </label>
+<div id="div_id_auteur" class="form-group  ">
+    <label for="id_auteur" class="control-label  ">
+        Auteur(s)
+    </label>
     <a class="related-widget-wrapper-link add-related" id="add_id_auteur"
-        href="JavaScript:newPopup('/admin/lmhsweb/auteur/add/?_to_field=id&amp;_popup=1');"
+       href="JavaScript:smallPopup('/admin/lmhsweb/auteur/add/?_to_field=id&amp;_popup=1');"
 
-        title="Ajouter un autre objet Auteur">
+       title="Ajouter un autre objet Auteur">
         <img src="/static/media/icon-addlink.svg" alt="Ajouter"/>
     </a>
-
-                <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/auteur-autocomplete/" id="id_auteur" name="auteur">
-</select>
-                </div>
+    <div class="">
+        <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/auteur-autocomplete/" id="id_auteur" name="auteur">
+        </select>
     </div>
+</div>
 
 
-    <div id="div_id_sujet" class="form-group  ">
-
-
-            <label for="id_sujet" class="control-label  ">
-                Sujet(s)
-            </label>
-
-
-
-
-
-
-                <div class="">
-                    <textarea class=" form-control" cols="40" id="id_sujet" name="sujet" rows="10">
-</textarea>
-
-
-                </div>
-
-
+<div id="div_id_sujet" class="form-group  ">
+    <label for="id_sujet" class="control-label  ">
+        Sujet(s)
+    </label>
+    <div class="">
+        <textarea class=" form-control" cols="40" id="id_sujet" name="sujet" rows="10"></textarea>
     </div>
+</div>
 
-    <div id="div_id_lieu_conservation" class="form-group  ">
-
-
-            <label for="id_lieu_conservation" class="control-label  ">
-                Lieu de conservation
-            </label>
-
-
-
-
-
-
-                <div class="">
-                    <input class=" form-control" id="id_lieu_conservation" maxlength="200" name="lieu_conservation" type="text" />
-
-
-                </div>
-
-
+<div id="div_id_lieu_conservation" class="form-group  ">
+    <label for="id_lieu_conservation" class="control-label  ">
+        Lieu de conservation
+    </label>
+    <div class="">
+        <input class=" form-control" id="id_lieu_conservation" maxlength="200" name="lieu_conservation" type="text"/>
     </div>
+</div>
 
-
-
-    <div id="div_id_medium" class="form-group  ">
-
-
-            <label for="id_medium" class="control-label  ">
-                Médium
-            </label>
-
-                <div class="">
-                    <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/medium-autocomplete/" id="id_medium" name="medium">
-<option value="" selected="selected">---------</option>
-</select>
-
-
-                </div>
-
-    <div id="div_id_methode_reproduction" class="form-group  ">
-
-
-            <label for="id_methode_reproduction" class="control-label  ">
-                Méthode de reproduction
-            </label>
-                <div class="">
-                    <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/methode_reproduction-autocomplete/" id="id_methode_reproduction" name="methode_reproduction">
-<option value="" selected="selected">---------</option>
-</select>
-
-
-                </div>
-
-
+<div id="div_id_medium" class="form-group  ">
+    <label for="id_medium" class="control-label  ">
+        Médium
+    </label>
+    <div class="">
+        <select class=" form-control" data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/medium-autocomplete/" id="id_medium" name="medium">
+            <option value="" selected="selected">---------</option>
+        </select>
     </div>
+</div>
 
-    <div id="div_id_date" class="form-group  ">
-            <label for="id_date" class="control-label  ">
-                Date
-            </label>
-                <div class="">
-                    <input class=" form-control" id="id_date" maxlength="100" name="date" type="text" />
-                </div>
+<div id="div_id_methode_reproduction" class="form-group  ">
+    <label for="id_methode_reproduction" class="control-label  ">
+        Méthode de reproduction
+    </label>
+    <div class="">
+        <select class=" form-control" data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/methode_reproduction-autocomplete/" id="id_methode_reproduction"
+                name="methode_reproduction">
+            <option value="" selected="selected">---------</option>
+        </select>
     </div>
+</div>
 
-    <div id="div_id_source" class="form-group  ">
-
-
-            <label for="id_source" class="control-label  ">
-                Source
-            </label>
-
-
-                <div class="">
-                    <input class=" form-control" id="id_source" maxlength="200" name="source" type="text" />
-
-
-                </div>
-
-
+<div id="div_id_date" class="form-group  ">
+    <label for="id_date" class="control-label  ">
+        Date
+    </label>
+    <div class="">
+        <input class=" form-control" id="id_date" maxlength="100" name="date" type="text"/>
     </div>
+</div>
 
-
-
-    <div id="div_id_commentaire" class="form-group  ">
-
-
-            <label for="id_commentaire" class="control-label  ">
-                Commentaire
-            </label>
-
-                <div class="">
-                    <textarea class=" form-control" cols="40" id="id_commentaire" name="commentaire" rows="10">
-</textarea>
-
-
-                </div>
-
-
+<div id="div_id_source" class="form-group  ">
+    <label for="id_source" class="control-label  ">
+        Source
+    </label>
+    <div class="">
+        <input class=" form-control" id="id_source" maxlength="200" name="source" type="text"/>
     </div>
+</div>
 
-    <div id="div_id_mot_cle" class="form-group  ">
-
-
-            <label for="id_mot_cle" class="control-label  ">
-                Mot(s) clé(s)
-            </label>
-
-                <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/mot_cle-autocomplete/" id="id_mot_cle" name="mot_cle">
-</select>
-
-
-                </div>
-
-
+<div id="div_id_commentaire" class="form-group  ">
+    <label for="id_commentaire" class="control-label  ">
+        Commentaire
+    </label>
+    <div class="">
+        <textarea class=" form-control" cols="40" id="id_commentaire" name="commentaire" rows="10"></textarea>
     </div>
+</div>
 
-
-    <div id="div_id_fonds" class="form-group  ">
-
-
-            <label for="id_fonds" class="control-label  ">
-                Fonds
-            </label>
-
-                <div class="">
-                    <select class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/fonds-autocomplete/" id="id_fonds" name="fonds">
-<option value="" selected="selected">---------</option>
-</select>
-
-
-                </div>
-
-
+<div id="div_id_mot_cle" class="form-group  ">
+    <label for="id_mot_cle" class="control-label  ">
+        Mot(s) clé(s)
+    </label>
+    <div class="">
+        <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/mot_cle-autocomplete/" id="id_mot_cle" name="mot_cle">
+        </select>
     </div>
+</div>
 
-
-    <div id="div_id_nb_exemplaire" class="form-group  ">
-            <label for="id_nb_exemplaire" class="control-label  ">
-                Nombre d'exemplaire
-            </label>
-                <div class="">
-                    <input class=" form-control" id="id_nb_exemplaire" name="nb_exemplaire" type="number" />
-                </div>
+<div id="div_id_fonds" class="form-group  ">
+    <label for="id_fonds" class="control-label  ">
+        Fonds
+    </label>
+    <div class="">
+        <select class=" form-control" data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/fonds-autocomplete/" id="id_fonds" name="fonds">
+            <option value="" selected="selected">---------</option>
+        </select>
     </div>
+</div>
 
-    <div id="div_id_support" class="form-group  ">
-
-
-            <label for="id_support" class="control-label  ">
-                Support
-            </label>
-
-
-
-
-
-
-                <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/support-autocomplete/" id="id_support" name="support">
-</select>
-
-
-                </div>
-
-
+<div id="div_id_nb_exemplaire" class="form-group  ">
+    <label for="id_nb_exemplaire" class="control-label  ">
+        Nombre d'exemplaire
+    </label>
+    <div class="">
+        <input class=" form-control" id="id_nb_exemplaire" name="nb_exemplaire" type="number"/>
     </div>
+</div>
 
-    <div id="div_id_projet" class="form-group  ">
-
-
-            <label for="id_projet" class="control-label  ">
-                Projet
-            </label>
-
-
-
-
-
-
-                <div class="">
-                    <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2" data-autocomplete-light-url="/projet-autocomplete/" id="id_projet" name="projet">
-</select>
-
-
-                </div>
-
-
+<div id="div_id_support" class="form-group  ">
+    <label for="id_support" class="control-label  ">
+        Support
+    </label>
+    <div class="">
+        <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/support-autocomplete/" id="id_support" name="support">
+        </select>
     </div>
+</div>
+
+<div id="div_id_projet" class="form-group  ">
+    <label for="id_projet" class="control-label  ">
+        Projet
+    </label>
+    <div class="">
+        <select multiple="multiple" class=" form-control" data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/projet-autocomplete/" id="id_projet" name="projet">
+        </select>
+    </div>
+</div>
