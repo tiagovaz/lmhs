@@ -45,7 +45,7 @@ python-dateutil==2.6.1
 python-magic==0.4.13
 pytz==2016.7
 pyxdg==0.25
-PyYAML==3.12
+PyYAML==5.4
 requests==2.12.2
 SecretStorage==2.3.1
 setuptools==33.1.1
