@@ -40,7 +40,7 @@ openpyxl==2.4.8
 pandas==0.20.3
 pdfminer==20140328
 phonenumberslite==8.10.14
-Pillow==4.0.0
+Pillow==9.0.1
 ply==3.9
 pyasn1==0.1.9
 pycparser==2.17
